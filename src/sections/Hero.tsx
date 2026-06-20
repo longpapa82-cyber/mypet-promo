@@ -13,7 +13,7 @@ const mascotDuoPng = asset('assets/mascot-duo.png');
 
 // 플로팅 통계칩 — 앱 2대 서비스(시설검색·AI상담)의 핵심 수치를 요약.
 const STATS = [
-  { label: '전국', value: '3만+', unit: '펫 시설', tone: 'sky' as const },
+  { label: '등록', value: '3만+', unit: '펫 시설', tone: 'sky' as const },
   { label: '한 번에', value: '다양한', unit: '시설 종류', tone: 'mint' as const },
   { label: '바로', value: 'AI', unit: '건강·법률 상담', tone: 'green' as const },
 ];
@@ -90,6 +90,40 @@ export default function Hero() {
     };
   }, []);
 
+  // P2: 마우스 추종 tilt — 커서 위치에 따라 마스코트 카드를 미세 회전(3D 점토 입체감).
+  // 데스크톱(hover/fine)만, reduced-motion 차단, transform만(합성). 화면 밖이면 리스너 해제.
+  useEffect(() => {
+    if (prefersReducedMotion()) return;
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    const node = visualRef.current;
+    const card = node?.querySelector<HTMLElement>('[data-tilt]');
+    if (!node || !card) return;
+
+    let raf = 0;
+    const MAX = 6; // deg — 절제(과하면 멀미)
+    const onMove = (e: MouseEvent) => {
+      if (raf) return;
+      raf = window.requestAnimationFrame(() => {
+        raf = 0;
+        const r = node.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5; // -0.5~0.5
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(900px) rotateY(${(px * MAX).toFixed(2)}deg) rotateX(${(-py * MAX).toFixed(2)}deg)`;
+      });
+    };
+    const reset = () => {
+      card.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg)';
+    };
+    node.addEventListener('mousemove', onMove);
+    node.addEventListener('mouseleave', reset);
+    return () => {
+      node.removeEventListener('mousemove', onMove);
+      node.removeEventListener('mouseleave', reset);
+      if (raf) window.cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
     <Section id="hero" background="warm" fullBleed className={styles.hero}>
       <Aurora variant="mixed" className={styles.aurora} />
@@ -109,7 +143,7 @@ export default function Hero() {
 
           <p className={`${styles.subcopy} t-body-lg`}>
             내 주변 펫 시설을 거리순으로 찾고, AI에게 반려동물 건강·법률을
-            바로 물어보세요. 전국 3만여 곳의 병원·미용실·호텔·카페까지 한 번에.
+            바로 물어보세요. 등록된 3만여 곳의 병원·미용실·호텔·용품점까지 한 번에.
           </p>
 
           <StoreCTA className={styles.cta} />
@@ -135,8 +169,10 @@ export default function Hero() {
             <Doodle kind="paw" size={30} color="var(--cute-lav)" className={`${styles.doodle} ${styles.doodlePaw} cute-float`} />
             <Doodle kind="heart" size={22} color="var(--cute-coral)" className={`${styles.doodle} ${styles.doodleHeart} cute-pulse`} />
 
-            {/* 마스코트 글래스+골드 보더 카드 (중간 속도 패럴랙스) + 둥실 통통 */}
-            <div className={`${styles.imageCard} cute-float`} data-parallax="0.04">
+            {/* 마스코트 카드: 바깥 wrapper=패럴랙스+둥실(transform), 안쪽 card=마우스 tilt(transform).
+                transform 충돌 방지로 레이어 분리. P2 claymorphism 점토 액자 + 3D 추종. */}
+            <div className={`${styles.imageTiltWrap} cute-float`} data-parallax="0.04">
+            <div className={styles.imageCard} data-tilt>
               <span className={styles.cardCrown} aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="18" height="18" focusable="false">
                   <path
@@ -158,6 +194,7 @@ export default function Hero() {
                   decoding="async"
                 />
               </picture>
+            </div>
             </div>
 
             {/* 글래스 플로팅 통계칩 (빠른 패럴랙스로 깊이 강조) */}

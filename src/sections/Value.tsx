@@ -192,7 +192,7 @@ export default function Value() {
           <Reveal bounce className={styles.cellStat} delay={210}>
             <article className={`${styles.card} ${styles.stat} glass`}>
               <span className={`${styles.statNumber} t-display-lg`}>3만+</span>
-              <span className={`${styles.statLabel} t-label-md`}>전국 펫 시설 수록</span>
+              <span className={`${styles.statLabel} t-label-md`}>등록 펫 시설 수록</span>
               <p className={`${styles.statNote} t-body-md`}>
                 거리순 정렬 · 운영시간(확인된 시설) 안내로 계속 채워집니다.
               </p>

@@ -144,7 +144,16 @@
   animation-delay: 0.5s;
 }
 
-/* 마스코트 카드 — 깊이있는 글래스 + 골드 보더 포인트 */
+/* P2: tilt wrapper — 패럴랙스+둥실(transform) 담당. 안쪽 .imageCard는 마우스 tilt(transform) 담당.
+   transform 충돌 방지로 레이어 분리. */
+.imageTiltWrap {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+}
+
+/* 마스코트 카드 — P2 claymorphism 점토 액자 + 마우스 tilt(transform-style preserve-3d) */
 .imageCard {
   position: relative;
   z-index: 1;
