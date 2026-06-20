@@ -11,13 +11,16 @@
     <link rel="canonical" href="https://longpapa82-cyber.github.io/mypet-promo/" />
 
     <!-- LCP hero 이미지 조기 발견을 위한 preload (vite base '/mypet-promo/' 반영, WebP) -->
+    <!-- Hero 배경 실사(가장 큰 LCP 후보) — fetchpriority high -->
     <link
       rel="preload"
       as="image"
       type="image/webp"
-      href="/mypet-promo/assets/mascot-duo.webp"
+      href="/mypet-promo/assets/hero-pet.webp"
       fetchpriority="high"
     />
+    <!-- 마스코트 카드 -->
+    <link rel="preload" as="image" type="image/webp" href="/mypet-promo/assets/mascot-duo.webp" />
 
     <title>MyPet — 반려동물 필수정보 앱 | 내 주변 펫 시설 + AI 상담</title>
     <meta
