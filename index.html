@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 파비콘/터치아이콘은 작은 전용 파일 사용 (OG는 hero-pet.jpg, 큰 스토어 아이콘은 스토어 콘솔에만 보관·웹 번들 제외) -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png" />
+
+    <!-- 정규 URL (GitHub Pages 배포 주소) -->
+    <link rel="canonical" href="https://longpapa82-cyber.github.io/mypet-promo/" />
+
+    <!-- LCP hero 이미지 조기 발견을 위한 preload (vite base '/mypet-promo/' 반영, WebP) -->
+    <link
+      rel="preload"
+      as="image"
+      type="image/webp"
+      href="/mypet-promo/assets/mascot-duo.webp"
+      fetchpriority="high"
+    />
+
+    <title>MyPet — 반려동물 필수정보 앱 | 내 주변 펫 시설 + AI 상담</title>
+    <meta
+      name="description"
+      content="MyPet은 내 주변 동물병원·응급실·미용실·호텔·유치원·훈련소·용품점·카페·공원·식당을 거리순으로 찾고, AI에게 반려동물 건강·법률을 묻는 반려동물 필수정보 앱입니다. 지금 설치하세요."
+    />
+
+    <!-- Open Graph (크롤러는 상대경로 이미지를 못 읽으므로 절대 URL 사용) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MyPet" />
+    <meta property="og:url" content="https://longpapa82-cyber.github.io/mypet-promo/" />
+    <meta property="og:title" content="MyPet — 반려동물 필수정보 앱" />
+    <meta
+      property="og:description"
+      content="내 주변 펫 시설 검색과 AI 펫 건강·법률 상담을 한 앱에서. 전국 3만여 곳의 반려동물 시설 정보. iOS·Android 설치 가능."
+    />
+    <meta
+      property="og:image"
+      content="https://longpapa82-cyber.github.io/mypet-promo/assets/hero-pet.jpg"
+    />
+    <meta property="og:image:width" content="1080" />
+    <meta property="og:image:height" content="810" />
+    <meta property="og:image:alt" content="MyPet 반려동물 필수정보 앱" />
+    <meta property="og:locale" content="ko_KR" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MyPet — 반려동물 필수정보 앱" />
+    <meta
+      name="twitter:description"
+      content="내 주변 펫 시설 검색과 AI 펫 건강·법률 상담을 한 앱에서."
+    />
+    <meta
+      name="twitter:image"
+      content="https://longpapa82-cyber.github.io/mypet-promo/assets/hero-pet.jpg"
+    />
+
+    <!-- Fonts: Quicksand 400/500/600/700 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

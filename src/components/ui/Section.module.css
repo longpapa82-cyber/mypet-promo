@@ -1,0 +1,59 @@
+.section {
+  position: relative;
+  /* 명시적 stacking context — Aurora blob(z:0)이 절대 콘텐츠 위로 못 올라오게 보장. */
+  isolation: isolate;
+}
+
+.surface {
+  background-color: var(--surface);
+}
+
+.low {
+  background-color: var(--surface-low);
+}
+
+.jewel {
+  background: var(--grad-jewel);
+}
+
+.warm {
+  background: var(--grad-warm);
+}
+
+.mint {
+  background: var(--grad-mint);
+}
+
+.sky {
+  background: var(--grad-sky);
+}
+
+/* 옅은 기분색 틴트 — 콘텐츠 섹션 alternating 배경(본문 가독 유지). B2 */
+.skySoft {
+  background-color: var(--tint-sky);
+}
+.mintSoft {
+  background-color: var(--tint-mint);
+}
+.peachSoft {
+  background-color: var(--tint-peach);
+}
+.lavSoft {
+  background-color: var(--tint-lav);
+}
+.butterSoft {
+  background-color: var(--tint-butter);
+}
+
+/* jewel(어두운) 배경 위 텍스트 가독성 */
+.onDark,
+.onDark :global(.t-headline-lg),
+.onDark :global(.t-headline-md),
+.onDark :global(.t-display-lg) {
+  color: #f4f9f4;
+}
+
+.onDark :global(.t-body-lg),
+.onDark :global(.t-body-md) {
+  color: rgba(244, 249, 244, 0.82);
+}

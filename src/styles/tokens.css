@@ -1,0 +1,245 @@
+/* MyPet 디자인 토큰 — app/src/constants/theme.ts 1:1 이식 (단일 소스, 새 색 만들지 말 것) */
+
+:root {
+  /* ── Color ───────────────────────────────── */
+  --green: #2f7d5e;          /* 주 CTA, 흰 텍스트 OK */
+  --green-deep: #2e5d4b;     /* 헤딩 */
+  --green-fixed: #dcead9;    /* 칩/배경 */
+
+  --primary: #8bc34a;        /* 연두 강조, 흰글씨 금지 = 버튼 배경 불가 */
+  --on-primary: #1f3a0d;
+
+  --secondary: #006491;      /* 스카이 */
+  --tertiary: #27695e;       /* 민트 */
+
+  --gold: #caa46a;           /* 프리미엄 포인트/아이콘/보더, 텍스트 금지 */
+  --gold-soft: #f3e8d4;
+
+  /* ── Cute 액센트 (P1) — 도들·스티커·배지 포인트 전용. 메인 CTA/본문엔 금지(green 유지).
+     2026 cute-alism 파스텔 다색(버터옐로·코랄·라벤더). dopamine 포인트만, 절제 사용. */
+  --cute-butter: #ffe2a0;    /* 버터옐로 — 별·반짝임 */
+  --cute-butter-ink: #8a6a1f;/* 버터 위 텍스트(대비 AA) */
+  --cute-coral: #ffc1bd;     /* 코랄핑크 — 하트·볼터치 */
+  --cute-coral-ink: #9a4a45;
+  --cute-lav: #ddd6ff;       /* 라벤더 — 도들·스티커 */
+  --cute-lav-ink: #5a4ea0;
+
+  --surface: #f7fafe;
+  --surface-low: #f1f4f8;
+
+  /* 섹션 기분색 틴트 — alternating 배경. 인접 섹션이 "확실히" 다르게 보이도록 채도를 올린다.
+     이전 값(거의 흰색)은 surface(#f7fafe)와 명도차 3~5%뿐이라 경계가 안 보였음.
+     캔디 파스텔(cute-alism)로 채도↑ + 명도 8~12% 차이 확보. 텍스트 대비는 여전히 충분. */
+  --tint-sky: #d6ebff;     /* 하늘 캔디 */
+  --tint-mint: #cdf2e4;    /* 민트 캔디 */
+  --tint-peach: #ffe2d4;   /* 피치 캔디 */
+  --tint-lav: #e9e3ff;     /* 라벤더 캔디 */
+  --tint-butter: #fff0c9;  /* 버터 캔디 — Features 등 추가 밴드용 */
+  --on-surface: #181c1f;
+  --on-surface-variant: #4a4f54;
+  --outline-variant: #d4d8de;
+
+  /* ── Gradients ───────────────────────────── */
+  --grad-jewel: linear-gradient(160deg, #235641, #1c3d30, #16302a); /* 프리미엄 hero */
+  --grad-warm: linear-gradient(160deg, #fff1ea, #fef7f3, #f7fafe);
+  --grad-sky: linear-gradient(160deg, #c9e6ff, #e6f3ff);
+  --grad-mint: linear-gradient(160deg, #aeefe2, #c9f3ec);
+  --grad-peach: linear-gradient(160deg, #ffdbd0, #ffe9e1);
+
+  /* ── Aurora / 메시 blob (방사형, 부드러운 분위기 레이어) ──────
+     섹션별 분위기를 만드는 blob 단색 방사 그라디언트. tokens.css 색만 사용.
+     중심은 진하게 → 가장자리 투명으로 자연스럽게 사라지도록 한다. */
+  --aurora-mint: radial-gradient(closest-side, #aeefe2 0%, rgba(174, 239, 226, 0.55) 45%, rgba(174, 239, 226, 0) 100%);
+  --aurora-sky: radial-gradient(closest-side, #c9e6ff 0%, rgba(201, 230, 255, 0.55) 45%, rgba(201, 230, 255, 0) 100%);
+  --aurora-peach: radial-gradient(closest-side, #ffdbd0 0%, rgba(255, 219, 208, 0.55) 45%, rgba(255, 219, 208, 0) 100%);
+  /* jewel 다크 그라운드용 — 어두운 녹색 톤의 깊이감 blob */
+  --aurora-jewel: radial-gradient(closest-side, #27695e 0%, rgba(39, 105, 94, 0.5) 45%, rgba(39, 105, 94, 0) 100%);
+  /* 샴페인골드 톤 blob — 프리미엄 분위기 연속성(아주 옅게, 포인트 1곳). */
+  --aurora-gold: radial-gradient(closest-side, #f3e8d4 0%, rgba(202, 164, 106, 0.4) 45%, rgba(202, 164, 106, 0) 100%);
+
+  /* ── Glassmorphism (액센트 전용, 전체 적용 금지) ───────────── */
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-bg-strong: rgba(255, 255, 255, 0.72); /* backdrop-filter 미지원 폴백 */
+  --glass-border: rgba(255, 255, 255, 0.65);
+  --glass-blur: 14px;
+  /* jewel 다크 위 글래스 */
+  --glass-bg-dark: rgba(22, 48, 42, 0.42);
+  --glass-bg-dark-strong: rgba(22, 48, 42, 0.82);
+  --glass-border-dark: rgba(202, 164, 106, 0.4); /* 골드 보더 톤 */
+
+  /* ── 샴페인골드 메탈릭 (jewel 다크 위에서만 — 보더/구분선/아이콘) ──
+     라이트→골드→딥의 각도 그라디언트로 금속 광택 표현. 텍스트엔 금지. */
+  --gold-metallic: linear-gradient(135deg, #f3e8d4 0%, #caa46a 42%, #9a7b3f 70%, #caa46a 100%);
+  --gold-metallic-line: linear-gradient(90deg, rgba(202, 164, 106, 0) 0%, #caa46a 50%, rgba(202, 164, 106, 0) 100%);
+  --gold-deep: #9a7b3f;
+
+  /* ── 미세 노이즈 텍스처 (data-uri SVG, 글래스/jewel 위 입자감) ── */
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+
+  /* ── Radii ───────────────────────────────── */
+  --radius-pill: 9999px;
+  --radius-card: 22px;
+  --radius-hero: 26px;
+  --radius-sm: 16px;
+
+  /* ── Shadows (또렷·배경에 안 녹게) ────────── */
+  --shadow-rest: 0 1px 3px rgba(24, 28, 31, 0.08), 0 1px 2px rgba(24, 28, 31, 0.06);
+  --shadow-raised: 0 6px 18px rgba(24, 28, 31, 0.1), 0 2px 6px rgba(24, 28, 31, 0.08);
+  --shadow-overlay: 0 16px 40px rgba(24, 28, 31, 0.16), 0 4px 12px rgba(24, 28, 31, 0.1);
+
+  /* ── Font ────────────────────────────────── */
+  --font-sans: 'Quicksand', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ── Reset / Base ──────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  /* 어떤 섹션도 뷰포트 폭을 넘기지 않도록 가로 스크롤 차단 */
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--surface);
+  color: var(--on-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+/* sticky 헤더(약 56px) 아래로 앵커 스크롤이 가리지 않도록 여백 */
+:target,
+section[id] {
+  scroll-margin-top: 72px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ── Typography 유틸 클래스 (px) ───────────── */
+.t-display-lg {
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: 700;
+}
+
+.t-headline-lg {
+  font-size: 32px;
+  line-height: 38px;
+  font-weight: 700;
+}
+
+.t-headline-md {
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+}
+
+.t-body-lg {
+  font-size: 18px;
+  line-height: 29px;
+  font-weight: 400;
+}
+
+.t-body-md {
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 400;
+}
+
+.t-label-md {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+/* ── Cute 유틸 (P1) — 스티커·도들·통통 모션. 이후 Phase에서 재사용. ──────────
+   원칙: 고급 골격 위에 절제된 깜찍 레이어. transform/opacity만(성능). */
+
+/* 스티커 질감 — 살짝 회전 + 또렷 그림자(붙인 느낌). 짝/홀로 반대 기울기. */
+.sticker {
+  --tilt: -2deg;
+  transform: rotate(var(--tilt));
+  box-shadow: 0 4px 0 rgba(24, 28, 31, 0.06), var(--shadow-raised);
+}
+.sticker-r {
+  --tilt: 2deg;
+}
+
+/* 통통 등장 — 스크롤 진입 시 .pop-in.is-in 으로 톡 튀어나옴(scale+rotate). */
+.pop-in {
+  opacity: 0;
+  transform: scale(0.8) rotate(var(--pop-rot, -4deg));
+}
+.pop-in.is-in {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  transition:
+    opacity 0.4s ease,
+    transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); /* 백스윙 = 통통 */
+}
+
+/* 상시 통통(둥실) — 마스코트/아이콘 장식. */
+@keyframes cuteFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-7px) rotate(1.5deg); }
+}
+.cute-float {
+  animation: cuteFloat 3.6s ease-in-out infinite;
+}
+
+/* 하트/별 펄스 — 작은 장식의 박동. */
+@keyframes cutePulse {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.18); opacity: 1; }
+}
+.cute-pulse {
+  animation: cutePulse 2.4s ease-in-out infinite;
+}
+
+/* squishy 버튼 — 클릭 시 눌리는 앱 모티프(누름 피드백). */
+.squishy {
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.squishy:active {
+  transform: scale(0.94);
+}
+
+/* reduced-motion: 모든 cute 모션 정지(접근성·멀미 방지). */
+@media (prefers-reduced-motion: reduce) {
+  .pop-in,
+  .pop-in.is-in,
+  .cute-float,
+  .cute-pulse,
+  .squishy:active,
+  .sticker {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

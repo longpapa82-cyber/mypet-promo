@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://longpapa82-cyber.github.io/mypet-promo/sitemap.xml

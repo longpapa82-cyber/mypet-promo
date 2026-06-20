@@ -1,0 +1,92 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 18px;
+  min-width: 168px;
+  background-color: #101417;
+  color: #ffffff;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: var(--shadow-rest);
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease;
+  /* button/a 공통 — 네이티브 button 외형 리셋 (coming-soon이 <button>으로 렌더) */
+  -webkit-appearance: none;
+  appearance: none;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+.badge:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-raised);
+}
+
+.badge:active {
+  transform: scale(0.94); /* 더 통통한 누름감(cute squishy 강화) */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge,
+  .badge:hover,
+  .badge:active {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* coming-soon: 비활성 표현 — 회색조 + 호버/액티브 무효 + 커서 차단 */
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  filter: grayscale(0.55);
+}
+
+.disabled:hover {
+  transform: none;
+  box-shadow: var(--shadow-rest);
+}
+
+.disabled:active {
+  transform: none;
+}
+
+/* "출시 예정" 배지 — 골드 보더로 프리미엄 톤 (텍스트는 흰색, 골드는 보더만) */
+.soon {
+  margin-left: 4px;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--gold);
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.icon {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  text-align: left;
+}
+
+.small {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  opacity: 0.85;
+}
+
+.big {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}

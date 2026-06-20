@@ -1,0 +1,292 @@
+/* HowTo — 이용방법 3스텝.
+   골드 번호 원형 + 스텝 연결선(애니메이션 sweep, reduced-motion 정지)
+   + 깊이 그림자 + 글래스 카드 hover. surface-low 배경 위 mint Aurora 메시. */
+
+/* Aurora(z-index 0) 위로 콘텐츠를 띄우는 레이어 */
+.inner {
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  max-width: 640px;
+  margin-inline: auto;
+  margin-bottom: clamp(40px, 6vw, 64px);
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 12px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tertiary);
+}
+
+.header h2 {
+  margin: 0 0 12px;
+}
+
+.header p {
+  margin: 0;
+}
+
+/* ── Steps grid ─────────────────────────────── */
+.steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 44px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Reveal 래퍼가 그리드 셀이 되어 연결선 기준이 된다 */
+.stepReveal {
+  position: relative;
+}
+
+/* 글래스 카드(액센트) — 카드 hover로 깊이 상승 */
+.step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  height: 100%;
+  padding: clamp(28px, 4vw, 36px) clamp(20px, 3vw, 28px) clamp(28px, 4vw, 32px);
+  text-align: center;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease;
+}
+
+/* 카드 상단 골드 액센트 라인(보더, 텍스트 아님) */
+.step::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 22px;
+  right: 22px;
+  height: 2px;
+  border-radius: var(--radius-pill);
+  background: var(--gold-metallic-line);
+  opacity: 0.7;
+  transition: opacity 0.28s ease;
+}
+
+.stepReveal:hover .step,
+.stepReveal:focus-within .step {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-overlay);
+}
+
+.stepReveal:hover .step::after,
+.stepReveal:focus-within .step::after {
+  opacity: 1;
+}
+
+.step h3 {
+  margin: 0;
+}
+
+.step p {
+  margin: 0;
+  max-width: 30ch;
+}
+
+/* ── 번호 원형 — gold-soft 배경 + 골드 메탈릭 링 + 깊이 그림자 ──
+   골드 텍스트 금지 규칙에 따라 숫자는 green-deep(흰 배경 대비 AA). */
+.badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  border-radius: var(--radius-pill);
+  background: var(--gold-soft);
+  box-shadow: var(--shadow-raised);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 메탈릭 골드 링(보더 전용) — conic 광택 */
+.badgeRing {
+  position: absolute;
+  inset: -2px;
+  border-radius: var(--radius-pill);
+  padding: 2px;
+  background: var(--gold-metallic);
+  /* 보더만 칠하도록 마스크 컷아웃 */
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.badgeNum {
+  position: relative;
+  z-index: 1;
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 700;
+  color: var(--green-deep);
+}
+
+.stepReveal:hover .badge,
+.stepReveal:focus-within .badge {
+  transform: scale(1.06);
+}
+
+/* ── 단계 아이콘(green-deep, 흰/글래스 위 대비) ── */
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: var(--green-fixed);
+  color: var(--green-deep);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* ── 스텝 연결선 (애니메이션 sweep) ───────────────
+   모바일: 세로 점선 + 골드 그라디언트 sweep이 위→아래로 흐름. */
+.stepReveal:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: calc(100% - 8px);
+  height: calc(44px + 16px);
+  width: 2px;
+  transform: translateX(-50%);
+  background:
+    /* 흐르는 골드 sweep (animated) */
+    linear-gradient(
+        to bottom,
+        rgba(202, 164, 106, 0) 0%,
+        var(--gold) 50%,
+        rgba(202, 164, 106, 0) 100%
+      )
+      0 -100% / 100% 200% no-repeat,
+    /* 정적 점선 베이스 */
+    repeating-linear-gradient(
+      to bottom,
+      var(--outline-variant) 0,
+      var(--outline-variant) 6px,
+      transparent 6px,
+      transparent 12px
+    );
+  animation: sweepDown 2.4s linear infinite;
+}
+
+@keyframes sweepDown {
+  0% {
+    background-position: 0 -100%, 0 0;
+  }
+  100% {
+    background-position: 0 100%, 0 0;
+  }
+}
+
+/* ── 데스크톱: 가로 3컬럼 + 가로 연결선 sweep ─── */
+@media (min-width: 768px) {
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    align-items: stretch;
+  }
+
+  /* 세로선 → 가로선으로 전환 (배지 중앙 높이 ≈ 카드 상단 패딩 + 34px) */
+  .stepReveal:not(:last-child)::before {
+    left: auto;
+    right: -22px;
+    top: calc(clamp(28px, 4vw, 36px) + 34px);
+    transform: translateY(-50%);
+    width: 44px;
+    height: 2px;
+    background:
+      linear-gradient(
+          to right,
+          rgba(202, 164, 106, 0) 0%,
+          var(--gold) 50%,
+          rgba(202, 164, 106, 0) 100%
+        )
+        -100% 0 / 200% 100% no-repeat,
+      repeating-linear-gradient(
+        to right,
+        var(--outline-variant) 0,
+        var(--outline-variant) 6px,
+        transparent 6px,
+        transparent 12px
+      );
+    animation: sweepRight 2.4s linear infinite;
+  }
+
+  @keyframes sweepRight {
+    0% {
+      background-position: -100% 0, 0 0;
+    }
+    100% {
+      background-position: 100% 0, 0 0;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .steps {
+    gap: 36px;
+  }
+}
+
+/* ── Reduced motion: sweep·hover transform 전부 정지, 점선만 ── */
+@media (prefers-reduced-motion: reduce) {
+  .step,
+  .badge {
+    transition: none;
+  }
+
+  .stepReveal:hover .step,
+  .stepReveal:focus-within .step,
+  .stepReveal:hover .badge,
+  .stepReveal:focus-within .badge {
+    transform: none;
+  }
+
+  .stepReveal:not(:last-child)::before {
+    animation: none;
+    /* sweep 레이어 제거, 정적 점선만 남김 */
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--outline-variant) 0,
+      var(--outline-variant) 6px,
+      transparent 6px,
+      transparent 12px
+    );
+  }
+}
+
+/* 중첩 @media 대신 and로 평탄화(iOS 16.3 이하 호환 — 중첩 미디어쿼리 미지원). */
+@media (prefers-reduced-motion: reduce) and (min-width: 768px) {
+  .stepReveal:not(:last-child)::before {
+    background: repeating-linear-gradient(
+      to right,
+      var(--outline-variant) 0,
+      var(--outline-variant) 6px,
+      transparent 6px,
+      transparent 12px
+    );
+  }
+}

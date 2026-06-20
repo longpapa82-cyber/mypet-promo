@@ -1,0 +1,138 @@
+/* FinalCTA — jewel 다크 그라운드 + Aurora 메시 + 글래스 CTA 박스 + 오버사이즈 헤드라인 */
+
+/* Aurora 레이어 — 섹션 배경 뒤(blob z-index 0), 콘텐츠는 .inner z-index로 위.
+   Aurora.module.css .layer가 absolute/inset:0/overflow 클리핑을 담당한다. */
+.aurora {
+  z-index: 0;
+}
+
+.inner {
+  position: relative;
+  z-index: 1; /* Aurora blob 위로 */
+  display: flex;
+  justify-content: center;
+}
+
+/* ── 글래스 CTA 박스 (다크 그라운드 위 골드 보더 톤 액센트) ── */
+.glassBox {
+  position: relative; /* 도들 absolute 기준 */
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+  padding: clamp(28px, 6vw, 48px) clamp(20px, 5vw, 44px);
+  border-radius: var(--radius-hero);
+}
+
+/* 깜찍 도들 — 글래스 박스 상우/하좌 모서리(콘텐츠·텍스트 비가림). P2 */
+.cuteStar,
+.cutePaw {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+}
+.cuteStar {
+  top: 14px;
+  right: 18px;
+}
+.cutePaw {
+  bottom: 18px;
+  left: 16px;
+  animation-delay: 0.6s;
+}
+
+/* ── 마스코트: 작게, 골드 링으로 분리 ── */
+.mascotWrap {
+  position: relative;
+  margin: 0;
+  display: inline-flex;
+}
+
+.mascotRing {
+  position: absolute;
+  inset: -8px;
+  border-radius: var(--radius-pill);
+  /* jewel 다크 위 골드 메탈릭 보더 (텍스트 아님) */
+  background: var(--gold-metallic);
+  opacity: 0.5;
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+.mascot {
+  position: relative;
+  width: 132px;
+  height: auto;
+  border-radius: var(--radius-card);
+  filter: drop-shadow(0 12px 26px rgba(0, 0, 0, 0.35));
+}
+
+/* ── 아이브로우 (gold 아이콘 + 라벨) ── */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--glass-border-dark);
+  color: var(--gold-soft);
+  letter-spacing: 0.02em;
+}
+
+/* ── 오버사이즈 헤드라인 ── */
+.heading {
+  /* displayLg(40/48)를 기준으로 데스크톱에서 대담하게 증폭 */
+  font-size: clamp(34px, 7vw, 56px);
+  line-height: 1.08;
+  max-width: 14ch;
+  margin: 0;
+  letter-spacing: -0.01em;
+  /* 320px에서 한국어 단어 음절 분할 방지(시·작 등). 라틴 토큰만 필요 시 줄바꿈 */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.divider {
+  max-width: 120px;
+}
+
+.subcopy {
+  /* onDark 본문 색은 Section.module.css가 t-body-lg에 적용 */
+  max-width: 36ch;
+  margin: 0;
+}
+
+.store {
+  margin-top: 8px;
+}
+
+/* ── 태블릿 이상 ───────────────────────────── */
+@media (min-width: 768px) {
+  .glassBox {
+    gap: 22px;
+  }
+
+  .mascot {
+    width: 156px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .glassBox {
+    max-width: 600px;
+  }
+
+  .mascot {
+    width: 168px;
+  }
+}
+
+/* reduced-motion: 부유/블러 정적 — Aurora/Reveal는 자체 처리, 링 정지 보강 */
+@media (prefers-reduced-motion: reduce) {
+  .mascotRing {
+    filter: none;
+  }
+}

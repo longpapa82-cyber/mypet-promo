@@ -1,0 +1,51 @@
+.footer {
+  background-color: var(--surface-low);
+  border-top: 1px solid var(--outline-variant);
+  padding-block: clamp(32px, 5vw, 48px);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  text-align: center;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--on-surface-variant);
+}
+
+.links a {
+  color: var(--green-deep);
+  transition: color 0.18s ease;
+}
+
+.links a:hover {
+  color: var(--green);
+  text-decoration: underline;
+}
+
+.dot {
+  color: var(--outline-variant);
+}
+
+.business {
+  margin: 0;
+  font-size: 13px;
+  color: var(--on-surface-variant);
+}
+
+.copyright {
+  margin: 0;
+  font-size: 13px;
+  /* opacity로 흐리지 않고 on-surface-variant 풀 대비 유지 (AA 안전마진) */
+  color: var(--on-surface-variant);
+}

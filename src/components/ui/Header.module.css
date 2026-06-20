@@ -1,0 +1,56 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: rgba(247, 250, 254, 0.72);
+  backdrop-filter: saturate(1.4) blur(14px);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 10px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  box-shadow: var(--shadow-rest);
+}
+
+.name {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--green-deep);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}
+
+/* 헤더 우측 배지는 콤팩트하게 */
+.cta {
+  gap: 8px;
+  transform: scale(0.82);
+  transform-origin: right center;
+}
+
+/* 모바일에서 배지가 좁으면 숨기고, 페이지 본문 CTA로 유도 */
+@media (max-width: 600px) {
+  .actions {
+    display: none;
+  }
+}

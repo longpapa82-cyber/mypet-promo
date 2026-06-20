@@ -1,0 +1,474 @@
+/* Features 섹션 — 폰 목업 + 글래스 캡션 + 좌우 교차(zig-zag) 기능 상세.
+   토큰 변수만 사용(하드코딩 색 금지). Aurora 메시 배경 + 패럴랙스 깊이. */
+
+/* ── 루트 (Aurora 호스트) ──────────────────── */
+.root {
+  position: relative;
+  /* 아주 옅은 웜 그라디언트 베이스 — Aurora blob이 이 위에서 더 또렷이 읽힌다.
+     surface-low 단색일 때 pastel blob이 묻혔던 문제를 톤 베이스로 해결(은은). */
+  background:
+    radial-gradient(120% 80% at 12% 0%, rgba(255, 219, 208, 0.18), transparent 55%),
+    radial-gradient(120% 80% at 88% 30%, rgba(174, 239, 226, 0.16), transparent 55%);
+}
+
+/* Aurora blob 레이어를 섹션 콘텐츠 뒤로 — 존재감 강화(밝은 배경 위 체감). */
+.aurora {
+  opacity: 0.85;
+}
+
+/* 콘텐츠는 Aurora 위로 */
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── 섹션 헤더 ─────────────────────────────── */
+.head {
+  text-align: center;
+  max-width: 640px;
+  margin-inline: auto;
+  margin-bottom: clamp(40px, 6vw, 72px);
+}
+
+.kicker {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background-color: var(--green-fixed);
+  color: var(--green-deep);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.heading {
+  margin: 16px 0 0;
+  color: var(--green-deep);
+}
+
+.lead {
+  margin: 12px 0 0;
+  color: var(--on-surface-variant);
+}
+
+/* ── 행 목록 ───────────────────────────────── */
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(56px, 9vw, 112px);
+}
+
+/* 한 행: 모바일은 세로 스택(미디어 위 → 카피 아래) */
+.row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(32px, 5vw, 56px);
+}
+
+.media,
+.copy {
+  width: 100%;
+}
+
+.media {
+  display: flex;
+  justify-content: center;
+}
+
+/* ── 카피 영역 ─────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background-color: var(--surface);
+  border: 1px solid var(--outline-variant);
+  color: var(--tertiary);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.title {
+  margin: 14px 0 0;
+  color: var(--green-deep);
+}
+
+.body {
+  margin: 12px 0 0;
+  color: var(--on-surface-variant);
+}
+
+.bullets {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bullet {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--on-surface);
+}
+
+.dot {
+  flex: 0 0 auto;
+  width: 9px;
+  height: 9px;
+  border-radius: var(--radius-pill);
+  background-color: var(--green);
+  box-shadow: 0 0 0 3px var(--green-fixed);
+}
+
+/* ── 폰 목업 프레임 ────────────────────────── */
+.phone {
+  position: relative;
+  width: min(296px, 82vw);
+  aspect-ratio: 296 / 600;
+  padding: 11px;
+  border-radius: 42px;
+  background: linear-gradient(160deg, #2a3330, #161d1a);
+  box-shadow: var(--shadow-overlay);
+  /* D-1 호버 인터랙션: transform/box-shadow만 트랜지션(합성 친화). */
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* D-1 폰 호버(데스크톱 전용): 살짝 떠오르며 미세 기울기 + 그림자 확장.
+   hover:hover/pointer:fine으로 터치 sticky-hover 차단. reduced-motion 시 비활성. */
+@media (hover: hover) and (pointer: fine) {
+  .media:hover .phone {
+    transform: translateY(-8px) rotate(-1.2deg) scale(1.015);
+    box-shadow:
+      0 28px 60px rgba(24, 28, 31, 0.2),
+      0 8px 20px rgba(24, 28, 31, 0.12);
+  }
+
+  /* zig-zag 반대 행은 반대 방향으로 기울여 율동감 */
+  .rowReverse .media:hover .phone {
+    transform: translateY(-8px) rotate(1.2deg) scale(1.015);
+  }
+}
+
+/* 베젤 광택 — 미세한 안쪽 하이라이트 */
+.phone::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+/* 상단 노치(필 형태) */
+.phoneNotch {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 96px;
+  height: 20px;
+  border-radius: var(--radius-pill);
+  background-color: #0f1714;
+  z-index: 3;
+}
+
+/* ── 앱 화면 합성 ──────────────────────────── */
+.screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 32px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface);
+}
+
+/* 톤별 화면 배경 — 토큰 그라디언트 재사용 */
+.tone_sky .screen {
+  background: var(--grad-sky);
+}
+.tone_mint .screen {
+  background: var(--grad-mint);
+}
+.tone_warm .screen {
+  background: var(--grad-warm);
+}
+.tone_gold .screen {
+  background: var(--grad-jewel);
+}
+
+/* 모의 상태바 */
+.statusBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px 4px;
+  flex: 0 0 auto;
+}
+
+.statusTime {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--green-deep);
+}
+
+.screenDark .statusTime {
+  color: var(--gold-soft);
+}
+
+.statusDots {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.statusDots i {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background-color: var(--green-deep);
+  opacity: 0.55;
+}
+
+.screenDark .statusDots i {
+  background-color: var(--gold);
+  opacity: 0.7;
+}
+
+/* 화면 제목 줄 */
+.screenHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 22px 2px;
+  flex: 0 0 auto;
+}
+
+.screenTitle {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--green-deep);
+}
+
+.screenDark .screenTitle {
+  color: var(--gold-soft);
+}
+
+/* 프리미엄 왕관/별 — jewel 다크 위 골드 (아이콘은 골드 허용) */
+.crown {
+  font-size: 16px;
+  line-height: 1;
+  color: var(--gold);
+}
+
+/* 미디어 영역 */
+.screenMedia {
+  position: relative;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* 사진(cover) — 화면을 꽉 채움 */
+.screenPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 18px;
+  margin: 2px 12px;
+}
+
+/* 마스코트(contain) — 여백 두고 가운데 */
+.screenIllust {
+  width: auto;
+  max-width: 78%;
+  max-height: 86%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(24, 28, 31, 0.2));
+}
+
+.screenDark .screenIllust {
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.45));
+}
+
+/* 실제 앱 스크린샷 — 폰 화면 전체를 꽉 채운다(자체 상태바/탭바 포함, 여백 없음). */
+.screenShot {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+/* 스크린샷 모드에선 screenMedia가 화면 전체(상태바/제목 줄 제거됨)를 채운다. */
+.screen .screenMedia {
+  margin: 0;
+}
+
+/* 하단 모의 탭바 */
+.tabBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 12px 26px 18px;
+  flex: 0 0 auto;
+  background-color: rgba(255, 255, 255, 0.42);
+}
+
+.screenDark .tabBar {
+  background-color: rgba(22, 48, 42, 0.5);
+}
+
+.tabDot,
+.tabDotActive {
+  width: 9px;
+  height: 9px;
+  border-radius: var(--radius-pill);
+  background-color: var(--green-deep);
+  opacity: 0.3;
+}
+
+.tabDotActive {
+  width: 22px;
+  opacity: 1;
+  background-color: var(--green);
+}
+
+.screenDark .tabDot {
+  background-color: var(--gold);
+  opacity: 0.35;
+}
+
+.screenDark .tabDotActive {
+  background-color: var(--gold);
+  opacity: 1;
+}
+
+/* ── 글래스 캡션 카드 (폰 위 오버레이) ──────── */
+/* 'glass' 유틸(global)과 합성: blur + 반투명 + 그라디언트 보더 + 노이즈 */
+.caption {
+  position: absolute;
+  bottom: 36px;
+  left: -18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 16px;
+  border-radius: var(--radius-pill);
+  z-index: 4;
+  /* 패럴랙스 transform과 충돌하지 않도록 위치는 left/bottom로만 */
+}
+
+/* NOTE: 캡션칩의 transform은 useParallax(JS 인라인 style.transform)가 소유한다.
+   여기서 .caption에 transform 애니메이션을 또 걸면 인라인 style이 이겨 무력화되거나
+   충돌한다 → 캡션 '살아있는 느낌'은 아래 dot 펄스(box-shadow, 충돌 없음)로만 준다. */
+
+.captionDot {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background-color: var(--green);
+  box-shadow: 0 0 0 3px var(--green-fixed);
+  /* D-3 캡션 dot 호흡 펄스 — 살아있는 느낌(매우 은은). */
+  animation: dot-pulse 2.4s ease-in-out infinite;
+}
+
+/* dot 펄스: box-shadow 확산 링이 옅게 호흡. opacity/box-shadow만. */
+@keyframes dot-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px var(--green-fixed);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(47, 125, 94, 0.14);
+  }
+}
+
+.captionText {
+  color: var(--green-deep);
+  white-space: nowrap;
+}
+
+/* jewel 다크 위 캡션 — 골드 보더 톤 + 밝은 텍스트 */
+.captionDark .captionDot {
+  background-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(202, 164, 106, 0.25);
+}
+
+.captionDark .captionText {
+  color: var(--gold-soft);
+}
+
+/* ── 데스크톱(768+): 좌우 2열 + zig-zag ───── */
+@media (min-width: 768px) {
+  .row {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .rowReverse {
+    flex-direction: row-reverse;
+  }
+
+  .media,
+  .copy {
+    flex: 1 1 0;
+    width: auto;
+  }
+
+  .copy {
+    max-width: 480px;
+  }
+
+  /* 캡션을 반대쪽으로 — zig-zag 방향에 맞춰 */
+  .rowReverse .caption {
+    left: auto;
+    right: -18px;
+  }
+}
+
+/* ── 대형 화면(1024+): 여백 확장 ───────────── */
+@media (min-width: 1024px) {
+  .row {
+    gap: clamp(64px, 7vw, 112px);
+  }
+
+  .caption {
+    left: -28px;
+  }
+
+  .rowReverse .caption {
+    right: -28px;
+  }
+}
+
+/* ── Reduced motion: 패럴랙스·호버·펄스 전면 정지 ── */
+@media (prefers-reduced-motion: reduce) {
+  .screenMedia,
+  .caption,
+  [data-parallax] {
+    transform: none !important;
+  }
+
+  /* D-1/D-3 신규 모션도 정지: 폰 호버 트랜지션·dot 펄스 */
+  .phone {
+    transition: none;
+  }
+  .media:hover .phone,
+  .rowReverse .media:hover .phone {
+    transform: none;
+  }
+  .captionDot {
+    animation: none;
+  }
+}

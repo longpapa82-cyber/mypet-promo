@@ -1,0 +1,36 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.wrap.center {
+  align-items: center;
+}
+
+.cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.cta.center {
+  justify-content: center;
+}
+
+/* Android UA에서 App Store 배지 강조 (미세한 골드 보더 + 살짝 키움) */
+.emphasis {
+  border-color: var(--gold);
+  box-shadow: var(--shadow-raised);
+}
+
+/* "iOS 먼저 / Android 곧" 안내 — surface 위 보조 텍스트 (AA 대비) */
+.notice {
+  margin: 0;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 600;
+  color: var(--on-surface-variant);
+}

@@ -1,0 +1,148 @@
+/* 약관/처리방침 등 법적 문서 페이지 공통 레이아웃.
+   디자인 토큰(Quicksand·surface·green·radius-card)만 사용. */
+
+.page {
+  min-height: 100vh;
+  background-color: var(--surface);
+  color: var(--on-surface);
+}
+
+/* 상단 sticky 헤더 — MyPet 로고+워드마크 하나 (클릭=홈, 웹 표준) */
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px clamp(16px, 5vw, 32px);
+  background-color: rgba(247, 250, 254, 0.86);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  border-bottom: 1px solid var(--outline-variant);
+}
+
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .bar {
+    background-color: var(--surface);
+  }
+}
+
+/* 로고+워드마크 = 홈 링크(웹 표준) */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.brand:active {
+  transform: scale(0.96);
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  box-shadow: var(--shadow-rest);
+}
+
+.name {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--green-deep);
+}
+
+/* 본문 — 읽기 좋은 폭/타이포 */
+.doc {
+  max-width: 760px;
+  margin-inline: auto;
+  padding: clamp(24px, 5vw, 48px) clamp(20px, 5vw, 32px) 80px;
+  line-height: 1.7;
+}
+
+.doc :global(h1) {
+  font-size: clamp(26px, 4vw, 34px);
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--green-deep);
+  border-bottom: 2px solid var(--green);
+  padding-bottom: 14px;
+  margin: 0 0 8px;
+}
+
+.doc :global(h2) {
+  font-size: 19px;
+  line-height: 1.4;
+  font-weight: 700;
+  color: var(--green-deep);
+  margin-top: 2.2rem;
+  margin-bottom: 0.4rem;
+}
+
+.doc :global(p),
+.doc :global(li) {
+  font-size: 16px;
+  color: var(--on-surface);
+}
+
+.doc :global(.meta) {
+  color: var(--on-surface-variant);
+  font-size: 14px;
+}
+
+.doc :global(strong),
+.doc :global(b) {
+  color: var(--on-surface);
+  font-weight: 700;
+}
+
+/* 사업자정보 등 안내 박스 */
+.doc :global(.note) {
+  background-color: var(--green-fixed);
+  border-left: 4px solid var(--green);
+  padding: 14px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--on-surface-variant);
+  margin: 16px 0;
+}
+
+.doc :global(table) {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 14px;
+}
+
+.doc :global(th),
+.doc :global(td) {
+  border: 1px solid var(--outline-variant);
+  padding: 9px 11px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.doc :global(th) {
+  background-color: var(--green-fixed);
+  color: var(--on-surface);
+  font-weight: 700;
+}
+
+.doc :global(ul) {
+  padding-left: 1.3em;
+}
+
+.doc :global(footer) {
+  margin-top: 3rem;
+  color: var(--on-surface-variant);
+  font-size: 14px;
+  border-top: 1px solid var(--outline-variant);
+  padding-top: 16px;
+}

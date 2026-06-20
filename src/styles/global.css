@@ -1,0 +1,192 @@
+/* MyPet 전역 레이아웃·유틸 — tokens.css 기반 */
+
+/* ── Container ─────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 48px);
+}
+
+/* ── Skip link (본문 바로가기) ─────────────── */
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: -100px;
+  z-index: 1000;
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  background-color: var(--green);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: var(--shadow-raised);
+  transition: top 0.18s ease;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+  top: 12px;
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* ── Section 여백 토큰 ─────────────────────── */
+.section {
+  padding-block: clamp(56px, 9vw, 112px);
+}
+
+.section-tight {
+  padding-block: clamp(32px, 5vw, 56px);
+}
+
+/* ── Squishy 버튼 베이스 ───────────────────── */
+.squishy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.squishy:active {
+  transform: scale(0.96);
+}
+
+/* 주 CTA: green 배경 + 흰 텍스트 (앱 검수 확정 규칙) */
+.btn-primary {
+  background-color: var(--green);
+  color: #ffffff;
+  box-shadow: var(--shadow-raised);
+}
+
+.btn-primary:hover {
+  background-color: var(--green-deep);
+}
+
+/* 보조 CTA: 표면 위 윤곽 */
+.btn-secondary {
+  background-color: #ffffff;
+  color: var(--green-deep);
+  border: 1.5px solid var(--outline-variant);
+  box-shadow: var(--shadow-rest);
+}
+
+.btn-secondary:hover {
+  border-color: var(--green);
+}
+
+/* ── Keyboard focus 표시 (a11y) ─────────────── */
+/* 마우스/탭 클릭에는 표시 안 하고, 키보드 포커스에만 green 윤곽을 띄운다.
+   스토어 배지·헤더 로고·푸터 링크 등 모든 인터랙티브 요소 공통 적용. */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* 어두운(jewel) 배경 위 인터랙티브 요소는 green 윤곽이 묻히므로 흰 윤곽으로 대비 확보 */
+[data-on-dark] a:focus-visible,
+[data-on-dark] button:focus-visible,
+a[data-on-dark]:focus-visible,
+button[data-on-dark]:focus-visible {
+  outline-color: #ffffff;
+}
+
+/* ── Glassmorphism 액센트 (전체 아님, 카드/배지에만) ───────────
+   반투명 + backdrop blur + 그라디언트 보더 + 미세 노이즈 입자.
+   backdrop-filter 미지원 브라우저는 @supports not 폴백으로 불투명 surface. */
+.glass {
+  position: relative;
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-raised);
+  overflow: hidden;
+}
+
+/* 미세 노이즈 입자 (글래스 표면 질감) */
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--noise);
+  opacity: 0.04;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* jewel 다크 위 글래스 (골드 보더 톤) */
+[data-on-dark] .glass,
+.glass[data-on-dark] {
+  background: var(--glass-bg-dark);
+  border-color: var(--glass-border-dark);
+}
+
+/* backdrop-filter 미지원 시 불투명 surface 폴백 */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .glass {
+    background: var(--glass-bg-strong);
+  }
+
+  [data-on-dark] .glass,
+  .glass[data-on-dark] {
+    background: var(--glass-bg-dark-strong);
+  }
+}
+
+/* ── Aurora 배경 컨테이너 (blob 레이어 호스트) ───────────────
+   콘텐츠 뒤에 깔리는 blob 그룹의 클리핑 박스. 자체는 투명. */
+.aurora-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* ── 샴페인골드 메탈릭 구분선 (jewel 다크 위) ─────────────── */
+.gold-divider {
+  height: 1px;
+  width: 100%;
+  border: none;
+  background: var(--gold-metallic-line);
+  opacity: 0.85;
+}
+
+/* ── Reduced motion ────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .squishy:active {
+    transform: none;
+  }
+
+  /* 패럴랙스·blob 부유 애니메이션 전면 정지 */
+  .blob,
+  .parallax,
+  [data-blob],
+  [data-parallax] {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,38 @@
+/* SectionDoodles — 코너 배치 장식 레이어. 콘텐츠 뒤(z:0), 클릭 비활성. */
+.layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* 각 도들 슬롯 — 코너 여백에 절대배치. 깜찍함이 또렷하게 보이도록 존재감 유지(but 콘텐츠 비방해). */
+.slot {
+  position: absolute;
+  opacity: 0.7;
+}
+
+/* 모바일에선 코너 도들이 콘텐츠와 겹칠 수 있어 살짝 옅게. */
+@media (max-width: 640px) {
+  .slot {
+    opacity: 0.5;
+  }
+}
+
+.tl {
+  top: clamp(16px, 4vw, 48px);
+  left: clamp(12px, 4vw, 56px);
+}
+.tr {
+  top: clamp(16px, 4vw, 48px);
+  right: clamp(12px, 4vw, 56px);
+}
+.bl {
+  bottom: clamp(16px, 4vw, 48px);
+  left: clamp(12px, 4vw, 56px);
+}
+.br {
+  bottom: clamp(16px, 4vw, 48px);
+  right: clamp(12px, 4vw, 56px);
+}

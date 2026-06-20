@@ -1,0 +1,340 @@
+/* Hero — 풀블리드 첫 화면.
+   배경: warm 그라디언트 + Aurora mixed(mint/sky/peach) 메시 blob.
+   모바일 세로 스택 → 1024+ 좌(카피)/우(글래스 마스코트 카드+통계칩) 2열.
+   패럴랙스(transform translateY)는 Hero.tsx에서 주입, reduced-motion 시 정지. */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--grad-warm);
+}
+
+/* Aurora 레이어를 콘텐츠 뒤로 (Aurora.layer가 inset:0·z-index:0 담당) */
+.aurora {
+  position: absolute;
+}
+
+/* 풀블리드 배경 위 콘텐츠 컨테이너 (Section fullBleed라 직접 래핑) */
+.inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 48px);
+  padding-block: clamp(56px, 9vw, 104px);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(40px, 7vw, 64px);
+  align-items: center;
+}
+
+/* ── 좌측: 카피 ─────────────────────────────── */
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px 6px 10px;
+  border-radius: var(--radius-pill);
+  background-color: var(--green-fixed);
+  color: var(--green-deep);
+  border: 1px solid var(--gold);
+  align-self: center;
+}
+
+.eyebrowDot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(47, 125, 94, 0.18);
+}
+
+/* 오버사이즈 헤드라인 — 기본 displayLg(40/48)에서 한 단계 더 키운다 */
+.headline {
+  color: var(--green-deep);
+  margin: 0;
+  max-width: 16ch;
+  font-size: clamp(34px, 6.4vw, 52px);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.accent {
+  color: var(--green);
+}
+
+.subcopy {
+  color: var(--on-surface-variant);
+  margin: 0;
+  max-width: 46ch;
+}
+
+.cta {
+  margin-top: 8px;
+  justify-content: center;
+}
+
+/* ── 우측: 글래스 마스코트 카드 + 패럴랙스 무대 ── */
+.visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 패럴랙스/통계칩이 카드 밖으로 살짝 넘쳐도 잘리지 않도록 여유를 둔 무대 */
+.stage {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-block: clamp(8px, 4vw, 40px);
+}
+
+/* 그라디언트 blob (카드 뒤 깊이) */
+.blob {
+  position: absolute;
+  inset: 4% 6%;
+  border-radius: 46% 54% 58% 42% / 52% 44% 56% 48%;
+  background: var(--grad-mint);
+  filter: blur(6px);
+  opacity: 0.7;
+  z-index: 0;
+}
+
+.blobGold {
+  position: absolute;
+  width: 40%;
+  aspect-ratio: 1;
+  top: -2%;
+  right: 2%;
+  border-radius: var(--radius-pill);
+  background: var(--gold-soft);
+  opacity: 0.6;
+  filter: blur(2px);
+  z-index: 0;
+}
+
+/* 깜찍 도들 — 마스코트 무대 주변에 떠다니는 장식(P2). z 위로, 콘텐츠 비가림 위치. */
+.doodle {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+}
+.doodlePaw {
+  top: 4%;
+  left: 0%;
+  animation-delay: 0.2s;
+}
+.doodleHeart {
+  bottom: 10%;
+  left: 6%; /* 좌하단 — 통계칩(우측)·콘텐츠와 안 겹침 */
+  animation-delay: 0.5s;
+}
+
+/* 마스코트 카드 — 깊이있는 글래스 + 골드 보더 포인트 */
+.imageCard {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+  border-radius: var(--radius-hero);
+  /* 글래스 풍 반투명 + 또렷 그림자 (warm 배경 위 깊이) */
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.92),
+    rgba(255, 255, 255, 0.78)
+  );
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow-overlay);
+  padding: clamp(12px, 3vw, 20px);
+  /* 골드 메탈릭 그라디언트 보더 포인트 (배경 클립 트릭) */
+  border: 1.5px solid transparent;
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  background-image: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.92),
+      rgba(255, 255, 255, 0.78)
+    ),
+    var(--gold-metallic);
+}
+
+/* 카드 우상단 골드 왕관 배지 (프리미엄 포인트, 아이콘만 골드 OK) */
+.cardCrown {
+  position: absolute;
+  top: -14px;
+  right: 18px;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  color: var(--gold-deep);
+  background: var(--grad-jewel);
+  border: 1.5px solid var(--gold);
+  box-shadow: var(--shadow-raised);
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-card);
+}
+
+/* ── 글래스 플로팅 통계칩 ───────────────────── */
+.chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chip {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  /* .glass(global) 위에 좌측 톤 액센트 바를 더한다 */
+  border-left: 3px solid var(--outline-variant);
+  /* 마스코트 위 최악영역에서도 텍스트 AA(4.5:1) 확보 —
+     glass 반투명(0.55) 대신 거의 불투명한 surface 배경으로 강화 */
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.chipValue {
+  color: var(--green-deep);
+}
+
+.chipLabel {
+  color: var(--on-surface-variant);
+  font-weight: 600;
+}
+
+/* 칩 위치 — 카드를 둘러싸는 3개 부유 배치 */
+.chip1 {
+  top: 6%;
+  left: -6%;
+}
+
+.chip2 {
+  bottom: 18%;
+  left: -10%;
+}
+
+.chip3 {
+  bottom: 6%;
+  right: -4%;
+}
+
+/* 칩 톤 액센트 (좌측 바·값 색) — 앱 의미색 매핑 */
+.tone_sky {
+  border-left-color: var(--secondary);
+}
+.tone_sky .chipValue {
+  color: var(--secondary);
+}
+
+.tone_mint {
+  border-left-color: var(--tertiary);
+}
+.tone_mint .chipValue {
+  color: var(--tertiary);
+}
+
+.tone_green {
+  border-left-color: var(--green);
+}
+.tone_green .chipValue {
+  color: var(--green);
+}
+
+/* ── 작은 화면(<520px): 칩이 카드를 가리지 않게 안쪽으로 ── */
+@media (max-width: 519px) {
+  .chip1 {
+    left: -2%;
+  }
+  .chip2 {
+    bottom: 14%;
+    left: -4%;
+  }
+  .chip3 {
+    right: -2%;
+  }
+  .chip {
+    padding: 8px 12px;
+  }
+}
+
+/* ── 768+ ───────────────────────────────────── */
+@media (min-width: 768px) {
+  .stage {
+    max-width: 600px;
+  }
+  .imageCard {
+    max-width: 580px;
+  }
+}
+
+/* ── 1024+ : 2열 (좌 카피 / 우 카드) ─────────── */
+@media (min-width: 1024px) {
+  .inner {
+    grid-template-columns: 1.05fr 1fr;
+    gap: clamp(40px, 5vw, 72px);
+  }
+
+  .copy {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .eyebrow {
+    align-self: flex-start;
+  }
+
+  .headline {
+    max-width: 17ch;
+    font-size: clamp(40px, 4vw, 56px);
+  }
+
+  .cta {
+    justify-content: flex-start;
+  }
+
+  .chip1 {
+    left: -12%;
+  }
+  .chip2 {
+    left: -14%;
+  }
+  .chip3 {
+    right: -10%;
+  }
+}
+
+/* ── 패럴랙스/blob 정지 (보강 — global.css도 [data-parallax] 차단) ── */
+@media (prefers-reduced-motion: reduce) {
+  .blob,
+  .blobGold,
+  .imageCard,
+  .chip {
+    transform: none !important;
+  }
+}

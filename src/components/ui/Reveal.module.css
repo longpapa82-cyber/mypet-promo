@@ -1,0 +1,47 @@
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  /* will-change는 베이스에 상시 두지 않는다(미진입 요소가 합성 레이어를 조기·장기 점유함).
+     진입 임박~전환 중에만 .arm 클래스로 부여하고 transitionend에서 해제한다. */
+}
+
+/* 진입 임박(IO 프리트리거) 또는 전환 진행 중에만 합성 레이어를 준비한다. */
+.arm {
+  will-change: opacity, transform;
+}
+
+.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* 통통 등장(cute) — 시작 상태를 살짝 작게+아래, spring 백스윙으로 톡 튀어오름. */
+.bounce {
+  transform: translateY(28px) scale(0.92);
+  transition:
+    opacity 0.45s ease,
+    transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.bounce.visible {
+  transform: translateY(0) scale(1);
+}
+
+/* 안전장치: JS 미실행(no-JS/스크린샷/OG/검색봇) 시 콘텐츠를 즉시 표시 → 빈 화면 방지.
+   index.html이 <html>에 no-js 클래스를 부여하고, main.tsx 부팅 시 제거한다. */
+:global(html.no-js) .reveal {
+  opacity: 1;
+  transform: none;
+  transition: none;
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+}

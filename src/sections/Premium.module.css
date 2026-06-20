@@ -1,0 +1,334 @@
+/* 프리미엄 섹션 — jewel 다크 그라운드 + 샴페인골드 메탈릭 + frosted 글래스 혜택 카드.
+   앱 구독화면 럭셔리 톤. tokens.css 변수만 사용(하드코딩 색 없음, 흰 텍스트는 #f4f9f4 계열). */
+
+.card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  /* jewel 그라디언트 + 상단 골드 광 미세 오버레이로 깊이 강화 */
+  background:
+    radial-gradient(120% 80% at 80% -10%, rgba(202, 164, 106, 0.16), transparent 55%),
+    var(--grad-jewel);
+  border-radius: var(--radius-hero);
+  box-shadow: var(--shadow-overlay);
+  padding: clamp(28px, 5vw, 60px);
+  color: #f4f9f4;
+  text-align: center;
+}
+
+/* 샴페인골드 메탈릭 보더 — 그라디언트 보더는 mask 기법으로(테두리만 금속 광택) */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: var(--gold-metallic);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Aurora 깊이 blob — jewel 위 어두운 녹색 톤, 콘텐츠 뒤 */
+.aurora {
+  z-index: 0;
+  border-radius: inherit;
+  opacity: 0.85;
+}
+
+/* gold 광채 — 우상단에서 은은하게 새어 나오는 빛 */
+.glow {
+  position: absolute;
+  z-index: 1;
+  top: -30%;
+  right: -10%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(202, 164, 106, 0.24), transparent 70%);
+  pointer-events: none;
+}
+
+/* 가장자리 비네팅 — 중앙 콘텐츠로 시선 집중, 깊이감 */
+.vignette {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: radial-gradient(120% 90% at 50% 30%, transparent 55%, rgba(13, 30, 25, 0.45) 100%);
+  pointer-events: none;
+}
+
+/* 콘텐츠는 보더(z3)·blob(z0)·광채(z1) 위 */
+.head,
+.benefits,
+.priceRow,
+.ctaWrap {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Header ─────────────────────────────────── */
+.badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  background-color: rgba(202, 164, 106, 0.12);
+}
+
+/* 배지 골드 메탈릭 보더(mask) */
+.badge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--gold-metallic);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.badgeText {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--gold-soft);
+}
+
+.title {
+  margin: 22px auto 0;
+  max-width: 18ch;
+  color: #f4f9f4;
+  /* 320px에서 한국어 단어가 음절 단위로 쪼개지지 않게(광·고, 시·작 방지).
+     긴 라틴 토큰(MyPet)만 필요 시 줄바꿈 허용 */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.titleAccent {
+  color: var(--gold-soft);
+}
+
+.lead {
+  margin: 16px auto 0;
+  max-width: 46ch;
+  color: rgba(244, 249, 244, 0.86);
+}
+
+/* 헤더 아래 골드 메탈릭 구분선 (global .gold-divider 재사용) */
+.card :global(.gold-divider) {
+  position: relative;
+  z-index: 2;
+  max-width: 480px;
+  margin: clamp(24px, 4vw, 36px) auto 0;
+}
+
+/* ── Benefits (frosted 글래스 카드) ──────────── */
+.benefits {
+  list-style: none;
+  margin: clamp(24px, 4vw, 36px) auto 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+  max-width: 640px;
+}
+
+.benefit {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  text-align: left;
+  padding: 22px;
+  border-radius: var(--radius-card);
+  /* frosted: 반투명 + backdrop blur + 미세 노이즈(::after). 폴백은 @supports로 불투명화 */
+  background: var(--glass-bg-dark);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: var(--shadow-raised);
+  overflow: hidden;
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
+}
+
+/* 혜택 카드 골드 그라디언트 보더(mask) */
+.benefit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--gold-metallic);
+  opacity: 0.85;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* 미세 노이즈 입자 (글래스 표면 질감) */
+.benefit::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: var(--noise);
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* hover 마이크로 인터랙션 — 살짝 떠오름 */
+.benefit:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-overlay);
+}
+
+.benefitMark {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  background-color: rgba(202, 164, 106, 0.16);
+  border: 1px solid rgba(202, 164, 106, 0.45);
+}
+
+.benefitTitle {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  color: var(--gold-soft);
+}
+
+.benefitDesc {
+  position: relative;
+  z-index: 2;
+  margin: 6px 0 0;
+  /* frosted 카드 위 본문 — AA 확보 위해 거의 흰색 */
+  color: rgba(244, 249, 244, 0.9);
+}
+
+/* ── Price ──────────────────────────────────── */
+.priceRow {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: clamp(24px, 4vw, 36px) auto 0;
+  padding: 12px 22px;
+  border-radius: var(--radius-pill);
+  background-color: rgba(202, 164, 106, 0.1);
+  /* mask 보더를 위해 상대 위치 */
+  position: relative;
+  z-index: 2;
+}
+
+.priceRow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--gold-metallic);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.starIcon {
+  flex-shrink: 0;
+}
+
+.priceLabel {
+  color: var(--gold-soft);
+  letter-spacing: 0.02em;
+}
+
+.priceNote {
+  /* jewel(어두운) 배경 위 보조 텍스트 — 흰색 충분 대비(AA 안전마진) */
+  color: rgba(244, 249, 244, 0.92);
+}
+
+/* 공정사용 단서 — jewel(어두운) 배경 위 작은 보조 텍스트(AA 안전 대비) */
+.fairUse {
+  margin: 14px 0 0;
+  color: rgba(244, 249, 244, 0.78);
+  text-align: center;
+  font-weight: 500;
+}
+
+/* ── CTA ────────────────────────────────────── */
+.ctaWrap {
+  margin-top: clamp(24px, 4vw, 36px);
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Responsive ─────────────────────────────── */
+@media (min-width: 768px) {
+  .benefits {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .priceNote {
+    border-left: 1px solid rgba(202, 164, 106, 0.4);
+    padding-left: 10px;
+    margin-left: 2px;
+  }
+}
+
+@media (max-width: 767px) {
+  .priceRow {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+/* backdrop-filter 미지원 폴백 — frosted 대신 불투명 jewel 톤 */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .benefit {
+    background: var(--glass-bg-dark-strong);
+  }
+}
+
+/* ── Reduced motion ─────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .benefit,
+  .benefit:hover {
+    transform: none;
+    transition: none;
+  }
+}

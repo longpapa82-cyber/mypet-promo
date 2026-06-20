@@ -1,0 +1,149 @@
+/* Aurora — 섹션 배경 blob 레이어.
+   콘텐츠 뒤(z-index 0, 컨테이너는 .aurora-bg가 음수 흐름 담당)에 깔리며
+   heavy blur + 은은한 float(transform translate만). reduced-motion 시 정지. */
+
+.layer {
+  /* .aurora-bg(global)와 합성: 절대배치 + 콘텐츠 뒤 + pointer 비활성 */
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.85; /* B3: 존재감 강화(blur 크니 텍스트 가독엔 영향 적음) */
+  /* transform만 애니메이션 → 합성 친화적 */
+  animation: float 14s ease-in-out infinite;
+}
+
+/* 노이즈 입자 오버레이(B3) — data-uri SVG 노이즈를 아주 옅게 깔아 그라디언트에 촉각감. */
+.grain {
+  position: absolute;
+  inset: 0;
+  background-image: var(--noise);
+  background-size: 160px 160px;
+  opacity: 0.045;
+  /* mix-blend-mode 제거(섹션별 추가 합성 레이어 방지 — 성능). opacity만으로 입자감 충분. */
+  pointer-events: none;
+}
+/* jewel(다크) 위에선 노이즈를 살짝 더(어두운 배경에 입자감 잘 보임). */
+.jewel .grain {
+  opacity: 0.08;
+}
+
+/* peach 동계열(FAQ: peach 배경 + peach blob) — blob을 옅게 해 배경이 콘텐츠를 압도하지 않게. */
+.peach .blob {
+  opacity: 0.62;
+}
+
+/* 3개 blob — 크기·위치·딜레이·이동방향 분산. 밝은 배경 위에서도 체감되도록
+   크기를 키워 면적·중첩을 늘린다(blur가 커서 경계는 여전히 부드러움). */
+.b1 {
+  width: 58%;
+  aspect-ratio: 1;
+  top: -16%;
+  left: -10%;
+  animation-delay: 0s;
+  animation-duration: 16s;
+}
+
+.b2 {
+  width: 50%;
+  aspect-ratio: 1;
+  top: 26%;
+  right: -14%;
+  animation-delay: -5s;
+  animation-duration: 19s;
+}
+
+.b3 {
+  width: 44%;
+  aspect-ratio: 1;
+  bottom: -18%;
+  left: 24%;
+  animation-delay: -9s;
+  animation-duration: 22s;
+}
+
+/* variant별 blob 그라디언트 (tokens.css aurora 변수만 사용) */
+.mint .b1,
+.mixed .b1 {
+  background: var(--aurora-mint);
+}
+.mint .b2 {
+  background: var(--aurora-mint);
+}
+.mint .b3 {
+  background: var(--aurora-sky);
+}
+
+.sky .b1,
+.sky .b2 {
+  background: var(--aurora-sky);
+}
+.sky .b3 {
+  background: var(--aurora-mint);
+}
+
+.peach .b1,
+.peach .b3 {
+  background: var(--aurora-peach);
+}
+.peach .b2 {
+  background: var(--aurora-mint);
+}
+
+.jewel .b1,
+.jewel .b2,
+.jewel .b3 {
+  background: var(--aurora-jewel);
+  opacity: 0.5;
+}
+
+/* mixed: 세 분위기를 한 섹션에서 (peach·mint·sky) */
+.mixed .b2 {
+  background: var(--aurora-peach);
+}
+.mixed .b3 {
+  background: var(--aurora-sky);
+}
+
+/* warm: 따뜻한 프리미엄 분위기 — peach + mint + 샴페인골드 1포인트.
+   골드 blob은 절제(b3 한 곳, 작고 옅게)해 럭셔리 톤만 살짝 더한다. */
+.warm .b1 {
+  background: var(--aurora-peach);
+}
+.warm .b2 {
+  background: var(--aurora-mint);
+}
+.warm .b3 {
+  background: var(--aurora-gold);
+  opacity: 0.5;
+}
+
+/* 부유 애니메이션 — translate + 미세 scale-breath (layout 무관, 합성).
+   scale 호흡(0.96~1.05)을 더해 blob이 더 유기적으로 살아 숨쉬는 분위기. */
+@keyframes float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(3%, -4%, 0) scale(1.05);
+  }
+  66% {
+    transform: translate3d(-3%, 3%, 0) scale(0.96);
+  }
+}
+
+/* reduced-motion: 정지 (global.css에서도 .blob 전역 차단하지만 모듈 차원에서도 보강) */
+@media (prefers-reduced-motion: reduce) {
+  .blob {
+    animation: none;
+    transform: none;
+  }
+}
