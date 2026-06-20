@@ -259,7 +259,7 @@ export default function Features() {
   useParallax(rootRef);
 
   return (
-    <Section id="features" background="butterSoft">
+    <Section id="features" background="surface">
       <div ref={rootRef} className={styles.root}>
         <Aurora variant="warm" className={styles.aurora} />
         <SectionDoodles set="butter" />

@@ -7,7 +7,7 @@
 //   라이브 GitHub Pages(스토어 심사 URL)는 그대로 유지하고, 사이트 내 표시만 내부 전환한다.
 //
 // 섹션 순서 + 배경/Aurora 리듬(인접 섹션 분위기 교차로 깊이):
-//   Hero(warm) → Value(skySoft) → Features(butterSoft) → HowTo(mintSoft)
+//   Hero(warm) → Value(skySoft) → Features(surface·폰목업 주인공이라 중립) → HowTo(mintSoft)
 //   → Premium(lavSoft) → FAQ(peachSoft) → FinalCTA(jewel·클라이맥스 다크)
 //   각 인접 섹션이 서로 다른 hue 패밀리(하늘/버터/민트/라벤더/피치)라 경계가 또렷하다.
 // 각 Section은 자체 id 앵커를 가진다(hero/services/features/how-to/premium/faq/download).
@@ -55,9 +55,9 @@ export default function App() {
         <Hero />
         <SectionDivider topColor="var(--surface)" color="var(--tint-sky)" />
         <Value />
-        <SectionDivider topColor="var(--tint-sky)" color="var(--tint-butter)" />
+        <SectionDivider topColor="var(--tint-sky)" color="var(--surface)" />
         <Features />
-        <SectionDivider topColor="var(--tint-butter)" color="var(--tint-mint)" />
+        <SectionDivider topColor="var(--surface)" color="var(--tint-mint)" />
         <HowTo />
         <SectionDivider topColor="var(--tint-mint)" color="var(--tint-lav)" />
         <Premium />
