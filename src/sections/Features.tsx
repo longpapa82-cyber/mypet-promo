@@ -1,7 +1,6 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 import Section from '../components/ui/Section';
 import Reveal from '../components/ui/Reveal';
-import Aurora from '../components/ui/Aurora';
 import SectionDoodles from '../components/ui/SectionDoodles';
 import styles from './Features.module.css';
 
@@ -261,7 +260,8 @@ export default function Features() {
   return (
     <Section id="features" background="surface">
       <div ref={rootRef} className={styles.root}>
-        <Aurora variant="warm" className={styles.aurora} />
+        {/* Aurora 제거: 폰 목업이 주인공인 섹션이라 배경은 조용하게(흰 surface).
+            warm Aurora의 골드 blob이 폰 주변을 노랗게 물들여 '테두리 두꺼움'으로 보이던 근본 원인. */}
         <SectionDoodles set="butter" />
 
         <div className={styles.content}>

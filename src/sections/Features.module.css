@@ -189,9 +189,9 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  /* 콘텐츠가 화면 테두리에 바짝 붙지 않게 충분한 안쪽 여백(흰 액자). 스크린샷이 이 패딩 안에 들어온다. */
-  padding: 12px;
-  /* 실제 앱 스크린샷이 화면을 채우므로 screen 배경은 흰색(스크린샷 여백과 동색 → 세로선 방지). */
+  /* 진짜 폰처럼: 베젤(검정) 바로 안에 화면이 여백 없이 꽉 참. 흰 패딩 액자는 '캡처 붙인 티'라 제거. */
+  padding: 0;
+  /* 스크린샷이 화면을 채우므로 배경은 흰색(스크린샷 가장자리와 동색 → 틈/세로선 방지). */
   background-color: #ffffff;
 }
 
@@ -296,8 +296,8 @@
   filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.45));
 }
 
-/* 실제 앱 스크린샷 — .screen 안쪽 패딩(흰 액자) 안에 둥근 모서리로 배치.
-   콘텐츠가 화면 테두리에서 충분히 떨어져 보인다. scale 불필요(패딩이 틴트 가장자리도 가림). */
+/* 실제 앱 스크린샷 — 베젤 안 화면을 가장자리까지 꽉 채움(진짜 폰). screen의 radius+overflow:hidden이
+   모서리를 둥글게 클립. 흰 가장자리 픽셀이라 흰 배경과 동색 → 틈/세로선 없음. */
 .screenShot {
   position: absolute;
   inset: 0;
@@ -306,7 +306,6 @@
   object-fit: cover;
   object-position: top center;
   display: block;
-  border-radius: 16px;
 }
 
 /* 스크린샷 모드에선 screenMedia가 화면 전체(상태바/제목 줄 제거됨)를 채운다. */

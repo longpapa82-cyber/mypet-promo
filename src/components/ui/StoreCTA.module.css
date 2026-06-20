@@ -23,14 +23,15 @@
   align-items: center;
 }
 
-/* 두 배지를 동일 폭으로(나란할 때 들쭉날쭉 방지). 모바일에서 적당한 고정폭. */
+/* 배지는 각자 콘텐츠(텍스트) 폭에 맞춤 — 고정폭 강제 시 App Store가 빈 여백 과다.
+   세로 스택일 때 시작 정렬 기준 동일하게(왼쪽 맞춤) 깔끔. */
 .cta :global(button),
 .cta :global(a) {
-  width: 260px;
+  width: auto;
   max-width: 100%;
 }
 
-/* 480+: 버튼 2개를 가로로(공간 충분). 콘텐츠폭으로 복원. */
+/* 480+: 버튼 2개를 가로로(공간 충분). */
 @media (min-width: 480px) {
   .cta {
     flex-direction: row;
@@ -39,10 +40,6 @@
   }
   .cta.center {
     justify-content: center;
-  }
-  .cta :global(button),
-  .cta :global(a) {
-    width: auto;
   }
 }
 
