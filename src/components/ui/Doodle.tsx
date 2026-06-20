@@ -6,7 +6,7 @@
  */
 import type { CSSProperties } from 'react';
 
-type DoodleKind = 'paw' | 'heart' | 'star' | 'sparkle';
+type DoodleKind = 'paw' | 'heart' | 'star' | 'sparkle' | 'bone';
 
 interface DoodleProps {
   kind: DoodleKind;
@@ -50,6 +50,17 @@ export default function Doodle({ kind, size = 28, color = 'var(--cute-coral)', c
       return (
         <svg {...common}>
           <path d="M12 2.6l2.7 5.9 6.4.7-4.8 4.3 1.3 6.3L12 17l-5.6 2.8 1.3-6.3-4.8-4.3 6.4-.7z" />
+        </svg>
+      );
+    case 'bone':
+      // 강아지 뼈다귀 — 펫 모티프 다양성(P6). 가로 막대 + 양끝 두 원 쌍.
+      return (
+        <svg {...common}>
+          <circle cx="5.2" cy="8.3" r="2.5" />
+          <circle cx="5.2" cy="12.2" r="2.5" />
+          <circle cx="18.8" cy="8.3" r="2.5" />
+          <circle cx="18.8" cy="12.2" r="2.5" />
+          <rect x="5" y="8.4" width="14" height="3.6" rx="1.8" />
         </svg>
       );
     case 'sparkle':

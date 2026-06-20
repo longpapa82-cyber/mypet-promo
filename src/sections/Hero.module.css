@@ -71,8 +71,18 @@
   text-wrap: balance;
 }
 
+/* P5: "MyPet" 워드마크 — green 계열 그라데이션 텍스트(절제, 1곳만). 미지원 시 solid green 폴백. */
 .accent {
   color: var(--green);
+  background: linear-gradient(120deg, var(--green-deep) 0%, var(--green) 45%, var(--tertiary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .accent {
+    -webkit-text-fill-color: var(--green);
+  }
 }
 
 .subcopy {

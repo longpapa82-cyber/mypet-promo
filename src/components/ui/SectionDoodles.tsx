@@ -13,7 +13,7 @@ import styles from './SectionDoodles.module.css';
 type DoodleSet = 'sky' | 'butter' | 'mint' | 'lav' | 'peach';
 
 interface Placed {
-  kind: 'paw' | 'heart' | 'star' | 'sparkle';
+  kind: 'paw' | 'heart' | 'star' | 'sparkle' | 'bone';
   color: string;
   size: number;
   /** 코너/위치 클래스 */
@@ -39,12 +39,12 @@ const SETS: Record<DoodleSet, Placed[]> = {
   ],
   mint: [
     { kind: 'paw', color: 'var(--tertiary)', size: 30, pos: 'tl', motion: 'float', tilt: 12, delay: 0 },
-    { kind: 'heart', color: 'var(--cute-coral)', size: 20, pos: 'br', motion: 'pulse', tilt: -10, delay: 0.7 },
+    { kind: 'bone', color: 'var(--cute-butter-ink)', size: 24, pos: 'br', motion: 'float', tilt: -8, delay: 0.7 },
     { kind: 'star', color: 'var(--cute-butter)', size: 22, pos: 'tr', motion: 'float', tilt: 6, delay: 1.3 },
   ],
   lav: [
     { kind: 'sparkle', color: 'var(--cute-lav)', size: 28, pos: 'tr', motion: 'pulse', tilt: 0, delay: 0.3 },
-    { kind: 'star', color: 'var(--gold)', size: 22, pos: 'bl', motion: 'float', tilt: -14, delay: 0.9 },
+    { kind: 'bone', color: 'var(--gold)', size: 24, pos: 'bl', motion: 'float', tilt: -14, delay: 0.9 },
     { kind: 'paw', color: 'var(--cute-coral)', size: 20, pos: 'br', motion: 'float', tilt: 10, delay: 1.5 },
   ],
   peach: [
