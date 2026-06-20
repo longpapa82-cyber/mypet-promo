@@ -9,24 +9,28 @@
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
-  /* ⚠️상하 가장자리 페이드: blob을 섹션 위/아래 끝에서 투명하게 사라지게 한다.
-     → 섹션 경계(그라데이션 전환 div와 만나는 곳)는 순수 단색 틴트만 보여
-     전환 div 끝색과 정확히 일치 → 가로 단차(밴딩 '선')가 사라진다.
-     Aurora 분위기는 섹션 가운데(18~82%)에만 남아 효과는 유지. */
+  /* ⚠️4방향 가장자리 페이드: blob을 섹션 상/하/좌/우 끝에서 투명하게 사라지게 한다.
+     상하 → 그라데이션 전환부 가로 단차 제거. 좌우 → blob이 섹션 옆 끝에서 급격히 잘려
+     생기던 세로선(파란톤 라인) 제거. 두 그라디언트를 intersect(mask-composite)해 네 변 모두 페이드.
+     Aurora 분위기는 섹션 중앙에만 남아 효과는 유지. */
   -webkit-mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    #000 18%,
-    #000 82%,
-    transparent 100%
-  );
+      to bottom,
+      transparent 0%,
+      #000 16%,
+      #000 84%,
+      transparent 100%
+    ),
+    linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  -webkit-mask-composite: source-in;
   mask-image: linear-gradient(
-    to bottom,
-    transparent 0%,
-    #000 18%,
-    #000 82%,
-    transparent 100%
-  );
+      to bottom,
+      transparent 0%,
+      #000 16%,
+      #000 84%,
+      transparent 100%
+    ),
+    linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%);
+  mask-composite: intersect;
 }
 
 .blob {

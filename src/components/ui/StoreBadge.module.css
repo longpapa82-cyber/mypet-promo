@@ -7,7 +7,7 @@
   background-color: #101417;
   color: #ffffff;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  /* 보더 제거 — 다크 버튼의 흰 1px 외곽선도 '선'으로 보임. 그림자만으로 분리. */
   box-shadow: var(--shadow-rest);
   transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease;
   /* button/a 공통 — 네이티브 button 외형 리셋 (coming-soon이 <button>으로 렌더) */
@@ -52,7 +52,7 @@
   transform: none;
 }
 
-/* "출시 예정" 배지 — 골드 보더로 프리미엄 톤 (텍스트는 흰색, 골드는 보더만) */
+/* "출시 예정" 배지 — 골드 보더 대신 옅은 골드 fill(테두리 선 없이 프리미엄 톤). */
 .soon {
   margin-left: 4px;
   padding: 2px 8px;
@@ -60,8 +60,8 @@
   font-weight: 700;
   letter-spacing: 0.02em;
   border-radius: var(--radius-pill);
-  border: 1px solid var(--gold);
-  color: #ffffff;
+  background-color: rgba(202, 164, 106, 0.22);
+  color: var(--gold-soft);
   white-space: nowrap;
 }
 

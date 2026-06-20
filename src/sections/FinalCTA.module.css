@@ -77,7 +77,8 @@
   gap: 8px;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
-  border: 1px solid var(--glass-border-dark);
+  /* 골드 보더 제거 — 다크 위 옅은 골드 톤 fill로(테두리 선 없이 강조). */
+  background-color: rgba(202, 164, 106, 0.14);
   color: var(--gold-soft);
   letter-spacing: 0.02em;
 }

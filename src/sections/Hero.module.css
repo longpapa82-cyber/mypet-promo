@@ -185,9 +185,9 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--radius-pill);
-  color: var(--gold-deep);
+  color: var(--gold-soft);
   background: var(--grad-jewel);
-  border: 1.5px solid var(--gold);
+  /* 골드 보더 제거 — jewel 배경 크라운 배지, 보더 링 없이 그림자만. */
   box-shadow: var(--shadow-raised);
 }
 

@@ -255,7 +255,8 @@
   background-color: var(--glass-bg-strong);
   -webkit-backdrop-filter: blur(var(--glass-blur));
   backdrop-filter: blur(var(--glass-blur));
-  border: 1px solid var(--glass-border);
+  /* 보더 제거 — 지도 위 반투명 패널, 그림자/블러로 분리. */
+  box-shadow: var(--shadow-rest);
 }
 
 .nearbyItem {
