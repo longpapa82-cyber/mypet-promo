@@ -129,11 +129,11 @@ button[data-on-dark]:focus-visible {
   mix-blend-mode: overlay;
 }
 
-/* jewel 다크 위 글래스 — 여기선 골드 보더가 광택으로 자연스러워 다시 켠다. */
+/* jewel 다크 위 글래스 — 골드 보더도 '테두리 선'으로 보여 제거. 반투명 배경 + 그림자만. */
 [data-on-dark] .glass,
 .glass[data-on-dark] {
   background: var(--glass-bg-dark);
-  border: 1px solid var(--glass-border-dark);
+  border: none;
 }
 
 /* backdrop-filter 미지원 시 불투명 surface 폴백 */

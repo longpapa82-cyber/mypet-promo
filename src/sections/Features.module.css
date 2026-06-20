@@ -187,21 +187,14 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  background-color: var(--surface);
+  /* 실제 앱 스크린샷이 화면을 꽉 채우므로 screen 배경은 흰색.
+     ⚠️톤별 그라디언트를 깔면 스크린샷 가장자리 1px에서 비쳐 '세로선'이 됨 → 흰색 단색으로. */
+  background-color: #ffffff;
 }
 
-/* 톤별 화면 배경 — 토큰 그라디언트 재사용 */
-.tone_sky .screen {
-  background: var(--grad-sky);
-}
-.tone_mint .screen {
-  background: var(--grad-mint);
-}
-.tone_warm .screen {
-  background: var(--grad-warm);
-}
+/* gold(jewel) 톤만 다크 — 프리미엄 스크린샷이 다크 배경이라 가장자리도 다크로 맞춤 */
 .tone_gold .screen {
-  background: var(--grad-jewel);
+  background-color: #16302a;
 }
 
 /* 모의 상태바 */
