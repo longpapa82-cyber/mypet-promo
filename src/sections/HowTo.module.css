@@ -98,6 +98,7 @@
 
 /* ── 번호 원형 — gold-soft 배경 + 골드 메탈릭 링 + 깊이 그림자 ──
    골드 텍스트 금지 규칙에 따라 숫자는 green-deep(흰 배경 대비 AA). */
+/* v3: claymorphism 점토 알사탕 — 골드 링 대신 점토 입체 그림자로 정체성. */
 .badge {
   position: relative;
   display: inline-flex;
@@ -107,27 +108,13 @@
   height: 68px;
   border-radius: var(--radius-pill);
   background: var(--gold-soft);
-  box-shadow: var(--shadow-raised);
+  box-shadow: var(--clay-orb);
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 메탈릭 골드 링(보더 전용) — conic 광택 */
+/* badgeRing: v3에서 점토 그림자로 대체 → 보이지 않게(마크업 호환 위해 클래스 유지). */
 .badgeRing {
-  position: absolute;
-  inset: -2px;
-  border-radius: var(--radius-pill);
-  padding: 2px;
-  background: var(--gold-metallic);
-  /* 보더만 칠하도록 마스크 컷아웃 */
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  pointer-events: none;
+  display: none;
 }
 
 .badgeNum {
@@ -154,6 +141,8 @@
   border-radius: var(--radius-sm);
   background: var(--green-fixed);
   color: var(--green-deep);
+  /* v3: 점토 입체(작은 칩) */
+  box-shadow: var(--clay-orb);
 }
 
 .icon {

@@ -160,7 +160,7 @@
   color: var(--on-surface-variant);
 }
 
-/* ── 아이콘 칩 (라인 아이콘, 톤별 액센트) ── */
+/* ── 아이콘 칩 (라인 아이콘, 톤별 액센트) — v3 claymorphism 점토 칩 ── */
 .iconWrap {
   flex-shrink: 0;
   display: inline-flex;
@@ -170,7 +170,7 @@
   height: 52px;
   border-radius: var(--radius-sm);
   background-color: #ffffff;
-  box-shadow: var(--shadow-rest);
+  box-shadow: var(--clay-orb);
 }
 
 .icon {
