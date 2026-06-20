@@ -1,0 +1,61 @@
+/* DuotonePhoto — 실사 사진 + jewel green 듀오톤 합성. 레이어 z-index 순서로 쌓는다. */
+.wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate; /* mix-blend가 바깥으로 새지 않게 */
+}
+
+.img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* green 듀오톤 wash — multiply로 사진 그림자를 jewel green 쪽으로, 밝은 부분은 크림 쪽으로 */
+.wash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(155deg, #235641 0%, #2f7d5e 55%, #27695e 100%);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* 크림 하이라이트 — 상단 따뜻한 빛(screen 블렌드로 밝은 영역만 띄움) */
+.highlight {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 80% at 50% 0%, rgba(243, 232, 212, 0.45) 0%, rgba(243, 232, 212, 0) 55%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* 스크림 — 텍스트 가독(방향별 어두운 그라데이션) */
+.scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.scrim_bottom {
+  background: linear-gradient(to top, rgba(16, 32, 26, 0.72) 0%, rgba(16, 32, 26, 0.15) 45%, transparent 75%);
+}
+.scrim_left {
+  background: linear-gradient(to right, rgba(16, 32, 26, 0.72) 0%, rgba(16, 32, 26, 0.12) 50%, transparent 80%);
+}
+.scrim_top {
+  background: linear-gradient(to bottom, rgba(16, 32, 26, 0.66) 0%, rgba(16, 32, 26, 0.1) 45%, transparent 75%);
+}
+
+/* 미지원(mix-blend) 폴백 — 그냥 옅은 green 오버레이로 톤만 */
+@supports not (mix-blend-mode: multiply) {
+  .wash {
+    background: rgba(35, 86, 65, 0.4);
+  }
+  .highlight {
+    display: none;
+  }
+}

@@ -3,6 +3,7 @@ import Section from '../components/ui/Section';
 import StoreCTA from '../components/ui/StoreCTA';
 import Reveal from '../components/ui/Reveal';
 import Aurora from '../components/ui/Aurora';
+import DuotonePhoto from '../components/ui/DuotonePhoto';
 import Doodle from '../components/ui/Doodle';
 import { asset } from '../constants/stores';
 import styles from './Hero.module.css';
@@ -126,6 +127,15 @@ export default function Hero() {
 
   return (
     <Section id="hero" background="warm" fullBleed className={styles.hero}>
+      {/* V1: 실사 펫 배경(듀오톤, 아주 옅게) — 단색 배경의 허전함 해소·감성 깊이. 마스코트 카드는 유지. */}
+      <DuotonePhoto
+        name="hero-pet"
+        className={styles.photoBg}
+        intensity={0.62}
+        scrimDir="none"
+        position="center"
+        decorative
+      />
       <Aurora variant="mixed" className={styles.aurora} />
 
       <div className={styles.inner}>

@@ -9,6 +9,18 @@
   background: var(--grad-warm);
 }
 
+/* V1: 실사 배경 사진(듀오톤) — 최하단. warm 배경 위에 옅게 깔려 감성 깊이.
+   아래쪽으로 갈수록 페이드(mask)해 다음 콘텐츠·섹션과 자연스럽게 이어짐. */
+.photoBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.5; /* 절제 — 텍스트 가독 위해 옅게. warm 배경과 블렌드 */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 92%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 92%);
+  pointer-events: none;
+}
+
 /* Aurora 레이어를 콘텐츠 뒤로 (Aurora.layer가 inset:0·z-index:0 담당) */
 .aurora {
   position: absolute;
