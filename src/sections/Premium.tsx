@@ -15,12 +15,12 @@ const BENEFITS: readonly Benefit[] = [
   {
     icon: 'block',
     title: '광고 완전 제거',
-    desc: '배너·전면 광고 없이 깔끔하게. 검색도 상담도 흐름이 끊기지 않습니다.',
+    desc: '배너·전면 광고 없이 깔끔하게',
   },
   {
     icon: 'infinity',
     title: 'AI 상담 무제한*',
-    desc: '펫 건강·법률 질문을 개인 이용 범위 내에서 횟수 제한 없이. 무료 일일 한도 이상으로 더 자유롭게 물어보세요.',
+    desc: '건강·법률 질문을 마음껏',
   },
 ] as const;
 
@@ -124,8 +124,7 @@ export default function Premium() {
               프리미엄으로 광고 없이 <span className={styles.titleAccent}>AI 무제한*</span>
             </h2>
             <p className={`t-body-lg ${styles.lead}`}>
-              월 구독 한 번으로 방해 없는 검색과 넉넉한 펫 상담. 가족 같은 반려동물에게
-              더 집중하세요.
+              광고 없이, AI 상담은 마음껏. 반려동물에게 더 집중하세요.
             </p>
           </header>
 
@@ -151,7 +150,7 @@ export default function Premium() {
             <StarIcon />
             <span className={`t-label-md ${styles.priceLabel}`}>월 구독</span>
             <span className={`t-body-md ${styles.priceNote}`}>
-              가격은 스토어에서 자동 안내 · 월 자동 갱신, 해지 전까지 매월 자동 결제 · 스토어 설정에서 언제든 해지
+              월 자동 갱신 · 언제든 해지 · 가격은 스토어 안내
             </span>
           </div>
 
