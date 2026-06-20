@@ -294,17 +294,19 @@
 }
 
 /* 실제 앱 스크린샷 — 폰 화면 전체를 꽉 채운다(자체 상태바/탭바 포함, 여백 없음).
-   ⚠️absolute inset 0 + 좌우 1px 더 늘려(-1px..calc(100%+2px)) screen 배경(그라디언트)이
-   가장자리에서 비쳐 '세로선'으로 보이던 문제 제거. flex 중앙정렬 틈도 우회. */
+   ⚠️스크린샷 가장자리 픽셀이 순수 흰색이 아니라 앱 화면 틴트색(예: mint)을 띠고 있어
+   screen 흰 배경과 만나 '세로선'이 됨. → transform scale로 살짝 키워(중앙 기준) 틴트 가장자리를
+   screen(overflow:hidden) 밖으로 밀어내 클리핑 → 화면엔 내부 콘텐츠만 보임(선 제거). */
 .screenShot {
   position: absolute;
-  top: 0;
-  left: -1px;
-  width: calc(100% + 2px);
+  inset: 0;
+  width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top center;
   display: block;
+  transform: scale(1.03);
+  transform-origin: center top;
 }
 
 /* 스크린샷 모드에선 screenMedia가 화면 전체(상태바/제목 줄 제거됨)를 채운다. */
