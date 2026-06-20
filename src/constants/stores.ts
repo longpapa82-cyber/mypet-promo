@@ -1,6 +1,8 @@
 // MyPet 스토어/연락처/법무 단일소스 (URL은 모든 컴포넌트에서 여기만 참조)
 
-export const APP_STORE_URL = 'https://apps.apple.com/app/id6780117383';
+// ⚠️/kr/ 포함 필수 — 앱이 한국 지역에서만 판매(사용 가능)되므로, 지역코드 없는 URL은
+// 미국 등 해외 기준이라 404가 난다. 한국 스토어 직링크로 고정.
+export const APP_STORE_URL = 'https://apps.apple.com/kr/app/id6780117383';
 export const PLAY_STORE_URL =
   'https://play.google.com/store/apps/details?id=com.longpapa82.mypet';
 
