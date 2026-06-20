@@ -81,8 +81,8 @@
   display: inline-block;
   padding: 5px 12px;
   border-radius: var(--radius-pill);
-  background-color: var(--surface);
-  border: 1px solid var(--outline-variant);
+  /* 보더 제거 — 민트 톤 fill pill로(테두리 선 없이 카테고리 강조). */
+  background-color: rgba(39, 105, 94, 0.1);
   color: var(--tertiary);
   font-size: 13px;
   font-weight: 700;

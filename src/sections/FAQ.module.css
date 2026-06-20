@@ -31,15 +31,16 @@
 
 .item {
   background-color: #ffffff;
-  border: 1.5px solid var(--green-fixed);
+  /* 하드 보더 제거 — 파스텔 배경 위 '테두리 선'으로 보임. 카드 분리는 soft shadow가 담당. */
+  border: none;
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-rest);
   overflow: hidden;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  transition: box-shadow 0.18s ease;
 }
 
 .item[open] {
-  border-color: var(--green);
+  /* 펼침 강조도 보더 대신 그림자 상승으로 — 선 없이 깊이만. */
   box-shadow: var(--shadow-raised);
 }
 
