@@ -9,28 +9,34 @@
   align-items: center;
 }
 
-/* 모바일 기본: 버튼 세로 스택(폭 100%) → 2줄로 깨지지 않고 한 줄씩 깔끔. */
+/* 모바일 기본: 버튼 세로 스택. Hero·FinalCTA 동일 크기 위해 두 배지 같은 너비(stretch) +
+   컨테이너 최대폭 제한 → 풀폭으로 과하게 커지지 않고 일관된 사이즈. */
 .cta {
   display: flex;
   flex-direction: column;
   gap: 12px;
   align-items: stretch;
   width: 100%;
+  max-width: 320px;
+  margin-inline: auto;
 }
 
+/* center 변형도 동일 — 가운데 정렬은 wrap에서, 버튼 자체는 항상 동일폭(stretch) */
 .cta.center {
-  align-items: center;
+  align-items: stretch;
 }
 
-/* 480+: 버튼 2개를 가로로(공간 충분). */
+/* 480+: 버튼 2개를 가로로(공간 충분). 이때는 콘텐츠폭. */
 @media (min-width: 480px) {
   .cta {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
     width: auto;
+    max-width: none;
   }
   .cta.center {
+    align-items: center;
     justify-content: center;
   }
 }

@@ -22,10 +22,12 @@
   max-width: 1120px;
   margin-inline: auto;
   padding-inline: clamp(20px, 5vw, 48px);
-  padding-block: clamp(56px, 9vw, 104px);
+  /* 모바일: 상단 넉넉·하단 절제(다음 섹션과 공백 과다 방지). 데스크톱은 1024+에서 대칭 복원. */
+  padding-top: clamp(48px, 9vw, 104px);
+  padding-bottom: clamp(24px, 5vw, 104px);
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(40px, 7vw, 64px);
+  gap: clamp(28px, 6vw, 64px);
   align-items: center;
 }
 
@@ -92,15 +94,16 @@
   align-items: center;
 }
 
-/* 패럴랙스/통계칩이 카드 밖으로 살짝 넘쳐도 잘리지 않도록 여유를 둔 무대 */
+/* 모바일: 카드+칩 세로 스택(칩이 흐름 배치라). 패딩 최소화(빈 공간 제거). */
 .stage {
   position: relative;
   width: 100%;
   max-width: 560px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  padding-block: clamp(8px, 4vw, 40px);
+  gap: 4px;
+  padding-block: 0;
 }
 
 /* 그라디언트 blob (카드 뒤 깊이) */
@@ -253,6 +256,13 @@
   }
   .imageCard {
     max-width: 580px;
+  }
+  /* 데스크톱: 칩 absolute라 stage는 카드만 중앙 배치(흐름 칩 column 해제) */
+  .stage {
+    flex-direction: row;
+    justify-content: center;
+    gap: 0;
+    padding-block: clamp(8px, 4vw, 40px);
   }
   .chips {
     margin: 0;
