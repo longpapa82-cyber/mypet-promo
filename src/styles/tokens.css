@@ -60,7 +60,9 @@
   /* ── Glassmorphism (액센트 전용, 전체 적용 금지) ───────────── */
   --glass-bg: rgba(255, 255, 255, 0.55);
   --glass-bg-strong: rgba(255, 255, 255, 0.72); /* backdrop-filter 미지원 폴백 */
-  --glass-border: rgba(255, 255, 255, 0.65);
+  /* 보더 alpha 0.65→0.28: 밝은 파스텔 배경 위에서 흰 1px 림이 '선'으로 보이던 문제 해결.
+     림 라이트(글래스 가장자리 광택)는 옅게만 남기고, 카드 분리는 soft shadow가 담당. */
+  --glass-border: rgba(255, 255, 255, 0.28);
   --glass-blur: 14px;
   /* jewel 다크 위 글래스 */
   --glass-bg-dark: rgba(22, 48, 42, 0.42);
