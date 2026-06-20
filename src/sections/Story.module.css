@@ -1,0 +1,53 @@
+/* Story — 감성 풀블리드 사진 섹션. 사진 위 텍스트(스크림으로 가독). */
+.story {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(420px, 60vh, 560px);
+  display: flex;
+  align-items: flex-end; /* 텍스트 하단 정렬(스크림 진한 쪽) */
+}
+
+.photo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding: clamp(28px, 5vw, 56px) clamp(20px, 5vw, 48px) clamp(36px, 6vw, 72px);
+  color: #f4f9f4;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.16);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #f4f9f4;
+  margin-bottom: 14px;
+}
+
+.heading {
+  margin: 0;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+  text-shadow: 0 2px 12px rgba(16, 32, 26, 0.4);
+}
+
+.body {
+  margin: 14px auto 0;
+  max-width: 30ch;
+  color: rgba(244, 249, 244, 0.92);
+  text-shadow: 0 1px 8px rgba(16, 32, 26, 0.4);
+}

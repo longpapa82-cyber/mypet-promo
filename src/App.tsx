@@ -23,6 +23,7 @@ import Features from './sections/Features';
 import HowTo from './sections/HowTo';
 import Premium from './sections/Premium';
 import FAQ from './sections/FAQ';
+import Story from './sections/Story';
 import FinalCTA from './sections/FinalCTA';
 import PrivacyPage from './pages/PrivacyPage';
 import TermsPage from './pages/TermsPage';
@@ -64,6 +65,8 @@ export default function App() {
         <SectionDivider topColor="var(--tint-lav)" color="var(--tint-peach)" />
         <FAQ />
         <SectionDivider topColor="var(--tint-peach)" color="#1c3d30" />
+        {/* V4: 감성 스토리 섹션(풀블리드 실사) → FinalCTA로 자연 연결(둘 다 jewel 다크) */}
+        <Story />
         <FinalCTA />
       </main>
       <Footer />
