@@ -48,20 +48,21 @@ export default function App() {
       <span id="top" />
       <Header />
       <main id="main">
-        {/* 섹션 사이 곡선 디바이더 — color=다음 섹션 배경색. 투명 top이 위 섹션 배경을 비춰 매끄럽게 연결.
+        {/* 섹션 사이 그라데이션 페이드 — 위 섹션 색(topColor) → 아래 섹션 색(color)으로 부드럽게 전환.
+            곡선 제거(가장자리 선 문제) → 색이 녹아들어 경계선이 물리적으로 없음.
             배경 톤: warm→sky→butter→mint→lav→peach→jewel(클라이맥스 다크). 인접 모두 다른 hue. */}
         <Hero />
-        <SectionDivider variant="wave" color="var(--tint-sky)" />
+        <SectionDivider topColor="var(--surface)" color="var(--tint-sky)" />
         <Value />
-        <SectionDivider variant="hill" color="var(--tint-butter)" />
+        <SectionDivider topColor="var(--tint-sky)" color="var(--tint-butter)" />
         <Features />
-        <SectionDivider variant="wave" color="var(--tint-mint)" />
+        <SectionDivider topColor="var(--tint-butter)" color="var(--tint-mint)" />
         <HowTo />
-        <SectionDivider variant="blob" color="var(--tint-lav)" />
+        <SectionDivider topColor="var(--tint-mint)" color="var(--tint-lav)" />
         <Premium />
-        <SectionDivider variant="wave" color="var(--tint-peach)" />
+        <SectionDivider topColor="var(--tint-lav)" color="var(--tint-peach)" />
         <FAQ />
-        <SectionDivider variant="hill" color="#1c3d30" />
+        <SectionDivider topColor="var(--tint-peach)" color="#1c3d30" />
         <FinalCTA />
       </main>
       <Footer />

@@ -1,25 +1,10 @@
-/* SectionDivider — 풀폭 곡선 전환. 투명 top + 음수 top마진(인라인)으로 위 섹션에 겹쳐,
-   위 섹션의 실제 배경(그라디언트 포함)이 곡선 위로 비치게 한다(평평한 색 띠 = 밴드 제거). */
-.wrap {
-  position: relative;
+/* SectionDivider — 그라데이션 페이드 전환(곡선 제거).
+   위·아래 섹션 색을 잇는 세로 그라데이션. 양 끝이 각 섹션 색과 정확히 일치해 경계선이 없다. */
+.fade {
   width: 100%;
-  line-height: 0;
   display: block;
-  /* margin-top은 인라인(-height)으로 위 섹션에 통째 겹침. 아래는 1px 당겨 다음 섹션과 sliver 방지. */
+  /* 위·아래 섹션과 1px 겹쳐 서브픽셀 틈(헤어라인)도 방지. */
+  margin-top: -1px;
   margin-bottom: -1px;
   pointer-events: none;
-  /* color = 다음 섹션 배경색(prop) → svg currentColor가 곡선 아래쪽을 채움. */
-}
-
-.svg {
-  display: block;
-  width: 100%;
-  /* 곡선 아래쪽(채워진 다음 색)이 경계에 정확히 닿도록 부모 높이를 꽉 채움.
-     drop-shadow·height overflow 제거: 평평 밴드/선 헤어라인 원인. 색차+곡선만으로 구분 충분. */
-  height: 100%;
-}
-
-/* 뒤집기 — 곡선 방향 반전(위로 볼록 ↔ 아래로 볼록). */
-.flip {
-  transform: scaleY(-1);
 }
