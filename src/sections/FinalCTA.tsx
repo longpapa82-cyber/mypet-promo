@@ -2,6 +2,7 @@ import Section from '../components/ui/Section';
 import Reveal from '../components/ui/Reveal';
 import StoreCTA from '../components/ui/StoreCTA';
 import Aurora from '../components/ui/Aurora';
+import DuotonePhoto from '../components/ui/DuotonePhoto';
 import Doodle from '../components/ui/Doodle';
 import styles from './FinalCTA.module.css';
 
@@ -36,6 +37,14 @@ function SparkIcon() {
 export default function FinalCTA() {
   return (
     <Section id="download" background="jewel">
+      {/* V2: 실사 펫 배경(듀오톤 강하게) — jewel 다크 위 감성 깊이. 글래스 박스가 텍스트 가독 담당. */}
+      <DuotonePhoto
+        name="hero-home"
+        className={styles.photoBg}
+        intensity={0.78}
+        scrimDir="none"
+        decorative
+      />
       {/* jewel 다크 위 Aurora 메시 — jewel blob을 베이스로 깊이감 부여 */}
       <Aurora variant="jewel" className={styles.aurora} />
 

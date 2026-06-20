@@ -1,5 +1,16 @@
 /* FinalCTA — jewel 다크 그라운드 + Aurora 메시 + 글래스 CTA 박스 + 오버사이즈 헤드라인 */
 
+/* V2: 실사 펫 배경(듀오톤) — 최하단. jewel 다크 위 감성 깊이. 상하 페이드로 인접 섹션과 연결. */
+.photoBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.55;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 88%, transparent 100%);
+  pointer-events: none;
+}
+
 /* Aurora 레이어 — 섹션 배경 뒤(blob z-index 0), 콘텐츠는 .inner z-index로 위.
    Aurora.module.css .layer가 absolute/inset:0/overflow 클리핑을 담당한다. */
 .aurora {
