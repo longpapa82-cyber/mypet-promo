@@ -9,15 +9,30 @@
   align-items: center;
 }
 
+/* 모바일 기본: 버튼 세로 스택(폭 100%) → 2줄로 깨지지 않고 한 줄씩 깔끔. */
 .cta {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 12px;
-  align-items: center;
+  align-items: stretch;
+  width: 100%;
 }
 
 .cta.center {
-  justify-content: center;
+  align-items: center;
+}
+
+/* 480+: 버튼 2개를 가로로(공간 충분). */
+@media (min-width: 480px) {
+  .cta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    width: auto;
+  }
+  .cta.center {
+    justify-content: center;
+  }
 }
 
 /* Android UA에서 App Store 배지 강조 (미세한 골드 보더 + 살짝 키움) */

@@ -203,25 +203,27 @@
 }
 
 /* ── 글래스 플로팅 통계칩 ───────────────────── */
+/* 모바일 기본: 칩을 카드 아래 일반 흐름(가로 wrap)으로 → 마스코트 비가림 + 빈 공간 해소.
+   768+에서만 카드 둘레 absolute 플로팅으로 전환(아래 미디어쿼리). */
 .chips {
   list-style: none;
-  margin: 0;
+  margin: 14px 0 0;
   padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
 }
 
 .chip {
-  position: absolute;
-  z-index: 3;
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 10px 16px;
+  padding: 8px 14px;
   border-radius: var(--radius-sm);
-  /* .glass(global) 위에 좌측 톤 액센트 바를 더한다 */
-  border-left: 3px solid var(--outline-variant);
-  /* 마스코트 위 최악영역에서도 텍스트 AA(4.5:1) 확보 —
-     glass 반투명(0.55) 대신 거의 불투명한 surface 배경으로 강화 */
-  background: rgba(255, 255, 255, 0.95);
+  /* 좌측 톤 바(border) 대신 점토 그림자 — 테두리 선 금지 원칙 + 입체감 */
+  box-shadow: var(--clay-orb);
+  background: rgba(255, 255, 255, 0.96);
 }
 
 .chipValue {
@@ -233,68 +235,44 @@
   font-weight: 600;
 }
 
-/* 칩 위치 — 카드를 둘러싸는 3개 부유 배치 */
-.chip1 {
-  top: 6%;
-  left: -6%;
-}
-
-.chip2 {
-  bottom: 18%;
-  left: -10%;
-}
-
-.chip3 {
-  bottom: 6%;
-  right: -4%;
-}
-
-/* 칩 톤 액센트 (좌측 바·값 색) — 앱 의미색 매핑 */
-.tone_sky {
-  border-left-color: var(--secondary);
-}
+/* 칩 톤 액센트 (값 색만) — 앱 의미색 매핑. 보더 제거(흐름 배치 + 점토 그림자). */
 .tone_sky .chipValue {
   color: var(--secondary);
 }
-
-.tone_mint {
-  border-left-color: var(--tertiary);
-}
 .tone_mint .chipValue {
   color: var(--tertiary);
-}
-
-.tone_green {
-  border-left-color: var(--green);
 }
 .tone_green .chipValue {
   color: var(--green);
 }
 
-/* ── 작은 화면(<520px): 칩이 카드를 가리지 않게 안쪽으로 ── */
-@media (max-width: 519px) {
-  .chip1 {
-    left: -2%;
-  }
-  .chip2 {
-    bottom: 14%;
-    left: -4%;
-  }
-  .chip3 {
-    right: -2%;
-  }
-  .chip {
-    padding: 8px 12px;
-  }
-}
-
-/* ── 768+ ───────────────────────────────────── */
+/* ── 768+: 칩을 카드 둘레 absolute 플로팅으로(데스크톱 깊이감). 모바일은 흐름 유지. ── */
 @media (min-width: 768px) {
   .stage {
     max-width: 600px;
   }
   .imageCard {
     max-width: 580px;
+  }
+  .chips {
+    margin: 0;
+    display: block; /* absolute 자식이라 flow 해제 */
+  }
+  .chip {
+    position: absolute;
+    z-index: 3;
+  }
+  .chip1 {
+    top: 6%;
+    left: -6%;
+  }
+  .chip2 {
+    bottom: 18%;
+    left: -10%;
+  }
+  .chip3 {
+    bottom: 6%;
+    right: -4%;
   }
 }
 
