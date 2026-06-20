@@ -159,6 +159,16 @@
   margin: 0;
   color: var(--on-surface-variant);
 }
+/* 카피 강조 — 핵심 키워드만 green 볼드로(스캔 가능성↑) */
+.cardDesc strong {
+  color: var(--green-deep);
+  font-weight: 700;
+}
+/* 부연 — 옅게(핵심에서 뒤로) */
+.muted {
+  color: var(--outline);
+  font-weight: 500;
+}
 
 /* ── 아이콘 칩 (라인 아이콘, 톤별 액센트) — v3 claymorphism 점토 칩 ── */
 .iconWrap {
@@ -346,10 +356,11 @@
 }
 
 .disclaimer {
-  margin: 4px 0 0;
-  color: var(--on-surface-variant);
-  font-size: 13px;
-  line-height: 19px;
+  margin: 8px 0 0;
+  /* 법적 필수지만 부연이라 더 작고 옅게(핵심 가독 방해 최소). */
+  color: var(--outline);
+  font-size: 11.5px;
+  line-height: 16px;
   font-weight: 500;
 }
 

@@ -107,9 +107,9 @@ export default function Value() {
                   <PinIcon />
                 </span>
                 <div>
-                  <h3 className={`${styles.cardTitle} t-headline-md`}>내 주변 펫 시설 검색</h3>
+                  <h3 className={`${styles.cardTitle} t-headline-md`}>내 주변 펫 시설</h3>
                   <p className={`${styles.cardDesc} t-body-md`}>
-                    현재 위치를 기준으로 가까운 펫 시설을 거리순으로 찾아드려요.
+                    현재 위치에서 <strong>가까운 순서</strong>로 한눈에
                   </p>
                 </div>
               </div>
@@ -153,7 +153,7 @@ export default function Value() {
                 <h3 className={`${styles.cardTitle} t-headline-md`}>AI 펫 상담</h3>
               </div>
               <p className={`${styles.cardDesc} t-body-md`}>
-                반려동물 건강·법률 궁금증을 AI에게 바로 물어보세요.
+                건강·법률 궁금증을 <strong>바로 질문</strong>
               </p>
 
               {/* 말풍선 대화 미리보기 */}
@@ -177,7 +177,7 @@ export default function Value() {
             <article className={`${styles.card} ${styles.categories}`}>
               <h3 className={`${styles.cardTitle} t-headline-md`}>다양한 카테고리</h3>
               <p className={`${styles.cardDesc} t-body-md`}>
-                동물병원·미용실·호텔·용품점 등, 반려생활에 필요한 곳을 한 곳에서. 카테고리는 계속 확대 중입니다.
+                필요한 곳을 한 곳에서 <span className={styles.muted}>· 계속 확대 중</span>
               </p>
               <ul className={styles.chips}>
                 {CATEGORIES.map((c) => (
@@ -193,9 +193,9 @@ export default function Value() {
           <Reveal bounce className={styles.cellStat} delay={210}>
             <article className={`${styles.card} ${styles.stat} glass`}>
               <span className={`${styles.statNumber} t-display-lg`}>3만+</span>
-              <span className={`${styles.statLabel} t-label-md`}>등록 펫 시설 수록</span>
+              <span className={`${styles.statLabel} t-label-md`}>등록 펫 시설</span>
               <p className={`${styles.statNote} t-body-md`}>
-                거리순 정렬 · 운영시간(확인된 시설) 안내로 계속 채워집니다.
+                거리순 · 운영시간 안내
               </p>
             </article>
           </Reveal>
