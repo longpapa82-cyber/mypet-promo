@@ -129,10 +129,12 @@
   position: relative;
   width: min(296px, 82vw);
   aspect-ratio: 296 / 600;
-  padding: 11px;
+  /* 베젤(검정 테두리) — 얇게. 콘텐츠 여백은 .screen padding이 따로 담당. */
+  padding: 10px;
   border-radius: 42px;
   background: linear-gradient(160deg, #2a3330, #161d1a);
-  box-shadow: var(--shadow-overlay);
+  /* 그림자 완화(overlay→raised) — 폰이 배경에서 덜 무겁게 떠 보이도록(두꺼움 완화) */
+  box-shadow: var(--shadow-raised);
   /* D-1 호버 인터랙션: transform/box-shadow만 트랜지션(합성 친화). */
   transition:
     transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
@@ -187,8 +189,9 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  /* 실제 앱 스크린샷이 화면을 꽉 채우므로 screen 배경은 흰색.
-     ⚠️톤별 그라디언트를 깔면 스크린샷 가장자리 1px에서 비쳐 '세로선'이 됨 → 흰색 단색으로. */
+  /* 콘텐츠가 화면 테두리에 바짝 붙지 않게 충분한 안쪽 여백(흰 액자). 스크린샷이 이 패딩 안에 들어온다. */
+  padding: 12px;
+  /* 실제 앱 스크린샷이 화면을 채우므로 screen 배경은 흰색(스크린샷 여백과 동색 → 세로선 방지). */
   background-color: #ffffff;
 }
 
@@ -293,10 +296,8 @@
   filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.45));
 }
 
-/* 실제 앱 스크린샷 — 폰 화면 전체를 꽉 채운다(자체 상태바/탭바 포함, 여백 없음).
-   ⚠️스크린샷 가장자리 픽셀이 순수 흰색이 아니라 앱 화면 틴트색(예: mint)을 띠고 있어
-   screen 흰 배경과 만나 '세로선'이 됨. → transform scale로 살짝 키워(중앙 기준) 틴트 가장자리를
-   screen(overflow:hidden) 밖으로 밀어내 클리핑 → 화면엔 내부 콘텐츠만 보임(선 제거). */
+/* 실제 앱 스크린샷 — .screen 안쪽 패딩(흰 액자) 안에 둥근 모서리로 배치.
+   콘텐츠가 화면 테두리에서 충분히 떨어져 보인다. scale 불필요(패딩이 틴트 가장자리도 가림). */
 .screenShot {
   position: absolute;
   inset: 0;
@@ -305,8 +306,7 @@
   object-fit: cover;
   object-position: top center;
   display: block;
-  transform: scale(1.03);
-  transform-origin: center top;
+  border-radius: 16px;
 }
 
 /* 스크린샷 모드에선 screenMedia가 화면 전체(상태바/제목 줄 제거됨)를 채운다. */

@@ -1,0 +1,126 @@
+/* InstallPrompt — 모바일 앱 설치 유도 바텀시트. 앱 토큰 사용, claymorphism 톤. */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  border: none;
+  padding: 0;
+  background: rgba(24, 28, 31, 0.45);
+  cursor: pointer;
+  animation: fade 0.25s ease;
+}
+
+.sheet {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  background: var(--surface);
+  border-radius: var(--radius-clay) var(--radius-clay) 0 0;
+  padding: 14px 24px calc(24px + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+  box-shadow: 0 -12px 40px rgba(24, 28, 31, 0.2);
+  animation: slideUp 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.handle {
+  width: 40px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--outline-variant);
+  margin: 0 auto 8px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 999px;
+  background: var(--surface-low);
+  color: var(--on-surface-variant);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.mascot {
+  width: 120px;
+  height: auto;
+  margin: 4px auto 8px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 16px rgba(24, 28, 31, 0.15));
+}
+
+.title {
+  margin: 0 0 6px;
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 700;
+  color: var(--green-deep);
+}
+
+.body {
+  margin: 0 0 18px;
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--on-surface-variant);
+}
+
+.cta {
+  display: block;
+  width: 100%;
+  padding: 15px 20px;
+  border-radius: var(--radius-pill);
+  background: var(--green);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: var(--clay-rest);
+}
+
+.later {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  color: var(--on-surface-variant);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet,
+  .scrim {
+    animation: none;
+  }
+}

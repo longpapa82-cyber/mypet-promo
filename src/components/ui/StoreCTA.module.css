@@ -9,35 +9,40 @@
   align-items: center;
 }
 
-/* 모바일 기본: 버튼 세로 스택. Hero·FinalCTA 동일 크기 위해 두 배지 같은 너비(stretch) +
-   컨테이너 최대폭 제한 → 풀폭으로 과하게 커지지 않고 일관된 사이즈. */
+/* 모바일 기본: 버튼 세로 스택. 두 배지를 같은 너비로 맞추되(나란히 보이게) 과하게 크지 않게
+   고정폭(260px) + 좌측 정렬(기본). 2줄 깨짐은 column 스택으로 이미 해소. */
 .cta {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  align-items: stretch;
-  width: 100%;
-  max-width: 320px;
-  margin-inline: auto;
+  align-items: flex-start;
 }
 
-/* center 변형도 동일 — 가운데 정렬은 wrap에서, 버튼 자체는 항상 동일폭(stretch) */
+/* center 변형: 배지를 가운데로. (Premium·FinalCTA 등 카드 중앙 배치) */
 .cta.center {
-  align-items: stretch;
+  align-items: center;
 }
 
-/* 480+: 버튼 2개를 가로로(공간 충분). 이때는 콘텐츠폭. */
+/* 두 배지를 동일 폭으로(나란할 때 들쭉날쭉 방지). 모바일에서 적당한 고정폭. */
+.cta :global(button),
+.cta :global(a) {
+  width: 260px;
+  max-width: 100%;
+}
+
+/* 480+: 버튼 2개를 가로로(공간 충분). 콘텐츠폭으로 복원. */
 @media (min-width: 480px) {
   .cta {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    width: auto;
-    max-width: none;
   }
   .cta.center {
-    align-items: center;
     justify-content: center;
+  }
+  .cta :global(button),
+  .cta :global(a) {
+    width: auto;
   }
 }
 

@@ -16,6 +16,7 @@ import { useEffect } from 'react';
 import Header from './components/ui/Header';
 import Footer from './components/ui/Footer';
 import SectionDivider from './components/ui/SectionDivider';
+import InstallPrompt from './components/ui/InstallPrompt';
 import Hero from './sections/Hero';
 import Value from './sections/Value';
 import Features from './sections/Features';
@@ -66,6 +67,8 @@ export default function App() {
         <FinalCTA />
       </main>
       <Footer />
+      {/* 모바일(iOS/Android) 접속 시 앱 설치 유도 바텀시트 (첫 방문 1회) */}
+      <InstallPrompt />
     </>
   );
 }

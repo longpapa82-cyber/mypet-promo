@@ -34,7 +34,7 @@
   --tint-mint: #cdf2e4;    /* 민트 캔디 */
   --tint-peach: #ffe2d4;   /* 피치 캔디 */
   --tint-lav: #e9e3ff;     /* 라벤더 캔디 */
-  --tint-butter: #fff0c9;  /* 버터 캔디 — Features 등 추가 밴드용 */
+  --tint-butter: #fdf8ea;  /* 버터 — 노랑 채도 더 절제(폰 베젤 대비 과함 방지). 은은한 크림 */
   --on-surface: #181c1f;
   --on-surface-variant: #4a4f54;
   --outline-variant: #d4d8de;
