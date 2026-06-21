@@ -51,19 +51,20 @@ export default function FAQ() {
         </div>
       </Reveal>
 
-      <Reveal delay={80}>
-        <div className={styles.list}>
-          {FAQ_ITEMS.map((item, index) => (
-            <details key={item.q} className={styles.item} open={index === 0}>
+      <div className={styles.list}>
+        {/* v10: 아이템별 stagger 등장(착착 안무) — 각 Reveal에 순차 delay. */}
+        {FAQ_ITEMS.map((item, index) => (
+          <Reveal key={item.q} delay={index * 80}>
+            <details className={styles.item} open={index === 0}>
               <summary className={styles.summary}>
                 <span className={`t-body-lg ${styles.question}`}>{item.q}</span>
                 <span className={styles.icon} aria-hidden="true" />
               </summary>
               <p className={`t-body-md ${styles.answer}`}>{item.a}</p>
             </details>
-          ))}
-        </div>
-      </Reveal>
+          </Reveal>
+        ))}
+      </div>
     </Section>
   );
 }

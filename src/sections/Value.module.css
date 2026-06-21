@@ -440,6 +440,14 @@
   border-radius: var(--radius-pill);
   background-color: rgba(193, 154, 91, 0.14);
   color: var(--champagne-deep);
+  /* v10: hover 시 아이콘 통통(craft 마이크로 인터랙션). */
+  transition: transform 0.28s var(--ease-spring), background-color 0.18s ease, color 0.18s ease;
+}
+/* hover 시 칩 아이콘이 살짝 회전+확대 + 코랄 톤(만족스러운 피드백). */
+.chip:hover .chipIcon {
+  transform: scale(1.12) rotate(-8deg);
+  background-color: var(--accent-soft);
+  color: var(--accent-deep);
 }
 .chipSvg {
   width: 15px;

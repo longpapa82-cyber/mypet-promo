@@ -46,7 +46,14 @@
   border-radius: var(--radius-card);
   box-shadow: inset 0 0 0 1px var(--lux-hairline), var(--lux-shadow-rest);
   overflow: hidden;
-  transition: box-shadow 0.18s ease;
+  /* v10 craft: hover 시 살짝 떠오름 + 코랄 글로우(만족스러운 피드백). */
+  transition: box-shadow 0.22s ease, transform 0.22s var(--ease-spring);
+}
+@media (hover: hover) and (pointer: fine) {
+  .item:hover {
+    transform: translateY(-2px);
+    box-shadow: inset 0 0 0 1px rgba(255, 107, 92, 0.3), var(--lux-shadow-raised);
+  }
 }
 
 .item[open] {
@@ -141,5 +148,8 @@
   .icon,
   .item {
     transition: none;
+  }
+  .item:hover {
+    transform: none;
   }
 }

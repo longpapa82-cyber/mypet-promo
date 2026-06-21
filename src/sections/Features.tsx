@@ -163,7 +163,7 @@ function FeatureRow({ item, index }: FeatureRowProps) {
   );
 
   return (
-    <Reveal>
+    <Reveal delay={index % 2 === 0 ? 0 : 80}>
       <div className={[styles.row, mediaRight ? styles.rowReverse : ''].filter(Boolean).join(' ')}>
         <div className={styles.media}>
           <PhoneMock item={item} parallax={mediaRight ? 0.34 : 0.26}>

@@ -26,14 +26,41 @@
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  box-shadow: var(--shadow-rest);
+  box-shadow: var(--lux-shadow-rest);
+  /* v10 craft: hover 시 로고 통통(만족스러운 피드백, 절제된 delight). */
+  transition: transform 0.3s var(--ease-spring);
+}
+.brand:hover .logo {
+  transform: scale(1.1) rotate(-5deg);
+}
+.brand:active .logo {
+  transform: scale(0.96);
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo,
+  .brand:hover .logo,
+  .brand:active .logo {
+    transform: none;
+    transition: none;
+  }
 }
 
 .name {
+  font-family: var(--font-display);
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: -0.01em;
-  color: var(--green-deep);
+  /* v10: 워드마크 샴페인 메탈릭(헤더 브랜드 고급화). */
+  color: var(--champagne-deep);
+  background: var(--champagne-metallic);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .name {
+    -webkit-text-fill-color: var(--champagne-deep);
+  }
 }
 
 .actions {

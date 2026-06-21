@@ -59,6 +59,24 @@
   transform: scale(0.96);
 }
 
+/* v10 craft — 전역 인터랙티브 press 피드백(만족스러운 클릭감). 스토어 배지·버튼·요약 등.
+   transform만(합성). reduced-motion 시 정지. 이미 자체 transition 가진 요소와 충돌 없게 active만. */
+@media (hover: hover) and (pointer: fine) {
+  a:active,
+  button:active,
+  summary:active {
+    transform: scale(0.985);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  a:active,
+  button:active,
+  summary:active,
+  .squishy:active {
+    transform: none;
+  }
+}
+
 /* 주 CTA: green 배경 + 흰 텍스트 (앱 검수 확정 규칙) */
 .btn-primary {
   background-color: var(--green);
