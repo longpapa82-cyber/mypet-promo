@@ -35,8 +35,8 @@ const FEATURES: FeatureItem[] = [
     key: 'facility',
     badge: '내 주변 시설',
     title: '주변 펫 시설을 한눈에',
-    body: '현재 위치를 기준으로 가까운 순서대로 펫 시설을 찾아줍니다. 동물병원·미용실·호텔·용품점 등 다양한 카테고리로 등록된 3만여 곳을 담았으며, 카테고리는 계속 확대 중입니다.',
-    bullets: ['거리순 정렬', '운영시간(확인된 시설)·전화', '카테고리 필터'],
+    body: '현재 위치 기준, 가까운 펫 시설을 한눈에. 등록 3만+ 곳.',
+    bullets: ['거리순 정렬', '운영시간·전화', '카테고리 필터'],
     image: asset('shot-map.webp'),
     imageAlt: 'MyPet 앱 주변 펫 시설 화면',
     tone: 'sky',
@@ -48,7 +48,7 @@ const FEATURES: FeatureItem[] = [
     key: 'home',
     badge: '홈',
     title: '오늘 우리 아이 일정까지',
-    body: '로그인하면 다가오는 예방접종·검진 일정을 D-day로 알려주고, 매일 바뀌는 반려 팁을 만날 수 있어요. 우리 아이의 하루를 한 화면에서.',
+    body: '예방접종·검진 일정을 D-day로, 매일 반려 팁까지 한 화면에.',
     bullets: ['다가오는 의료 일정', '매일 반려 팁', '내 반려동물 관리'],
     image: asset('shot-home.webp'),
     imageAlt: 'MyPet 앱 홈 화면',
@@ -61,7 +61,7 @@ const FEATURES: FeatureItem[] = [
     key: 'ai',
     badge: 'AI 상담',
     title: 'AI에게 건강·법률을 묻다',
-    body: '반려동물의 건강과 관련 법률을 AI에게 바로 물어보세요. 답변은 참고용 정보이며 진단이 아닙니다. 중요한 사안은 수의사·전문가와 상담하세요.',
+    body: '건강·법률 궁금증을 AI에게 바로. (참고용 정보 · 진단 아님)',
     bullets: ['건강·법률 질의', '면책 안내 동반', '주제별 빠른 질문'],
     image: asset('shot-chat.webp'),
     imageAlt: 'MyPet 앱 AI 상담 화면',
@@ -74,7 +74,7 @@ const FEATURES: FeatureItem[] = [
     key: 'premium',
     badge: '프리미엄',
     title: '광고 없이, AI 상담 무제한*',
-    body: '월 구독으로 전환하면 광고가 사라지고 AI 상담을 무제한*으로 이용할 수 있습니다. (*개인 이용 범위 내 무제한 — 공정사용 정책 적용) 월 자동 갱신되며 해지 전까지 매월 자동 결제됩니다.',
+    body: '광고 없이, AI 상담은 마음껏. 월 자동 갱신 · 언제든 해지.',
     bullets: ['광고 제거', 'AI 상담 무제한*', '월 자동 갱신'],
     image: asset('shot-premium.webp'),
     imageAlt: 'MyPet 앱 프리미엄 구독 화면',
@@ -177,7 +177,19 @@ function FeatureRow({ item, index }: FeatureRowProps) {
           <ul className={styles.bullets}>
             {item.bullets.map((b) => (
               <li key={b} className={`t-body-md ${styles.bullet}`}>
-                <span className={styles.dot} aria-hidden="true" />
+                {/* F3: 점 → 체크 아이콘(기능 제공 시각화·스캔성) */}
+                <span className={styles.check} aria-hidden="true">
+                  <svg viewBox="0 0 20 20" width="13" height="13" focusable="false">
+                    <path
+                      d="M5 10.5l3.2 3.2L15 6.5"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
                 {b}
               </li>
             ))}

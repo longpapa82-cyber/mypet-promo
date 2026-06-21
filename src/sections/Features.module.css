@@ -124,6 +124,19 @@
   box-shadow: 0 0 0 3px var(--green-fixed);
 }
 
+/* F3: 체크 아이콘 칩 — green 원 안 흰 체크(기능 제공 시각화) */
+.check {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-pill);
+  background-color: var(--green);
+  color: #ffffff;
+}
+
 /* ── 폰 목업 프레임 ────────────────────────── */
 .phone {
   position: relative;
