@@ -127,13 +127,13 @@ export default function Hero() {
 
   return (
     <Section id="hero" background="warm" fullBleed className={styles.hero}>
-      {/* V1: 실사 펫 배경(듀오톤, 아주 옅게) — 단색 배경의 허전함 해소·감성 깊이. 마스코트 카드는 유지. */}
+      {/* F1: 귀여운 새끼 강아지 실사 배경(듀오톤). 시설 카드의 hero-pet과 중복 해소 + 따뜻한 첫인상. */}
       <DuotonePhoto
-        name="hero-pet"
+        name="hero-puppy"
         className={styles.photoBg}
-        intensity={0.62}
+        intensity={0.6}
         scrimDir="none"
-        position="center"
+        position="center top"
         decorative
       />
       <Aurora variant="mixed" className={styles.aurora} />
