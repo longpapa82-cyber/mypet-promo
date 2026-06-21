@@ -219,34 +219,71 @@
   box-shadow: var(--shadow-rest);
 }
 
-.mapImg {
+/* F2: CSS 지도 캔버스 — 옅은 지도 바탕 + 격자 도로(라인 그라데이션) */
+.mapCanvas {
+  position: relative;
   width: 100%;
-  height: clamp(140px, 22vw, 200px);
-  object-fit: cover;
-  /* 지도 느낌: 채도 낮추고 스카이 톤 살짝 */
-  filter: saturate(0.78) brightness(1.04);
+  height: clamp(150px, 24vw, 210px);
+  background-color: #eaf1ea;
+  /* 격자 도로: 가로·세로 옅은 라인 + 굵은 대로 1개씩 */
+  background-image:
+    linear-gradient(rgba(0, 100, 145, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 100, 145, 0.08) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.9) 4px, transparent 4px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.9) 4px, transparent 4px);
+  background-size:
+    28px 28px,
+    28px 28px,
+    100% 84px,
+    120px 100%;
+  background-position:
+    0 0,
+    0 0,
+    0 60%,
+    38% 0;
 }
 
-/* 중앙 현재위치 핀 */
-.mapPin {
+/* 현재 위치 — 펄스 도트(스카이) */
+.mapCurrent {
   position: absolute;
-  top: 38%;
+  top: 50%;
   left: 50%;
+  width: 16px;
+  height: 16px;
   transform: translate(-50%, -50%);
+  border-radius: var(--radius-pill);
+  background-color: var(--secondary);
+  box-shadow: 0 0 0 5px rgba(0, 100, 145, 0.22), 0 0 0 11px rgba(0, 100, 145, 0.1);
+}
+
+/* 시설 마커 — 흰 원 + 핀 아이콘(점토 그림자), 위치 분산 */
+.mapMarker {
+  position: absolute;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-pill);
   background-color: #ffffff;
-  border: 1.5px solid var(--secondary);
-  box-shadow: var(--shadow-raised);
+  box-shadow: var(--clay-orb);
 }
-.mapPin .icon {
-  width: 22px;
-  height: 22px;
-  color: var(--secondary);
+.mapMarker .icon {
+  width: 18px;
+  height: 18px;
+  color: var(--green);
+}
+.marker1 {
+  top: 22%;
+  left: 26%;
+}
+.marker2 {
+  top: 30%;
+  right: 20%;
+}
+.marker3 {
+  bottom: 26%;
+  left: 38%;
 }
 
 /* 결과 목록 — 지도 위 반투명 surface 패널 */

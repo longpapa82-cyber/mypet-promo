@@ -2,7 +2,6 @@ import Section from '../components/ui/Section';
 import Reveal from '../components/ui/Reveal';
 import Aurora from '../components/ui/Aurora';
 import SectionDoodles from '../components/ui/SectionDoodles';
-import { asset } from '../constants/stores';
 import styles from './Value.module.css';
 
 // 핵심 가치 — 베이토(bento) 그리드 재구성.
@@ -114,21 +113,22 @@ export default function Value() {
                 </div>
               </div>
 
-              {/* 지도 패널: 정적 미니맵 느낌 배경 + 거리 배지가 붙은 결과 목록 */}
+              {/* F2: CSS 지도 일러스트(격자 도로 + 현재위치/시설 핀) + 거리 배지 결과 목록.
+                  강아지 사진 대신 '지도로 주변을 본다' 직관. 저작권 자유·가벼움. */}
               <div className={styles.mapPanel}>
-                <img
-                  className={styles.mapImg}
-                  src={asset('assets/hero-pet.jpg')}
-                  alt=""
-                  width={640}
-                  height={360}
-                  loading="lazy"
-                  decoding="async"
-                  aria-hidden="true"
-                />
-                <span className={styles.mapPin} aria-hidden="true">
-                  <PinIcon />
-                </span>
+                <div className={styles.mapCanvas} aria-hidden="true">
+                  {/* 격자 도로 라인(::before·::after) + 현재 위치 펄스 + 시설 핀 3개 */}
+                  <span className={styles.mapCurrent} />
+                  <span className={`${styles.mapMarker} ${styles.marker1}`}>
+                    <PinIcon />
+                  </span>
+                  <span className={`${styles.mapMarker} ${styles.marker2}`}>
+                    <PinIcon />
+                  </span>
+                  <span className={`${styles.mapMarker} ${styles.marker3}`}>
+                    <PinIcon />
+                  </span>
+                </div>
                 <ul className={styles.nearbyList}>
                   {NEARBY.map((item) => (
                     <li key={item.name} className={styles.nearbyItem}>
