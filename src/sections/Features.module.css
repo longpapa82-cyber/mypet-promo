@@ -167,16 +167,17 @@
   pointer-events: none;
 }
 
-/* 상단 노치(필 형태) */
+/* Dynamic Island(2026 현행) — 베젤 상단(검정 영역)에 작은 알약. 화면 콘텐츠 비가림(F4).
+   베젤 padding 10px 안, 화면 시작 위쪽에 떠 있어 스크린샷 상태바를 가리지 않는다. */
 .phoneNotch {
   position: absolute;
-  top: 18px;
+  top: 1px; /* 베젤 검정 영역 안(화면 밖) */
   left: 50%;
   transform: translateX(-50%);
-  width: 96px;
-  height: 20px;
+  width: 72px;
+  height: 8px;
   border-radius: var(--radius-pill);
-  background-color: #0f1714;
+  background-color: #050807;
   z-index: 3;
 }
 
