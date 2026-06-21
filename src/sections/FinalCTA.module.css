@@ -5,7 +5,8 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  opacity: 0.55;
+  /* 밝은 크림 위 — 사진을 옅게 깔아 감성만(글래스 박스가 텍스트 가독 담당). */
+  opacity: 0.38;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 88%, transparent 100%);
   mask-image: linear-gradient(to bottom, transparent 0%, #000 18%, #000 88%, transparent 100%);
   pointer-events: none;
@@ -36,6 +37,11 @@
   gap: 18px;
   padding: clamp(28px, 6vw, 48px) clamp(20px, 5vw, 44px);
   border-radius: var(--radius-hero);
+  /* 밝은 크림 글래스 + 골드 헤어라인 + 따뜻한 그림자(글로벌 .glass 위 덮어쓰기). */
+  background: var(--lux-glass-strong);
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  backdrop-filter: blur(var(--glass-blur));
+  box-shadow: inset 0 0 0 1px var(--lux-hairline), var(--lux-shadow-overlay);
 }
 
 /* 깜찍 도들 — 글래스 박스 상우/하좌 모서리(콘텐츠·텍스트 비가림). P2 */
@@ -88,21 +94,20 @@
   gap: 8px;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
-  /* 골드 보더 제거 — 다크 위 옅은 골드 톤 fill로(테두리 선 없이 강조). */
-  background-color: rgba(202, 164, 106, 0.14);
-  color: var(--gold-soft);
+  /* 옅은 샴페인 fill(밝은 박스 위 강조). */
+  background-color: rgba(193, 154, 91, 0.16);
+  color: var(--champagne-deep);
   letter-spacing: 0.02em;
 }
 
 /* ── 오버사이즈 헤드라인 ── */
 .heading {
-  /* displayLg(40/48)를 기준으로 데스크톱에서 대담하게 증폭 */
   font-size: clamp(34px, 7vw, 56px);
   line-height: 1.08;
   max-width: 14ch;
   margin: 0;
-  letter-spacing: -0.01em;
-  /* 320px에서 한국어 단어 음절 분할 방지(시·작 등). 라틴 토큰만 필요 시 줄바꿈 */
+  letter-spacing: -0.02em;
+  color: var(--ink);
   word-break: keep-all;
   overflow-wrap: anywhere;
 }
@@ -112,9 +117,9 @@
 }
 
 .subcopy {
-  /* onDark 본문 색은 Section.module.css가 t-body-lg에 적용 */
   max-width: 36ch;
   margin: 0;
+  color: var(--ink-soft);
 }
 
 .store {

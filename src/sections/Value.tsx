@@ -2,6 +2,7 @@ import Section from '../components/ui/Section';
 import Reveal from '../components/ui/Reveal';
 import Aurora from '../components/ui/Aurora';
 import SectionDoodles from '../components/ui/SectionDoodles';
+import { asset } from '../constants/stores';
 import styles from './Value.module.css';
 
 // 핵심 가치 — 베이토(bento) 그리드 재구성.
@@ -55,11 +56,12 @@ interface NearbyItem {
   distance: string;
 }
 
-// 시설검색 카드 미니 결과 목록 (지도 느낌 + 거리 배지)
+// 시설검색 카드 미니 결과 목록 (실제 앱 거리순 결과 예시)
 const NEARBY: readonly NearbyItem[] = [
   { name: '행복한 동물병원', category: '동물병원', distance: '55m' },
   { name: '멍냥 미용실', category: '미용실', distance: '320m' },
-  { name: '댕댕 호텔', category: '호텔', distance: '1.3km' },
+  { name: '포근 펫호텔', category: '호텔', distance: '1.3km' },
+  { name: '튼튼 훈련소', category: '훈련소', distance: '2.1km' },
 ] as const;
 
 // 카테고리 10종
@@ -80,9 +82,9 @@ const CATEGORIES: readonly { name: string; icon: string }[] = [
 
 export default function Value() {
   return (
-    <Section id="services" background="skySoft" className={styles.section}>
-      {/* Aurora 메시 배경 — sky(시설검색=스카이) 분위기로 Hero(mixed)와 대비. 콘텐츠 뒤(z-index 0). */}
-      <Aurora variant="sky" className={styles.aurora} />
+    <Section id="services" background="creamAlt" className={styles.section}>
+      {/* v7: 따뜻한 크림/골드 Aurora(다색 폐기, 통일). */}
+      <Aurora variant="cream" className={styles.aurora} />
       <SectionDoodles set="sky" />
 
       <div className={styles.content}>
@@ -90,11 +92,8 @@ export default function Value() {
           <header className={styles.head}>
             <span className={styles.eyebrow}>두 가지 핵심 서비스</span>
             <h2 className={`${styles.title} t-headline-lg`}>
-              찾고, 묻고. 반려 생활의 두 축
+              찾고, 묻고.<br />반려 생활의 두 축
             </h2>
-            <p className={`${styles.lead} t-body-lg`}>
-              가까운 펫 시설을 한눈에, 건강·법률 궁금증은 AI에게. MyPet 하나로 해결하세요.
-            </p>
           </header>
         </Reveal>
 
@@ -114,56 +113,22 @@ export default function Value() {
                 </div>
               </div>
 
-              {/* F2: CSS 지도 일러스트(격자 도로 + 현재위치/시설 핀) + 거리 배지 결과 목록.
-                  강아지 사진 대신 '지도로 주변을 본다' 직관. 저작권 자유·가벼움. */}
-              <div className={styles.mapPanel}>
-                <div className={styles.mapCanvas} aria-hidden="true">
-                  {/* M3: 곡선 도로 + 블록 면 SVG — 단순 격자보다 '진짜 지도를 단순화한' 사실감.
-                      도로(굵은/얇은 곡선) + 동네 블록(옅은 면) + 강(옅은 sky 곡선). 저작권 자유. */}
-                  <svg
-                    className={styles.mapSvg}
-                    viewBox="0 0 320 210"
-                    preserveAspectRatio="xMidYMid slice"
-                    fill="none"
-                  >
-                    {/* 블록 면(동네 구획) */}
-                    <rect x="14" y="16" width="86" height="60" rx="8" fill="rgba(0,100,145,0.05)" />
-                    <rect x="208" y="22" width="98" height="70" rx="8" fill="rgba(39,105,94,0.05)" />
-                    <rect x="24" y="128" width="104" height="64" rx="8" fill="rgba(0,100,145,0.05)" />
-                    <rect x="196" y="132" width="104" height="60" rx="8" fill="rgba(39,105,94,0.05)" />
-                    {/* 강/하천 — 옅은 sky 곡선 */}
-                    <path
-                      d="M-10 150 C 70 120, 120 180, 200 130 S 330 90, 340 110"
-                      stroke="rgba(0,100,145,0.12)"
-                      strokeWidth="14"
-                      strokeLinecap="round"
+              {/* v7.1: 가짜 CSS 지도 폐기 → 실제 앱 지도화면 스크린샷(shot-map). 폰 베젤 액자에
+                  담아 '진짜 작동하는 위치검색 앱'으로 읽히게. 옆에 거리 결과 배지로 보강. */}
+              <div className={styles.shotPanel}>
+                <div className={styles.shotPhone}>
+                  <picture>
+                    <source srcSet={asset('assets/shot-map.webp')} type="image/webp" />
+                    <img
+                      className={styles.shotImg}
+                      src={asset('assets/shot-map.png')}
+                      alt="MyPet 앱 내 주변 펫 시설 지도 화면"
+                      width={300}
+                      height={626}
+                      loading="lazy"
+                      decoding="async"
                     />
-                    {/* 대로(굵은) */}
-                    <path d="M0 104 H 320" stroke="#ffffff" strokeWidth="8" strokeLinecap="round" />
-                    <path d="M152 0 V 210" stroke="#ffffff" strokeWidth="8" strokeLinecap="round" />
-                    {/* 곡선 도로(얇은) */}
-                    <path
-                      d="M40 0 C 60 60, 110 70, 120 130 S 90 200, 70 210"
-                      stroke="rgba(255,255,255,0.85)"
-                      strokeWidth="4"
-                    />
-                    <path
-                      d="M320 60 C 250 70, 230 110, 250 160"
-                      stroke="rgba(255,255,255,0.85)"
-                      strokeWidth="4"
-                    />
-                  </svg>
-                  {/* 현재 위치 펄스 + 시설 핀 3개 */}
-                  <span className={styles.mapCurrent} />
-                  <span className={`${styles.mapMarker} ${styles.marker1}`}>
-                    <PinIcon />
-                  </span>
-                  <span className={`${styles.mapMarker} ${styles.marker2}`}>
-                    <PinIcon />
-                  </span>
-                  <span className={`${styles.mapMarker} ${styles.marker3}`}>
-                    <PinIcon />
-                  </span>
+                  </picture>
                 </div>
                 <ul className={styles.nearbyList}>
                   {NEARBY.map((item) => (
@@ -192,7 +157,7 @@ export default function Value() {
                 건강·법률 궁금증을 <strong>바로 질문</strong>
               </p>
 
-              {/* 말풍선 대화 미리보기 */}
+              {/* 말풍선 대화 미리보기 — 실제 상담 흐름(밀도↑, 휑함 제거) */}
               <div className={styles.bubbles} aria-hidden="true">
                 <span className={`${styles.bubble} ${styles.bubbleUser}`}>
                   우리 강아지가 오늘 기운이 없어요
@@ -200,10 +165,16 @@ export default function Value() {
                 <span className={`${styles.bubble} ${styles.bubbleAi}`}>
                   잇몸 색·물 섭취량을 먼저 확인해 보세요 🐾
                 </span>
+                <span className={`${styles.bubble} ${styles.bubbleUser}`}>
+                  분양 계약 파기하면 환불되나요?
+                </span>
+                <span className={`${styles.bubble} ${styles.bubbleAi}`}>
+                  계약 조건과 동물보호법 기준을 함께 알려드릴게요 ⚖️
+                </span>
               </div>
 
               <p className={styles.disclaimer}>
-                ※ AI 답변은 참고용이며 진단이 아닙니다. 정확한 진단은 전문가 상담을 권장합니다.
+                ※ 참고용 정보 · 진단 아님
               </p>
             </article>
           </Reveal>

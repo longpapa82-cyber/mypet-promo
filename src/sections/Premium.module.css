@@ -1,19 +1,37 @@
 /* 프리미엄 섹션 — jewel 다크 그라운드 + 샴페인골드 메탈릭 + frosted 글래스 혜택 카드.
    앱 구독화면 럭셔리 톤. tokens.css 변수만 사용(하드코딩 색 없음, 흰 텍스트는 #f4f9f4 계열). */
 
+/* 카드 래퍼 — 실사 배경(PhotoBackdrop z0) 위로 카드를 올림. */
+.cardWrap {
+  position: relative;
+  z-index: 1;
+}
+
 .card {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  /* jewel 그라디언트 + 상단 골드 광 미세 오버레이로 깊이 강화 */
+  /* v7: 진한 샴페인 럭셔리 카드 — 흰색 탈피, 대비 강화. 따뜻한 골드 그라디언트 + 상단 광채. */
   background:
-    radial-gradient(120% 80% at 80% -10%, rgba(202, 164, 106, 0.16), transparent 55%),
-    var(--grad-jewel);
+    radial-gradient(110% 70% at 80% -10%, rgba(227, 207, 163, 0.85), transparent 55%),
+    radial-gradient(100% 80% at 15% 110%, rgba(193, 154, 91, 0.35), transparent 55%),
+    linear-gradient(160deg, #f6e9cf 0%, #efdcb8 55%, #e8d0a6 100%);
   border-radius: var(--radius-hero);
-  box-shadow: var(--shadow-overlay);
+  box-shadow: var(--lux-shadow-overlay);
   padding: clamp(28px, 5vw, 60px);
-  color: #f4f9f4;
+  color: var(--ink);
   text-align: center;
+}
+
+/* 미세 그레인 텍스처 — 밋밋한 단색 탈피, 종이/패브릭 질감(럭셔리). 콘텐츠(z2) 아래. */
+.cardGrain {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image: var(--noise);
+  background-size: 160px 160px;
+  opacity: 0.09;
+  pointer-events: none;
 }
 
 /* 샴페인골드 메탈릭 보더 — 그라디언트 보더는 mask 기법으로(테두리만 금속 광택) */
@@ -51,16 +69,16 @@
   right: -10%;
   width: 60%;
   height: 80%;
-  background: radial-gradient(circle, rgba(202, 164, 106, 0.24), transparent 70%);
+  background: radial-gradient(circle, rgba(227, 207, 163, 0.5), transparent 70%);
   pointer-events: none;
 }
 
-/* 가장자리 비네팅 — 중앙 콘텐츠로 시선 집중, 깊이감 */
+/* 가장자리 비네팅 — 밝은 카드용 아주 옅은 골드 톤(깊이만, 어둡지 않게). */
 .vignette {
   position: absolute;
   z-index: 1;
   inset: 0;
-  background: radial-gradient(120% 90% at 50% 30%, transparent 55%, rgba(13, 30, 25, 0.45) 100%);
+  background: radial-gradient(120% 90% at 50% 30%, transparent 60%, rgba(193, 154, 91, 0.1) 100%);
   pointer-events: none;
 }
 
@@ -108,27 +126,25 @@
   line-height: 20px;
   font-weight: 700;
   letter-spacing: 0.02em;
-  color: var(--gold-soft);
+  color: var(--champagne-deep);
 }
 
 .title {
   margin: 22px auto 0;
   max-width: 18ch;
-  color: #f4f9f4;
-  /* 320px에서 한국어 단어가 음절 단위로 쪼개지지 않게(광·고, 시·작 방지).
-     긴 라틴 토큰(MyPet)만 필요 시 줄바꿈 허용 */
+  color: var(--ink);
   word-break: keep-all;
   overflow-wrap: anywhere;
 }
 
 .titleAccent {
-  color: var(--gold-soft);
+  color: var(--champagne-deep);
 }
 
 .lead {
   margin: 16px auto 0;
   max-width: 46ch;
-  color: rgba(244, 249, 244, 0.86);
+  color: var(--ink-soft);
 }
 
 /* 헤더 아래 골드 메탈릭 구분선 (global .gold-divider 재사용) */
@@ -157,11 +173,9 @@
   text-align: left;
   padding: 22px;
   border-radius: var(--radius-card);
-  /* frosted: 반투명 + backdrop blur + 미세 노이즈(::after). 폴백은 @supports로 불투명화 */
-  background: var(--glass-bg-dark);
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  backdrop-filter: blur(var(--glass-blur));
-  box-shadow: var(--shadow-raised);
+  /* 크림 카드(다크 글래스 폐기) + 골드 헤어라인은 ::before가 담당. */
+  background: var(--cream-card);
+  box-shadow: var(--lux-shadow-raised);
   overflow: hidden;
   transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
 }
@@ -202,7 +216,7 @@
 /* hover 마이크로 인터랙션 — 살짝 떠오름 */
 .benefit:hover {
   transform: translateY(-3px);
-  box-shadow: var(--shadow-overlay);
+  box-shadow: var(--lux-shadow-overlay);
 }
 
 .benefitMark {
@@ -215,23 +229,22 @@
   width: 44px;
   height: 44px;
   border-radius: var(--radius-pill);
-  /* 골드 보더 제거 — 옅은 골드 fill만(테두리 링 없이). */
-  background-color: rgba(202, 164, 106, 0.2);
+  /* 옅은 샴페인 fill(밝은 카드 위). */
+  background-color: rgba(193, 154, 91, 0.16);
 }
 
 .benefitTitle {
   position: relative;
   z-index: 2;
   margin: 0;
-  color: var(--gold-soft);
+  color: var(--ink);
 }
 
 .benefitDesc {
   position: relative;
   z-index: 2;
   margin: 6px 0 0;
-  /* frosted 카드 위 본문 — AA 확보 위해 거의 흰색 */
-  color: rgba(244, 249, 244, 0.9);
+  color: var(--ink-soft);
 }
 
 /* ── Price ──────────────────────────────────── */
@@ -273,19 +286,18 @@
 }
 
 .priceLabel {
-  color: var(--gold-soft);
+  color: var(--champagne-deep);
   letter-spacing: 0.02em;
 }
 
 .priceNote {
-  /* jewel(어두운) 배경 위 보조 텍스트 — 흰색 충분 대비(AA 안전마진) */
-  color: rgba(244, 249, 244, 0.92);
+  color: var(--ink-soft);
 }
 
-/* 공정사용 단서 — jewel(어두운) 배경 위 작은 보조 텍스트(AA 안전 대비) */
+/* 공정사용 단서 — 밝은 카드 위 작은 보조 텍스트. */
 .fairUse {
   margin: 14px 0 0;
-  color: rgba(244, 249, 244, 0.78);
+  color: var(--ink-dim);
   text-align: center;
   font-weight: 500;
 }
@@ -317,12 +329,7 @@
   }
 }
 
-/* backdrop-filter 미지원 폴백 — frosted 대신 불투명 jewel 톤 */
-@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
-  .benefit {
-    background: var(--glass-bg-dark-strong);
-  }
-}
+/* benefit는 이제 불투명 크림 카드라 backdrop-filter 폴백 불필요(제거). */
 
 /* ── Reduced motion ─────────────────────────── */
 @media (prefers-reduced-motion: reduce) {

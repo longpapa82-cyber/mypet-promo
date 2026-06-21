@@ -3,6 +3,7 @@ import Reveal from '../components/ui/Reveal';
 import StoreCTA from '../components/ui/StoreCTA';
 import Aurora from '../components/ui/Aurora';
 import SectionDoodles from '../components/ui/SectionDoodles';
+import PhotoBackdrop from '../components/ui/PhotoBackdrop';
 import styles from './Premium.module.css';
 
 interface Benefit {
@@ -42,8 +43,8 @@ function StarIcon() {
     >
       <path
         d="M12 2.5l2.78 5.63 6.22.9-4.5 4.39 1.06 6.18L12 16.68 6.44 19.6 7.5 13.42 3 9.03l6.22-.9L12 2.5z"
-        fill="var(--gold)"
-        stroke="var(--gold-soft)"
+        fill="var(--champagne)"
+        stroke="var(--champagne-bright)"
         strokeWidth="1.2"
         strokeLinejoin="round"
       />
@@ -64,12 +65,12 @@ function CrownIcon() {
     >
       <path
         d="M3 7.5l4.2 3.4L12 4.5l4.8 6.4L21 7.5l-1.6 11H4.6L3 7.5z"
-        fill="var(--gold)"
-        stroke="var(--gold-soft)"
+        fill="var(--champagne)"
+        stroke="var(--champagne-bright)"
         strokeWidth="1.4"
         strokeLinejoin="round"
       />
-      <circle cx="12" cy="3.4" r="1.5" fill="var(--gold-soft)" />
+      <circle cx="12" cy="3.4" r="1.5" fill="var(--champagne-bright)" />
     </svg>
   );
 }
@@ -79,8 +80,8 @@ function BenefitGlyph({ icon }: { icon: string }) {
   if (icon === 'block') {
     return (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <circle cx="12" cy="12" r="9" stroke="var(--gold)" strokeWidth="1.8" />
-        <path d="M5.6 5.6l12.8 12.8" stroke="var(--gold)" strokeWidth="1.8" strokeLinecap="round" />
+        <circle cx="12" cy="12" r="9" stroke="var(--champagne-deep)" strokeWidth="1.8" />
+        <path d="M5.6 5.6l12.8 12.8" stroke="var(--champagne-deep)" strokeWidth="1.8" strokeLinecap="round" />
       </svg>
     );
   }
@@ -89,7 +90,7 @@ function BenefitGlyph({ icon }: { icon: string }) {
     <svg width="24" height="22" viewBox="0 0 28 24" fill="none" aria-hidden="true">
       <path
         d="M9 12a4 4 0 110-.01M9 12c1.6 2.6 3.8 4 5 4s3.4-1.4 5-4M9 12c1.6-2.6 3.8-4 5-4s3.4 1.4 5 4M19 12a4 4 0 100-.01"
-        stroke="var(--gold)"
+        stroke="var(--champagne-deep)"
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -104,12 +105,16 @@ function BenefitGlyph({ icon }: { icon: string }) {
 // 혜택=광고 제거 + AI 무제한, 월 구독(가격은 스토어 자동), CTA=설치 유도.
 export default function Premium() {
   return (
-    <Section id="premium" background="lavSoft">
+    <Section id="premium" background="creamAlt">
+      {/* v7.1: 실사 펫(강아지+고양이) 배경 — 카드 뒤 여백을 채워 단색 탈피. 카드가 실사 위에 떠 있는 구도. */}
+      <PhotoBackdrop name="hero-pet" side="right" />
       <SectionDoodles set="lav" />
-      <Reveal>
+      <Reveal className={styles.cardWrap}>
         <article className={`${styles.card} parallax`} data-parallax="">
-          {/* jewel 다크 위 메시 깊이 — Aurora blob 레이어(transform만, reduced-motion 정지) */}
-          <Aurora variant="jewel" className={styles.aurora} />
+          {/* 종이/패브릭 그레인 텍스처(밋밋한 단색 탈피) */}
+          <span className={styles.cardGrain} aria-hidden="true" />
+          {/* Aurora blob 레이어(transform만, reduced-motion 정지) */}
+          <Aurora variant="champagne" className={styles.aurora} />
           {/* gold 광채 — 우상단에서 은은하게 새어 나오는 빛 */}
           <div className={styles.glow} aria-hidden="true" />
           {/* 가장자리 비네팅으로 깊이 강화 */}
@@ -156,7 +161,7 @@ export default function Premium() {
 
           <p className={`t-label-md ${styles.fairUse}`}>{FAIR_USE_NOTE}</p>
 
-          <div className={styles.ctaWrap} data-on-dark>
+          <div className={styles.ctaWrap}>
             <StoreCTA align="center" />
           </div>
         </article>

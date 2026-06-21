@@ -270,7 +270,7 @@ export default function Features() {
   useParallax(rootRef);
 
   return (
-    <Section id="features" background="surface">
+    <Section id="features" background="cream">
       <div ref={rootRef} className={styles.root}>
         {/* Aurora 제거: 폰 목업이 주인공인 섹션이라 배경은 조용하게(흰 surface).
             warm Aurora의 골드 blob이 폰 주변을 노랗게 물들여 '테두리 두꺼움'으로 보이던 근본 원인. */}

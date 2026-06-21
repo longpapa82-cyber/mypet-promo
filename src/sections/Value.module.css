@@ -28,24 +28,25 @@
 
 .eyebrow {
   display: inline-block;
-  padding: 6px 14px;
+  padding: 6px 16px;
   border-radius: var(--radius-pill);
-  background-color: var(--green-fixed);
-  color: var(--green-deep);
-  /* 골드 보더 제거 — 채워진 pill에 테두리 링이 '선'으로 보임. 배경 fill만으로 충분. */
+  /* 크림 위 골드 헤어라인 배지(Hero와 통일). */
+  background-color: var(--cream-card);
+  box-shadow: inset 0 0 0 1px var(--lux-hairline), var(--lux-shadow-rest);
+  color: var(--champagne-deep);
   font-size: 14px;
   line-height: 20px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .title {
   margin: 16px 0 0;
-  color: var(--green-deep);
+  color: var(--ink);
 }
 
 .lead {
   margin: 12px 0 0;
-  color: var(--on-surface-variant);
+  color: var(--ink-soft);
 }
 
 /* ── 베이토 그리드 ──
@@ -132,16 +133,16 @@
   height: 100%;
   padding: clamp(20px, 2.6vw, 28px);
   border-radius: var(--radius-card);
-  background-color: #ffffff;
-  /* 하드 보더 제거 — soft shadow만으로 카드 분리(테두리 선 없이 자연스럽게). */
-  box-shadow: var(--shadow-raised);
+  /* 크림 카드 + 골드 헤어라인 + 따뜻한 soft shadow(밝은 럭셔리). */
+  background-color: var(--cream-card);
+  box-shadow: inset 0 0 0 1px var(--lux-hairline), var(--lux-shadow-raised);
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
 }
 
 /* hover 마이크로 인터랙션: 살짝 raise + 그림자 강화 */
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-overlay);
+  box-shadow: inset 0 0 0 1px var(--lux-hairline), var(--lux-shadow-overlay);
 }
 
 /* 카드 헤더(아이콘 + 제목) */
@@ -153,16 +154,16 @@
 
 .cardTitle {
   margin: 0;
-  color: var(--green-deep);
+  color: var(--ink);
 }
 
 .cardDesc {
   margin: 0;
-  color: var(--on-surface-variant);
+  color: var(--ink-soft);
 }
-/* 카피 강조 — 핵심 키워드만 green 볼드로(스캔 가능성↑) */
+/* 카피 강조 — 핵심 키워드만 골드 볼드로(럭셔리 시그니처). */
 .cardDesc strong {
-  color: var(--green-deep);
+  color: var(--champagne-deep);
   font-weight: 700;
 }
 /* 부연 — 옅게(핵심에서 뒤로) */
@@ -189,151 +190,129 @@
   height: 28px;
 }
 
-/* 스카이(지도/위치) 액센트 — 보더 링 대신 옅은 톤 fill(테두리 선 제거). */
-.iconSky {
-  background-color: rgba(0, 100, 145, 0.1);
-}
-.iconSky .icon {
-  color: var(--secondary);
-}
-
-/* 민트(AI/태그) 액센트 — 옅은 톤 fill. */
+/* v7: 아이콘 액센트 골드 통일(다색 폐기 — 럭셔리). 옅은 샴페인 fill + 골드 아이콘. */
+.iconSky,
 .iconMint {
-  background-color: rgba(39, 105, 94, 0.1);
+  background-color: rgba(193, 154, 91, 0.12);
 }
+.iconSky .icon,
 .iconMint .icon {
-  color: var(--tertiary);
+  color: var(--champagne-deep);
 }
 
 /* ── ① 시설검색: 지도 패널 + 거리 배지 ── */
 .facility {
-  /* 스카이 톤이 옅게 비치는 surface 카드 (보더 없음 — .card에서 제거됨) */
-  background: linear-gradient(160deg, #f3f9ff 0%, #ffffff 60%);
+  /* 따뜻한 크림 그라디언트(스카이 톤 폐기 — 통일된 럭셔리). */
+  background: linear-gradient(160deg, #fdf9f1 0%, var(--cream-card) 60%);
 }
 
-.mapPanel {
-  position: relative;
+/* v7.1: 실제 앱 스크린샷 폰목업 + 거리 결과 목록을 가로로 나란히(빈 공간 제거). */
+.shotPanel {
   margin-top: auto;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  /* 보더 제거 — 지도 썸네일은 모서리 라운드 + 옅은 그림자만. */
-  box-shadow: var(--shadow-rest);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: clamp(16px, 3vw, 28px);
+}
+/* 거리 목록이 남은 폭을 채우게 */
+.shotPanel .nearbyList {
+  flex: 1 1 0;
+  min-width: 0;
+  align-self: stretch;
+  justify-content: center;
+}
+/* 모바일(좁을 때)은 세로 스택 */
+@media (max-width: 479px) {
+  .shotPanel {
+    flex-direction: column;
+  }
 }
 
-/* M3: CSS 지도 캔버스 — 옅은 지형 바탕(그라디언트) 위에 SVG 도로·블록·강 오버레이.
-   기존 단순 격자 → 곡선 도로+블록면+강으로 '진짜 지도 단순화' 사실감. 미세 격자만 바탕에 잔류. */
-.mapCanvas {
+/* 폰 베젤 액자 — 실제 지도화면 스크린샷을 진짜 폰처럼 감싼다(미세 3D 원근). 가로 배치 시 폰은
+   고정 폭(목록에 충분한 폭 양보). */
+.shotPhone {
   position: relative;
-  width: 100%;
-  height: clamp(160px, 25vw, 220px);
-  /* 지형 베이스: 옅은 그린-크림 그라디언트(평평한 단색 대신 자연스러운 톤 변화) */
-  background:
-    radial-gradient(120% 90% at 20% 10%, #eef4ee 0%, transparent 60%),
-    radial-gradient(120% 90% at 85% 90%, #e8f1ee 0%, transparent 55%),
-    #eaf1ea;
+  flex-shrink: 0;
+  width: clamp(150px, 38%, 190px);
+  aspect-ratio: 300 / 626;
+  padding: 8px;
+  border-radius: 32px;
+  background: linear-gradient(155deg, #353b38 0%, #1d2421 100%);
+  box-shadow:
+    0 2px 6px rgba(17, 24, 21, 0.16),
+    0 18px 40px rgba(17, 24, 21, 0.22);
+  transform: perspective(1200px) rotateY(-5deg) rotateX(2deg);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-/* 미세 격자(아주 옅게) — SVG 도로 아래 도시 질감 */
-.mapCanvas::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(0, 100, 145, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 100, 145, 0.05) 1px, transparent 1px);
-  background-size: 32px 32px, 32px 32px;
+.facility:hover .shotPhone {
+  transform: perspective(1200px) rotateY(-2deg) rotateX(1deg) translateY(-4px);
 }
-
-/* SVG 도로/블록 오버레이 — 캔버스 전체를 덮음 */
-.mapSvg {
-  position: absolute;
-  inset: 0;
+.shotImg {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  border-radius: 26px;
+  display: block;
 }
 
-/* 현재 위치 — 펄스 도트(스카이) */
-.mapCurrent {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 16px;
-  height: 16px;
-  transform: translate(-50%, -50%);
-  border-radius: var(--radius-pill);
-  background-color: var(--secondary);
-  box-shadow: 0 0 0 5px rgba(0, 100, 145, 0.22), 0 0 0 11px rgba(0, 100, 145, 0.1);
-}
-
-/* 시설 마커 — 흰 원 + 핀 아이콘(점토 그림자), 위치 분산 */
-.mapMarker {
-  position: absolute;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-pill);
-  background-color: #ffffff;
-  box-shadow: var(--clay-orb);
-}
-.mapMarker .icon {
-  width: 18px;
-  height: 18px;
-  color: var(--green);
-}
-.marker1 {
-  top: 22%;
-  left: 26%;
-}
-.marker2 {
-  top: 30%;
-  right: 20%;
-}
-.marker3 {
-  bottom: 26%;
-  left: 38%;
-}
-
-/* 결과 목록 — 지도 위 반투명 surface 패널 */
+/* 결과 목록 — 폰 아래 surface 패널(거리 배지) */
 .nearbyList {
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
+  width: 100%;
   margin: 0;
-  padding: 8px;
+  padding: 12px;
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  border-radius: var(--radius-sm);
-  background-color: var(--glass-bg-strong);
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  backdrop-filter: blur(var(--glass-blur));
-  /* 보더 제거 — 지도 위 반투명 패널, 그림자/블러로 분리. */
-  box-shadow: var(--shadow-rest);
+  gap: 10px;
+  /* 목록 컨테이너 배경 제거 — 각 항목이 개별 카드라 컨테이너는 투명. */
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
 }
 
+/* 각 결과 = 미니 카드(실제 검색 결과 느낌, 밀도↑). */
 .nearbyItem {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background-color: var(--cream-card);
+  box-shadow: inset 0 0 0 1px var(--lux-hairline), var(--lux-shadow-rest);
   font-size: 14px;
   line-height: 20px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.nearbyItem:hover {
+  transform: translateX(2px);
+  box-shadow: inset 0 0 0 1px var(--champagne), var(--lux-shadow-raised);
 }
 
 .nearbyDot {
   flex-shrink: 0;
-  width: 8px;
-  height: 8px;
+  width: 28px;
+  height: 28px;
   border-radius: var(--radius-pill);
-  background-color: var(--secondary);
+  /* 옅은 샴페인 원 + 골드 핀 느낌(텍스트 점 대신 시각 요소). */
+  background-color: rgba(193, 154, 91, 0.16);
+  position: relative;
+}
+.nearbyDot::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  transform: translate(-50%, -55%);
+  border-radius: 50% 50% 50% 0;
+  rotate: -45deg;
+  background-color: var(--champagne-deep);
 }
 
 .nearbyName {
-  font-weight: 600;
-  color: var(--on-surface);
+  font-weight: 700;
+  color: var(--ink);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -341,17 +320,18 @@
 
 .nearbyCat {
   display: none;
-  color: var(--on-surface-variant);
+  color: var(--ink-dim);
   font-weight: 500;
+  font-size: 12px;
 }
 
 .distanceBadge {
   flex-shrink: 0;
   margin-left: auto;
-  padding: 2px 10px;
+  padding: 3px 12px;
   border-radius: var(--radius-pill);
-  background-color: var(--secondary);
-  color: #ffffff;
+  background-color: rgba(193, 154, 91, 0.14);
+  color: var(--champagne-deep);
   font-size: 12px;
   line-height: 18px;
   font-weight: 700;
@@ -412,7 +392,7 @@
 
 /* ── ③ 카테고리 칩 클러스터 ── */
 .categories {
-  background: linear-gradient(160deg, #f3fbf8 0%, #ffffff 60%);
+  background: linear-gradient(160deg, #fdf9f1 0%, var(--cream-card) 60%);
 }
 
 .chips {
@@ -430,14 +410,14 @@
   gap: 6px;
   padding: 7px 14px 7px 10px;
   border-radius: var(--radius-pill);
-  background-color: #ffffff;
-  color: var(--green-deep);
-  /* 보더 대신 옅은 그림자 — 흰 칩이 카드 위에서 선 없이 떠 보이게. */
-  box-shadow: var(--shadow-rest);
+  background-color: var(--cream-card);
+  color: var(--ink);
+  /* 골드 헤어라인 — 크림 칩이 카드 위에서 럭셔리하게 떠 보이게. */
+  box-shadow: inset 0 0 0 1px var(--lux-hairline), var(--lux-shadow-rest);
   font-size: 14px;
   line-height: 20px;
   font-weight: 600;
-  transition: border-color 0.18s ease, transform 0.18s ease, color 0.18s ease;
+  transition: transform 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
 }
 
 /* F3: 카테고리 픽토그램(이모지) */
@@ -447,8 +427,8 @@
 }
 
 .chip:hover {
-  border-color: var(--tertiary);
-  color: var(--tertiary);
+  color: var(--champagne-deep);
+  box-shadow: inset 0 0 0 1px var(--champagne), var(--lux-shadow-raised);
   transform: translateY(-2px);
 }
 
@@ -467,12 +447,17 @@
 }
 
 .statNumber {
-  color: var(--green);
+  /* 샴페인골드 메탈릭 숫자(럭셔리 시그니처). */
+  color: var(--champagne);
+  background: var(--champagne-metallic);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
   line-height: 1;
 }
 
 .statLabel {
-  color: var(--on-surface);
+  color: var(--ink);
 }
 
 /* 보조지표 — 상단에 옅은 구분선(테두리 선 아님: 단일 hairline으로 정보 그룹 분리) */
@@ -482,7 +467,7 @@
   margin: 0;
   padding: 12px 0 0;
   list-style: none;
-  border-top: 1px solid var(--surface-container-high);
+  border-top: 1px solid var(--cream-deep);
 }
 
 .statSub {
@@ -496,14 +481,14 @@
   font-size: 18px;
   line-height: 22px;
   font-weight: 700;
-  color: var(--secondary);
+  color: var(--champagne-deep);
 }
 
 .statSubLabel {
   font-size: 12px;
   line-height: 16px;
   font-weight: 600;
-  color: var(--on-surface-variant);
+  color: var(--ink-soft);
 }
 
 /* ── reduced-motion ── */

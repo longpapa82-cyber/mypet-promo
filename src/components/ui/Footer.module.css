@@ -1,6 +1,7 @@
 .footer {
-  background-color: var(--surface-low);
-  border-top: 1px solid var(--outline-variant);
+  /* v7: 따뜻한 크림 톤(본문보다 살짝 진해 푸터 구분). 골드 헤어라인. */
+  background-color: var(--cream-2);
+  border-top: 1px solid var(--lux-hairline);
   padding-block: clamp(32px, 5vw, 48px);
 }
 

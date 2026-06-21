@@ -4,11 +4,11 @@
 /* ── 루트 (Aurora 호스트) ──────────────────── */
 .root {
   position: relative;
-  /* 아주 옅은 웜 그라디언트 베이스 — Aurora blob이 이 위에서 더 또렷이 읽힌다.
-     surface-low 단색일 때 pastel blob이 묻혔던 문제를 톤 베이스로 해결(은은). */
+  /* v7: 쿨 크림 + 샴페인 글로우 베이스(옛 peach/mint 폐기). 단색 심심함 완화. */
   background:
-    radial-gradient(120% 80% at 12% 0%, rgba(255, 219, 208, 0.18), transparent 55%),
-    radial-gradient(120% 80% at 88% 30%, rgba(174, 239, 226, 0.16), transparent 55%);
+    radial-gradient(110% 70% at 15% 5%, rgba(227, 207, 163, 0.28), transparent 55%),
+    radial-gradient(120% 80% at 88% 35%, rgba(199, 204, 212, 0.22), transparent 55%),
+    radial-gradient(100% 60% at 50% 100%, rgba(193, 154, 91, 0.12), transparent 60%);
 }
 
 /* Aurora blob 레이어를 섹션 콘텐츠 뒤로 — 존재감 강화(밝은 배경 위 체감). */
@@ -27,8 +27,8 @@
   text-align: center;
   max-width: 640px;
   margin-inline: auto;
-  /* 헤더~행 간격 모바일 하한 축소(과한 공백 제거). */
-  margin-bottom: clamp(32px, 5vw, 64px);
+  /* 헤더~행 간격 축소(상단 빈 공간 완화). */
+  margin-bottom: clamp(28px, 4vw, 48px);
 }
 
 .kicker {

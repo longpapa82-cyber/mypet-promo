@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import styles from './Aurora.module.css';
 
-type AuroraVariant = 'mint' | 'sky' | 'peach' | 'jewel' | 'mixed' | 'warm';
+type AuroraVariant = 'mint' | 'sky' | 'peach' | 'jewel' | 'mixed' | 'warm' | 'cream' | 'champagne';
 
 interface AuroraProps {
   /** 섹션 분위기 — blob 색 조합 */

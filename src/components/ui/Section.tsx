@@ -12,7 +12,10 @@ type BgVariant =
   | 'mintSoft'
   | 'peachSoft'
   | 'lavSoft'
-  | 'butterSoft';
+  | 'butterSoft'
+  // v7 Warm Light Luxury — 크림 베이스 톤(섹션 교차 리듬)
+  | 'cream'
+  | 'creamAlt';
 
 interface SectionProps {
   id?: string;

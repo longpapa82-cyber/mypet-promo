@@ -112,8 +112,48 @@
     inset 0 2px 3px rgba(243, 232, 212, 0.25),
     inset 0 -4px 8px rgba(0, 0, 0, 0.3);
 
+  /* ════════════════════════════════════════════════════════════════
+     v7 재디자인 — Warm Light Luxury + Cute (따뜻한 밝은 럭셔리 + 사랑스러움)
+     크림/아이보리 베이스 + 샴페인골드 메탈릭. 차가운 블루빛 흰색·다색 파스텔 폐기.
+     호텔 브로셔 같은 따뜻한 미니멀. 다크 톤 폐기(사용자 피드백).
+     ════════════════════════════════════════════════════════════════ */
+  /* 쿨 아이보리 배경 3단(베이스 → 카드 → 강조). 노란기 빼고 살짝 회청빛 — 차가운 럭셔리.
+     완전 흰색(차가움 과함)도, 다크도 아닌 중간. 사용자 피드백: "조금 더 차가운 컬러". */
+  --cream: #f3f4f2;          /* 페이지 베이스(쿨 아이보리/오트밀) */
+  --cream-2: #eaece9;        /* 섹션 미세 변화(살짝 진한 쿨 그레이지) */
+  --cream-card: #fcfdfc;     /* 카드(거의 흰, 미세 쿨) */
+  --cream-deep: #dde0dc;     /* 구분/보더 톤 */
+
+  /* 텍스트 — 쿨 차콜(쿨 아이보리 배경과 조화). 골드 액센트와 쿨/웜 대비로 럭셔리. */
+  --ink: #232629;            /* 헤딩(쿨 진한 차콜) */
+  --ink-soft: #51555a;       /* 본문 */
+  --ink-dim: #80858b;        /* 부연/캡션 */
+
+  /* 샴페인골드 럭셔리 — 보더/헤어라인/숫자강조/아이콘. 크림 위 골드텍스트는 큰 글자만(대비 확인). */
+  --champagne: #c19a5b;      /* 메인 골드(크림 위 대비 ↑ 위해 기존 #caa46a보다 살짝 진하게) */
+  --champagne-bright: #e3cfa3;
+  --champagne-deep: #9a7b3f;
+  --champagne-line: linear-gradient(90deg, rgba(193, 154, 91, 0) 0%, rgba(193, 154, 91, 0.6) 50%, rgba(193, 154, 91, 0) 100%);
+  --champagne-metallic: linear-gradient(135deg, #e3cfa3 0%, #c19a5b 42%, #9a7b3f 70%, #c19a5b 100%);
+
+  /* 크림 위 글래스 + 골드 헤어라인 */
+  --lux-glass: rgba(255, 253, 249, 0.7);
+  --lux-glass-strong: rgba(255, 253, 249, 0.9);
+  --lux-hairline: rgba(193, 154, 91, 0.28);   /* 카드 보더(골드 헤어라인, 절제) */
+
+  /* 따뜻한 soft shadow(크림 위 깊이, 살짝 골드빛 도는 그림자). */
+  --lux-shadow-rest: 0 2px 8px rgba(120, 90, 40, 0.07), 0 1px 3px rgba(120, 90, 40, 0.05);
+  --lux-shadow-raised: 0 14px 34px rgba(120, 90, 40, 0.1), 0 3px 10px rgba(120, 90, 40, 0.07);
+  --lux-shadow-overlay: 0 26px 56px rgba(120, 90, 40, 0.14), 0 6px 16px rgba(120, 90, 40, 0.08);
+
+  /* 따뜻한 Aurora — 크림/골드 글로우(은은). */
+  --aurora-cream: radial-gradient(closest-side, rgba(227, 207, 163, 0.4) 0%, rgba(227, 207, 163, 0.12) 45%, rgba(227, 207, 163, 0) 100%);
+  --aurora-champagne: radial-gradient(closest-side, rgba(193, 154, 91, 0.22) 0%, rgba(193, 154, 91, 0.06) 45%, rgba(193, 154, 91, 0) 100%);
+
   /* ── Font ────────────────────────────────── */
   --font-sans: 'Quicksand', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  /* 헤딩 — 둥근 한글 디스플레이(Jua). 라틴은 Quicksand로 폴백돼 MyPet 등도 둥글게. 말랑한 인상. */
+  --font-display: 'Jua', 'Quicksand', system-ui, sans-serif;
 }
 
 /* ── Reset / Base ──────────────────────────── */
@@ -138,11 +178,14 @@ body {
 body {
   margin: 0;
   font-family: var(--font-sans);
-  background-color: var(--surface);
-  color: var(--on-surface);
+  /* v7 Warm Light Luxury — 따뜻한 크림 베이스(차가운 블루빛 흰색 폐기). */
+  background-color: var(--cream);
+  color: var(--ink-soft);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.5;
+  /* 말랑한 인상: 기본 자간 살짝 좁혀 둥근 Quicksand 글자가 모이게. */
+  letter-spacing: -0.005em;
 }
 
 /* sticky 헤더(약 56px) 아래로 앵커 스크롤이 가리지 않도록 여백 */
@@ -169,27 +212,32 @@ button {
    고정 px는 모바일(375px)에서 긴 한글 제목이 단어 단위로 어색하게 깨졌다("두\n축").
    clamp(최소, 가변, 최대)로 모바일에선 작아져 자연 줄바꿈 + 데스크톱에선 큰 위계(운영 사이트 임팩트).
    line-height는 em 배수로 둬 폰트 크기에 비례. word-break/balance로 줄바꿈 품질 보강. */
+/* 헤딩 = 둥근 한글 디스플레이(Jua). 말랑한 임팩트 + 크기 대비 강화. Jua는 단일 weight(굵직둥글)라
+   font-weight는 normal로 두고 크기로 위계를 만든다. */
 .t-display-lg {
-  font-size: clamp(30px, 6.4vw, 48px);
-  line-height: 1.14;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-size: clamp(36px, 7.6vw, 60px);
+  line-height: 1.16;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   text-wrap: balance;
 }
 
 .t-headline-lg {
-  font-size: clamp(25px, 5.2vw, 36px);
+  font-family: var(--font-display);
+  font-size: clamp(28px, 6vw, 44px);
   line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-weight: 400;
+  letter-spacing: -0.005em;
   text-wrap: balance;
 }
 
 .t-headline-md {
-  font-size: clamp(21px, 3.4vw, 28px);
-  line-height: 1.28;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3.8vw, 30px);
+  line-height: 1.3;
+  font-weight: 400;
+  letter-spacing: 0;
   text-wrap: balance;
 }
 

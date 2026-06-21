@@ -22,7 +22,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--tertiary);
+  color: var(--champagne-deep);
 }
 
 .header h2 {
@@ -79,7 +79,7 @@
 .stepReveal:hover .step,
 .stepReveal:focus-within .step {
   transform: translateY(-6px);
-  box-shadow: var(--shadow-overlay);
+  box-shadow: var(--lux-shadow-overlay);
 }
 
 .stepReveal:hover .step::after,
@@ -107,8 +107,9 @@
   width: 68px;
   height: 68px;
   border-radius: var(--radius-pill);
-  background: var(--gold-soft);
-  box-shadow: var(--clay-orb);
+  /* 샴페인 톤 원형 + 골드 헤어라인(럭셔리 번호 알사탕). */
+  background: var(--champagne-bright);
+  box-shadow: inset 0 0 0 1px var(--lux-hairline), var(--lux-shadow-raised);
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -123,7 +124,7 @@
   font-size: 28px;
   line-height: 36px;
   font-weight: 700;
-  color: var(--green-deep);
+  color: var(--champagne-deep);
 }
 
 .stepReveal:hover .badge,
@@ -139,10 +140,10 @@
   width: 44px;
   height: 44px;
   border-radius: var(--radius-sm);
-  background: var(--green-fixed);
-  color: var(--green-deep);
-  /* v3: 점토 입체(작은 칩) */
-  box-shadow: var(--clay-orb);
+  /* 샴페인 톤 fill + 골드 아이콘(통일). */
+  background: rgba(193, 154, 91, 0.14);
+  color: var(--champagne-deep);
+  box-shadow: inset 0 0 0 1px var(--lux-hairline);
 }
 
 .icon {

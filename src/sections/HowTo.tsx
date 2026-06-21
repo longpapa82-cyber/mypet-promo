@@ -3,6 +3,7 @@ import Section from '../components/ui/Section';
 import Reveal from '../components/ui/Reveal';
 import Aurora from '../components/ui/Aurora';
 import SectionDoodles from '../components/ui/SectionDoodles';
+import PhotoBackdrop from '../components/ui/PhotoBackdrop';
 import styles from './HowTo.module.css';
 
 interface Step {
@@ -91,18 +92,20 @@ const STEPS: readonly Step[] = [
 // + 깊이 그림자(shadow-raised) + 글래스 카드 hover. surface-low 배경 + mint Aurora 메시.
 export default function HowTo() {
   return (
-    <Section id="how-to" background="mintSoft">
-      <Aurora variant="mint" />
+    <Section id="how-to" background="creamAlt">
+      {/* v7.1: 실사 강아지 배경(단색 탈피·진짜 사이트 느낌). 좌측 사진 + 우측 크림 페이드로 텍스트 보호. */}
+      <PhotoBackdrop name="hero-puppy" side="left" />
+      <Aurora variant="cream" />
       <SectionDoodles set="mint" />
 
       <div className={styles.inner}>
         <Reveal>
           <header className={styles.header}>
             <p className={styles.eyebrow}>How To</p>
-            <h2 className="t-headline-lg" style={{ color: 'var(--green-deep)' }}>
+            <h2 className="t-headline-lg" style={{ color: 'var(--ink)' }}>
               세 단계면 충분해요
             </h2>
-            <p className="t-body-lg" style={{ color: 'var(--on-surface-variant)' }}>
+            <p className="t-body-lg" style={{ color: 'var(--ink-soft)' }}>
               설치부터 첫 검색·상담까지, 1분이면 시작할 수 있어요.
             </p>
           </header>
@@ -119,10 +122,10 @@ export default function HowTo() {
                 <span className={styles.iconWrap} aria-hidden="true">
                   {step.icon}
                 </span>
-                <h3 className="t-headline-md" style={{ color: 'var(--green-deep)' }}>
+                <h3 className="t-headline-md" style={{ color: 'var(--ink)' }}>
                   {step.title}
                 </h3>
-                <p className="t-body-md" style={{ color: 'var(--on-surface-variant)' }}>
+                <p className="t-body-md" style={{ color: 'var(--ink-soft)' }}>
                   {step.description}
                 </p>
               </li>

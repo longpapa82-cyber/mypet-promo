@@ -16,6 +16,14 @@
   background: var(--grad-jewel);
 }
 
+/* v7 Warm Light Luxury — 따뜻한 크림 베이스. creamAlt는 살짝 진해 섹션 교차 리듬. */
+.cream {
+  background-color: var(--cream);
+}
+.creamAlt {
+  background-color: var(--cream-2);
+}
+
 .warm {
   background: var(--grad-warm);
 }

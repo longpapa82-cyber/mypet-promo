@@ -2,6 +2,7 @@ import Section from '../components/ui/Section';
 import Reveal from '../components/ui/Reveal';
 import Aurora from '../components/ui/Aurora';
 import SectionDoodles from '../components/ui/SectionDoodles';
+import PhotoBackdrop from '../components/ui/PhotoBackdrop';
 import styles from './FAQ.module.css';
 
 interface FaqItem {
@@ -35,8 +36,10 @@ const FAQ_ITEMS: readonly FaqItem[] = [
 
 export default function FAQ() {
   return (
-    <Section id="faq" background="peachSoft">
-      <Aurora variant="peach" />
+    <Section id="faq" background="creamAlt">
+      {/* v7.1: 실사 고양이 배경(우측) — 단색 탈피. 좌측 크림 페이드로 텍스트 보호. */}
+      <PhotoBackdrop name="hero-cat" side="right" />
+      <Aurora variant="cream" />
       <SectionDoodles set="peach" />
       <Reveal>
         <div className={styles.heading}>

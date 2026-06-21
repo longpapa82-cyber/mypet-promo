@@ -16,11 +16,12 @@
   display: block;
 }
 
-/* green 듀오톤 wash — multiply로 사진 그림자를 jewel green 쪽으로, 밝은 부분은 크림 쪽으로 */
+/* v7: 따뜻한 세피아/샴페인 듀오톤 wash — green 폐기. multiply로 그림자를 따뜻한 브라운 쪽으로,
+   밝은 부분은 크림 쪽으로. 강아지 사진이 따뜻한 고급 화보처럼(럭셔리+사랑스러움). */
 .wash {
   position: absolute;
   inset: 0;
-  background: linear-gradient(155deg, #235641 0%, #2f7d5e 55%, #27695e 100%);
+  background: linear-gradient(155deg, #5c4a32 0%, #9a7b3f 55%, #7a6238 100%);
   mix-blend-mode: multiply;
   pointer-events: none;
 }
@@ -29,7 +30,7 @@
 .highlight {
   position: absolute;
   inset: 0;
-  background: radial-gradient(120% 80% at 50% 0%, rgba(243, 232, 212, 0.45) 0%, rgba(243, 232, 212, 0) 55%);
+  background: radial-gradient(120% 80% at 50% 0%, rgba(250, 243, 228, 0.55) 0%, rgba(250, 243, 228, 0) 55%);
   mix-blend-mode: screen;
   pointer-events: none;
 }
@@ -41,19 +42,19 @@
   pointer-events: none;
 }
 .scrim_bottom {
-  background: linear-gradient(to top, rgba(16, 32, 26, 0.72) 0%, rgba(16, 32, 26, 0.15) 45%, transparent 75%);
+  background: linear-gradient(to top, rgba(46, 36, 24, 0.7) 0%, rgba(46, 36, 24, 0.14) 45%, transparent 75%);
 }
 .scrim_left {
-  background: linear-gradient(to right, rgba(16, 32, 26, 0.72) 0%, rgba(16, 32, 26, 0.12) 50%, transparent 80%);
+  background: linear-gradient(to right, rgba(46, 36, 24, 0.7) 0%, rgba(46, 36, 24, 0.12) 50%, transparent 80%);
 }
 .scrim_top {
-  background: linear-gradient(to bottom, rgba(16, 32, 26, 0.66) 0%, rgba(16, 32, 26, 0.1) 45%, transparent 75%);
+  background: linear-gradient(to bottom, rgba(46, 36, 24, 0.64) 0%, rgba(46, 36, 24, 0.1) 45%, transparent 75%);
 }
 
-/* 미지원(mix-blend) 폴백 — 그냥 옅은 green 오버레이로 톤만 */
+/* 미지원(mix-blend) 폴백 — 옅은 따뜻한 브라운 오버레이로 톤만 */
 @supports not (mix-blend-mode: multiply) {
   .wash {
-    background: rgba(35, 86, 65, 0.4);
+    background: rgba(122, 98, 56, 0.38);
   }
   .highlight {
     display: none;

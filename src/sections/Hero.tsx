@@ -126,7 +126,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <Section id="hero" background="warm" fullBleed className={styles.hero}>
+    <Section id="hero" background="cream" fullBleed className={styles.hero}>
       {/* F1: 귀여운 새끼 강아지 실사 배경(듀오톤). 시설 카드의 hero-pet과 중복 해소 + 따뜻한 첫인상. */}
       <DuotonePhoto
         name="hero-puppy"

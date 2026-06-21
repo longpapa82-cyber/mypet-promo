@@ -1,0 +1,67 @@
+/* PhotoBackdrop — 섹션 배경 실사 레이어. 한쪽에 사진, 반대쪽으로 크림 페이드(텍스트 가독). */
+.wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 58%;
+  height: 100%;
+  object-fit: cover;
+  /* 채도 더 낮춰 배경답게(자연색이 콘텐츠 압도 방지) + 쿨톤 통일. */
+  filter: saturate(0.7) brightness(1.04) contrast(0.98);
+  opacity: 0.85;
+}
+
+/* 사진 쪽: 오른쪽 정렬 + 왼쪽으로 크림 페이드 */
+.right .img {
+  right: 0;
+}
+.left .img {
+  left: 0;
+  transform: scaleX(-1); /* 좌측 배치 시 사진 좌우 반전(시선이 안쪽 향하게) */
+}
+
+/* 크림 페이드 오버레이 — 사진을 크림 배경에 녹여 텍스트 영역 확보. */
+.fade {
+  position: absolute;
+  inset: 0;
+}
+.right .fade {
+  background:
+    linear-gradient(to right, var(--cream-2) 0%, var(--cream-2) 38%, rgba(244, 238, 227, 0.6) 55%, transparent 78%),
+    linear-gradient(to top, var(--cream-2) 0%, transparent 22%),
+    linear-gradient(to bottom, var(--cream-2) 0%, transparent 18%);
+}
+.left .fade {
+  background:
+    linear-gradient(to left, var(--cream-2) 0%, var(--cream-2) 38%, rgba(244, 238, 227, 0.6) 55%, transparent 78%),
+    linear-gradient(to top, var(--cream-2) 0%, transparent 22%),
+    linear-gradient(to bottom, var(--cream-2) 0%, transparent 18%);
+}
+
+/* 모바일: 사진을 상단 가로 띠로(좌우 페이드 대신 하단 페이드) — 세로 레이아웃에서 텍스트 보호. */
+@media (max-width: 767px) {
+  .img {
+    width: 100%;
+    height: 46%;
+    top: 0;
+    bottom: auto;
+    transform: none;
+  }
+  .left .img {
+    transform: none;
+  }
+  .right .fade,
+  .left .fade {
+    background:
+      linear-gradient(to bottom, transparent 0%, rgba(244, 238, 227, 0.5) 32%, var(--cream-2) 46%),
+      linear-gradient(to top, var(--cream-2) 0%, transparent 12%);
+  }
+}

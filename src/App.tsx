@@ -50,22 +50,21 @@ export default function App() {
       <span id="top" />
       <Header />
       <main id="main">
-        {/* 섹션 사이 그라데이션 페이드 — 위 섹션 색(topColor) → 아래 섹션 색(color)으로 부드럽게 전환.
-            곡선 제거(가장자리 선 문제) → 색이 녹아들어 경계선이 물리적으로 없음.
-            배경 톤: warm→sky→butter→mint→lav→peach→jewel(클라이맥스 다크). 인접 모두 다른 hue. */}
+        {/* v7 Warm Light Luxury — 전 섹션 크림 톤 통일. cream↔cream-2 미세 교차로 리듬,
+            경계는 디바이더가 한 톤에서 다음 톤으로 녹여 한 덩어리처럼. 다크 폐기. */}
         <Hero />
-        <SectionDivider topColor="var(--surface)" color="var(--tint-sky)" />
+        <SectionDivider topColor="var(--cream)" color="var(--cream-2)" />
         <Value />
-        <SectionDivider topColor="var(--tint-sky)" color="var(--surface)" />
+        <SectionDivider topColor="var(--cream-2)" color="var(--cream)" />
         <Features />
-        <SectionDivider topColor="var(--surface)" color="var(--tint-mint)" />
+        <SectionDivider topColor="var(--cream)" color="var(--cream-2)" />
         <HowTo />
-        <SectionDivider topColor="var(--tint-mint)" color="var(--tint-lav)" />
+        <SectionDivider topColor="var(--cream-2)" color="var(--cream)" />
         <Premium />
-        <SectionDivider topColor="var(--tint-lav)" color="var(--tint-peach)" />
+        <SectionDivider topColor="var(--cream)" color="var(--cream-2)" />
         <FAQ />
-        <SectionDivider topColor="var(--tint-peach)" color="#1c3d30" />
-        {/* V4: 감성 스토리 섹션(풀블리드 실사) → FinalCTA로 자연 연결(둘 다 jewel 다크) */}
+        <SectionDivider topColor="var(--cream-2)" color="var(--cream)" />
+        {/* 감성 스토리 → FinalCTA 자연 연결(크림 톤 유지). */}
         <Story />
         <FinalCTA />
       </main>

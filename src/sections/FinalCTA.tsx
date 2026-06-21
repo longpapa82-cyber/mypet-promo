@@ -22,8 +22,8 @@ function SparkIcon() {
     >
       <path
         d="M12 2.5l2.78 5.63 6.22.9-4.5 4.39 1.06 6.18L12 16.68 6.44 19.6 7.5 13.42 3 9.03l6.22-.9L12 2.5z"
-        fill="var(--gold)"
-        stroke="var(--gold)"
+        fill="var(--champagne)"
+        stroke="var(--champagne)"
         strokeWidth="1.2"
         strokeLinejoin="round"
       />
@@ -36,24 +36,24 @@ function SparkIcon() {
 // 골드 메탈릭은 jewel 위 보더/구분선/아이콘으로만(텍스트 금지). 주 CTA는 StoreCTA 내부 규칙 따름.
 export default function FinalCTA() {
   return (
-    <Section id="download" background="jewel">
-      {/* V2: 실사 펫 배경(듀오톤 강하게) — jewel 다크 위 감성 깊이. 글래스 박스가 텍스트 가독 담당. */}
+    <Section id="download" background="cream">
+      {/* 실사 펫 배경(듀오톤) — 밝은 크림 위 감성 깊이. 글래스 박스가 텍스트 가독 담당. */}
       <DuotonePhoto
         name="hero-home"
         className={styles.photoBg}
-        intensity={0.78}
+        intensity={0.5}
         scrimDir="none"
         decorative
       />
-      {/* jewel 다크 위 Aurora 메시 — jewel blob을 베이스로 깊이감 부여 */}
-      <Aurora variant="jewel" className={styles.aurora} />
+      {/* 크림 위 Aurora 메시 — 따뜻한 골드/크림 blob으로 깊이감 부여 */}
+      <Aurora variant="champagne" className={styles.aurora} />
 
       <Reveal>
-        <div className={styles.inner} data-on-dark>
-          {/* 글래스 CTA 박스 — 다크 그라운드 위 골드 보더 톤 액센트 */}
-          <div className={`glass ${styles.glassBox}`} data-on-dark>
+        <div className={styles.inner}>
+          {/* 글래스 CTA 박스 — 밝은 크림 글래스 + 골드 헤어라인 */}
+          <div className={`glass ${styles.glassBox}`}>
             {/* 깜찍 도들 — 절제 2개(골드 별·라벤더 발자국). 박스 상/하 모서리, 텍스트 비가림. */}
-            <Doodle kind="star" size={24} color="var(--gold)" className={`${styles.cuteStar} cute-float`} />
+            <Doodle kind="star" size={24} color="var(--champagne)" className={`${styles.cuteStar} cute-float`} />
             <Doodle kind="paw" size={26} color="var(--cute-lav)" className={`${styles.cutePaw} cute-float`} />
 
             {/* 마스코트: 작게, 골드 링으로 분리 + 둥실 통통 */}

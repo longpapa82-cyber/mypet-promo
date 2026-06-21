@@ -13,7 +13,7 @@ import styles from './Story.module.css';
  */
 export default function Story() {
   return (
-    <Section id="story" background="jewel" fullBleed className={styles.story}>
+    <Section id="story" background="cream" fullBleed className={styles.story}>
       <DuotonePhoto
         name="hero-tip"
         className={styles.photo}
