@@ -66,15 +66,16 @@ const NEARBY: readonly NearbyItem[] = [
 // ⚠️표시광고 정직성: 실제 노출(verified·영업중) 데이터가 있는 카테고리만 광고한다.
 // DB 조회(2026-06-20): 미용실9531·용품점7878·동물병원6333·호텔5304·공원844·유치원411·훈련소100·식당79.
 // 응급실·카페는 0건이라 제외(데이터 적재 시 다시 추가). '계속 확대 중' 카피가 미래 확장은 커버.
-const CATEGORIES: readonly string[] = [
-  '동물병원',
-  '미용실',
-  '호텔',
-  '용품점',
-  '유치원',
-  '훈련소',
-  '공원',
-  '식당',
+// F3: 카테고리별 픽토그램(이모지) — 텍스트만인 칩에 시각 단서. 아기자기+스캔성.
+const CATEGORIES: readonly { name: string; icon: string }[] = [
+  { name: '동물병원', icon: '🏥' },
+  { name: '미용실', icon: '✂️' },
+  { name: '호텔', icon: '🏨' },
+  { name: '용품점', icon: '🛍️' },
+  { name: '유치원', icon: '🎒' },
+  { name: '훈련소', icon: '🦴' },
+  { name: '공원', icon: '🌳' },
+  { name: '식당', icon: '🍽️' },
 ] as const;
 
 export default function Value() {
@@ -181,8 +182,11 @@ export default function Value() {
               </p>
               <ul className={styles.chips}>
                 {CATEGORIES.map((c) => (
-                  <li key={c} className={styles.chip}>
-                    {c}
+                  <li key={c.name} className={styles.chip}>
+                    <span className={styles.chipIcon} aria-hidden="true">
+                      {c.icon}
+                    </span>
+                    {c.name}
                   </li>
                 ))}
               </ul>
