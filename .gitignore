@@ -4,3 +4,10 @@ dist-ssr
 *.local
 .DS_Store
 .vite
+
+# v6 디자인 검증 임시 산출물(배포 제외)
+.v6-shots/
+scripts/capture-v6.mjs
+scripts/measure.mjs
+scripts/verify-responsive.mjs
+scripts/cap-desk-value.mjs

@@ -165,23 +165,32 @@ button {
   font-family: inherit;
 }
 
-/* ── Typography 유틸 클래스 (px) ───────────── */
+/* ── Typography 유틸 클래스 (반응형 clamp) ─────────────
+   고정 px는 모바일(375px)에서 긴 한글 제목이 단어 단위로 어색하게 깨졌다("두\n축").
+   clamp(최소, 가변, 최대)로 모바일에선 작아져 자연 줄바꿈 + 데스크톱에선 큰 위계(운영 사이트 임팩트).
+   line-height는 em 배수로 둬 폰트 크기에 비례. word-break/balance로 줄바꿈 품질 보강. */
 .t-display-lg {
-  font-size: 40px;
-  line-height: 48px;
+  font-size: clamp(30px, 6.4vw, 48px);
+  line-height: 1.14;
   font-weight: 700;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
 .t-headline-lg {
-  font-size: 32px;
-  line-height: 38px;
+  font-size: clamp(25px, 5.2vw, 36px);
+  line-height: 1.2;
   font-weight: 700;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 .t-headline-md {
-  font-size: 28px;
-  line-height: 36px;
+  font-size: clamp(21px, 3.4vw, 28px);
+  line-height: 1.28;
   font-weight: 600;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 .t-body-lg {

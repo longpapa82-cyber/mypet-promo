@@ -118,7 +118,42 @@ export default function Value() {
                   강아지 사진 대신 '지도로 주변을 본다' 직관. 저작권 자유·가벼움. */}
               <div className={styles.mapPanel}>
                 <div className={styles.mapCanvas} aria-hidden="true">
-                  {/* 격자 도로 라인(::before·::after) + 현재 위치 펄스 + 시설 핀 3개 */}
+                  {/* M3: 곡선 도로 + 블록 면 SVG — 단순 격자보다 '진짜 지도를 단순화한' 사실감.
+                      도로(굵은/얇은 곡선) + 동네 블록(옅은 면) + 강(옅은 sky 곡선). 저작권 자유. */}
+                  <svg
+                    className={styles.mapSvg}
+                    viewBox="0 0 320 210"
+                    preserveAspectRatio="xMidYMid slice"
+                    fill="none"
+                  >
+                    {/* 블록 면(동네 구획) */}
+                    <rect x="14" y="16" width="86" height="60" rx="8" fill="rgba(0,100,145,0.05)" />
+                    <rect x="208" y="22" width="98" height="70" rx="8" fill="rgba(39,105,94,0.05)" />
+                    <rect x="24" y="128" width="104" height="64" rx="8" fill="rgba(0,100,145,0.05)" />
+                    <rect x="196" y="132" width="104" height="60" rx="8" fill="rgba(39,105,94,0.05)" />
+                    {/* 강/하천 — 옅은 sky 곡선 */}
+                    <path
+                      d="M-10 150 C 70 120, 120 180, 200 130 S 330 90, 340 110"
+                      stroke="rgba(0,100,145,0.12)"
+                      strokeWidth="14"
+                      strokeLinecap="round"
+                    />
+                    {/* 대로(굵은) */}
+                    <path d="M0 104 H 320" stroke="#ffffff" strokeWidth="8" strokeLinecap="round" />
+                    <path d="M152 0 V 210" stroke="#ffffff" strokeWidth="8" strokeLinecap="round" />
+                    {/* 곡선 도로(얇은) */}
+                    <path
+                      d="M40 0 C 60 60, 110 70, 120 130 S 90 200, 70 210"
+                      stroke="rgba(255,255,255,0.85)"
+                      strokeWidth="4"
+                    />
+                    <path
+                      d="M320 60 C 250 70, 230 110, 250 160"
+                      stroke="rgba(255,255,255,0.85)"
+                      strokeWidth="4"
+                    />
+                  </svg>
+                  {/* 현재 위치 펄스 + 시설 핀 3개 */}
                   <span className={styles.mapCurrent} />
                   <span className={`${styles.mapMarker} ${styles.marker1}`}>
                     <PinIcon />
@@ -193,14 +228,24 @@ export default function Value() {
             </article>
           </Reveal>
 
-          {/* ④ 통계 — "전국 3만+" (글래스 액센트) */}
+          {/* ④ 통계 — 주지표(3만+) + 보조지표(카테고리·전국)로 밀도 확보(M4).
+              숫자 하나만 덩그러니 → 신뢰 지표 묶음 = 운영 사이트 느낌. 법무: 실측치만 표기. */}
           <Reveal bounce className={styles.cellStat} delay={210}>
             <article className={`${styles.card} ${styles.stat} glass`}>
-              <span className={`${styles.statNumber} t-display-lg`}>3만+</span>
-              <span className={`${styles.statLabel} t-label-md`}>등록 펫 시설</span>
-              <p className={`${styles.statNote} t-body-md`}>
-                거리순 · 운영시간 안내
-              </p>
+              <div className={styles.statMain}>
+                <span className={`${styles.statNumber} t-display-lg`}>3만+</span>
+                <span className={`${styles.statLabel} t-label-md`}>등록 펫 시설</span>
+              </div>
+              <ul className={styles.statSubs}>
+                <li className={styles.statSub}>
+                  <span className={styles.statSubNum}>8</span>
+                  <span className={styles.statSubLabel}>시설 카테고리</span>
+                </li>
+                <li className={styles.statSub}>
+                  <span className={styles.statSubNum}>전국</span>
+                  <span className={styles.statSubLabel}>거리순 · 운영시간</span>
+                </li>
+              </ul>
             </article>
           </Reveal>
         </div>

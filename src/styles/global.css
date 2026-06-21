@@ -30,13 +30,15 @@
   outline-offset: 2px;
 }
 
-/* ── Section 여백 토큰 ─────────────────────── */
+/* ── Section 여백 토큰 ───────────────────────
+   모바일 하한을 낮춰 밀도↑(과한 빈 띠 제거 — 사용자 지적 "불필요한 공백"). 데스크톱 상한은
+   유지해 큰 화면 호흡감 보존. clamp(최소 40, 가변, 최대 100). */
 .section {
-  padding-block: clamp(56px, 9vw, 112px);
+  padding-block: clamp(40px, 7vw, 100px);
 }
 
 .section-tight {
-  padding-block: clamp(32px, 5vw, 56px);
+  padding-block: clamp(28px, 4vw, 48px);
 }
 
 /* ── Squishy 버튼 베이스 ───────────────────── */

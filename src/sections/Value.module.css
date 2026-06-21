@@ -54,8 +54,9 @@
 .bento {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
-  margin-top: clamp(32px, 5vw, 56px);
+  gap: 14px;
+  /* 헤더~그리드 간격 — 모바일 하한 축소(과한 공백 제거, W2). */
+  margin-top: clamp(24px, 4vw, 48px);
 }
 
 /* Reveal 래퍼가 카드 높이를 채우도록 */
@@ -219,28 +220,36 @@
   box-shadow: var(--shadow-rest);
 }
 
-/* F2: CSS 지도 캔버스 — 옅은 지도 바탕 + 격자 도로(라인 그라데이션) */
+/* M3: CSS 지도 캔버스 — 옅은 지형 바탕(그라디언트) 위에 SVG 도로·블록·강 오버레이.
+   기존 단순 격자 → 곡선 도로+블록면+강으로 '진짜 지도 단순화' 사실감. 미세 격자만 바탕에 잔류. */
 .mapCanvas {
   position: relative;
   width: 100%;
-  height: clamp(150px, 24vw, 210px);
-  background-color: #eaf1ea;
-  /* 격자 도로: 가로·세로 옅은 라인 + 굵은 대로 1개씩 */
+  height: clamp(160px, 25vw, 220px);
+  /* 지형 베이스: 옅은 그린-크림 그라디언트(평평한 단색 대신 자연스러운 톤 변화) */
+  background:
+    radial-gradient(120% 90% at 20% 10%, #eef4ee 0%, transparent 60%),
+    radial-gradient(120% 90% at 85% 90%, #e8f1ee 0%, transparent 55%),
+    #eaf1ea;
+}
+
+/* 미세 격자(아주 옅게) — SVG 도로 아래 도시 질감 */
+.mapCanvas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   background-image:
-    linear-gradient(rgba(0, 100, 145, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 100, 145, 0.08) 1px, transparent 1px),
-    linear-gradient(rgba(255, 255, 255, 0.9) 4px, transparent 4px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.9) 4px, transparent 4px);
-  background-size:
-    28px 28px,
-    28px 28px,
-    100% 84px,
-    120px 100%;
-  background-position:
-    0 0,
-    0 0,
-    0 60%,
-    38% 0;
+    linear-gradient(rgba(0, 100, 145, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 100, 145, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px, 32px 32px;
+}
+
+/* SVG 도로/블록 오버레이 — 캔버스 전체를 덮음 */
+.mapSvg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
 }
 
 /* 현재 위치 — 펄스 도트(스카이) */
@@ -443,24 +452,57 @@
   transform: translateY(-2px);
 }
 
-/* ── ④ 통계 (글래스 카드) ── */
+/* ── ④ 통계 (글래스 카드) — 주지표 + 보조지표 ── */
 .stat {
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: center;
-  gap: 6px;
+  gap: 14px;
   border-color: rgba(0, 100, 145, 0.24);
+}
+
+.statMain {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .statNumber {
   color: var(--green);
+  line-height: 1;
 }
 
 .statLabel {
   color: var(--on-surface);
 }
 
-.statNote {
-  margin: 4px 0 0;
+/* 보조지표 — 상단에 옅은 구분선(테두리 선 아님: 단일 hairline으로 정보 그룹 분리) */
+.statSubs {
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  padding: 12px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--surface-container-high);
+}
+
+.statSub {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.statSubNum {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+.statSubLabel {
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
   color: var(--on-surface-variant);
 }
 
