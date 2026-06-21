@@ -4,11 +4,8 @@
 /* ── 루트 (Aurora 호스트) ──────────────────── */
 .root {
   position: relative;
-  /* v7: 쿨 크림 + 샴페인 글로우 베이스(옛 peach/mint 폐기). 단색 심심함 완화. */
-  background:
-    radial-gradient(110% 70% at 15% 5%, rgba(227, 207, 163, 0.28), transparent 55%),
-    radial-gradient(120% 80% at 88% 35%, rgba(199, 204, 212, 0.22), transparent 55%),
-    radial-gradient(100% 60% at 50% 100%, rgba(193, 154, 91, 0.12), transparent 60%);
+  /* 배경 제거 — Section .cream 풀폭 배경(+발자국 패턴)에 맡긴다. .root는 container 안이라
+     여기 배경을 두면 가운데 박스로만 깔려 좌우에 '사각 테두리 선'이 보였다(사용자 지적). */
 }
 
 /* Aurora blob 레이어를 섹션 콘텐츠 뒤로 — 존재감 강화(밝은 배경 위 체감). */
@@ -79,13 +76,18 @@
 }
 
 /* ── 카피 영역 ─────────────────────────────── */
+/* 모바일(세로 스택): 카피 가운데 정렬 — 텍스트가 한쪽으로 쏠려 허전한 문제 해소(사용자 제안). */
+.copy {
+  text-align: center;
+}
+
 .badge {
   display: inline-block;
-  padding: 5px 12px;
+  padding: 5px 14px;
   border-radius: var(--radius-pill);
-  /* 보더 제거 — 민트 톤 fill pill로(테두리 선 없이 카테고리 강조). */
-  background-color: rgba(39, 105, 94, 0.1);
-  color: var(--tertiary);
+  /* v7: 샴페인 톤 fill pill(골드 통일). */
+  background-color: rgba(193, 154, 91, 0.14);
+  color: var(--champagne-deep);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.02em;
@@ -93,12 +95,12 @@
 
 .title {
   margin: 14px 0 0;
-  color: var(--green-deep);
+  color: var(--ink);
 }
 
 .body {
   margin: 12px 0 0;
-  color: var(--on-surface-variant);
+  color: var(--ink-soft);
 }
 
 .bullets {
@@ -108,6 +110,11 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  /* 모바일: 불릿 '그룹'을 통째로 중앙에 놓되(width:fit + margin auto), 항목은 좌측 정렬 →
+     체크 아이콘이 세로로 정렬돼 들쑥날쑥 해소(가운데 정렬 부작용 수정, 사용자 지적). */
+  align-items: flex-start;
+  width: fit-content;
+  margin-inline: auto;
 }
 
 .bullet {
@@ -126,17 +133,20 @@
   box-shadow: 0 0 0 3px var(--green-fixed);
 }
 
-/* F3: 체크 아이콘 칩 — green 원 안 흰 체크(기능 제공 시각화) */
+/* 체크 아이콘 — 샴페인 메탈릭 그라디언트 + 입체 광택(기본 단색 원 탈피, 럭셔리). */
 .check {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   border-radius: var(--radius-pill);
-  background-color: var(--green);
-  color: #ffffff;
+  background: var(--champagne-metallic);
+  color: #fffdf9;
+  box-shadow:
+    0 2px 5px rgba(154, 123, 63, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 /* ── 폰 목업 프레임 ────────────────────────── */
@@ -430,8 +440,8 @@
   width: 8px;
   height: 8px;
   border-radius: var(--radius-pill);
-  background-color: var(--green);
-  box-shadow: 0 0 0 3px var(--green-fixed);
+  background-color: var(--champagne);
+  box-shadow: 0 0 0 3px rgba(193, 154, 91, 0.18);
   /* D-3 캡션 dot 호흡 펄스 — 살아있는 느낌(매우 은은). */
   animation: dot-pulse 2.4s ease-in-out infinite;
 }
@@ -440,15 +450,15 @@
 @keyframes dot-pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 3px var(--green-fixed);
+    box-shadow: 0 0 0 3px rgba(193, 154, 91, 0.18);
   }
   50% {
-    box-shadow: 0 0 0 5px rgba(47, 125, 94, 0.14);
+    box-shadow: 0 0 0 5px rgba(193, 154, 91, 0.12);
   }
 }
 
 .captionText {
-  color: var(--green-deep);
+  color: var(--ink);
   white-space: nowrap;
 }
 
@@ -481,6 +491,13 @@
 
   .copy {
     max-width: 480px;
+    /* 데스크톱 zig-zag(좌우 분할)에선 카피 좌측 정렬 복원(모바일만 가운데). */
+    text-align: left;
+  }
+  .bullets {
+    align-items: flex-start;
+    width: auto;
+    margin-inline: 0;
   }
 
   /* 캡션을 반대쪽으로 — zig-zag 방향에 맞춰 */

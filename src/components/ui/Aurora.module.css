@@ -147,16 +147,18 @@
   opacity: 0.5;
 }
 
-/* v7 cream: 따뜻한 크림+샴페인골드 글로우(밝은 럭셔리). 은은하게(밝은 배경 위 콘텐츠 비방해). */
+/* v7 cream: 크림+샴페인+쿨 글로우 믹스(밋밋한 단색 탈피). 밝은 배경 위 체감되게 또렷이. */
 .cream .b1 {
   background: var(--aurora-cream);
+  opacity: 0.95;
 }
 .cream .b2 {
   background: var(--aurora-champagne);
-  opacity: 0.6;
+  opacity: 0.85;
 }
 .cream .b3 {
-  background: var(--aurora-cream);
+  background: var(--aurora-cool);
+  opacity: 0.9;
 }
 
 /* champagne: 골드 위주(프리미엄 강조 섹션용). */

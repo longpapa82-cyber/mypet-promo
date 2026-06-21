@@ -96,54 +96,50 @@
   max-width: 30ch;
 }
 
-/* ── 번호 원형 — gold-soft 배경 + 골드 메탈릭 링 + 깊이 그림자 ──
-   골드 텍스트 금지 규칙에 따라 숫자는 green-deep(흰 배경 대비 AA). */
-/* v3: claymorphism 점토 알사탕 — 골드 링 대신 점토 입체 그림자로 정체성. */
-.badge {
+/* ── 메인 그림 아이콘(크게) + 코너 번호 배지(작게) — '원 안 숫자' 목업 패턴 탈피 ── */
+.iconWrap {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 68px;
-  height: 68px;
-  border-radius: var(--radius-pill);
-  /* 샴페인 톤 원형 + 골드 헤어라인(럭셔리 번호 알사탕). */
-  background: var(--champagne-bright);
-  box-shadow: inset 0 0 0 1px var(--lux-hairline), var(--lux-shadow-raised);
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-clay);
+  /* 옅은 샴페인 라운드 스퀘어 + 점토 입체(아이콘이 안긴 틀). */
+  background: linear-gradient(160deg, #fbf3e3, #f3e6cc);
+  color: var(--champagne-deep);
+  box-shadow:
+    0 8px 18px rgba(154, 123, 63, 0.18),
+    inset 0 2px 3px rgba(255, 255, 255, 0.8),
+    inset 0 -3px 6px rgba(154, 123, 63, 0.14);
   transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
-
-/* badgeRing: v3에서 점토 그림자로 대체 → 보이지 않게(마크업 호환 위해 클래스 유지). */
-.badgeRing {
-  display: none;
+.iconWrap .icon {
+  width: 34px;
+  height: 34px;
 }
-
-.badgeNum {
-  position: relative;
-  z-index: 1;
-  font-size: 28px;
-  line-height: 36px;
-  font-weight: 700;
-  color: var(--champagne-deep);
-}
-
-.stepReveal:hover .badge,
-.stepReveal:focus-within .badge {
-  transform: scale(1.06);
-}
-
-/* ── 단계 아이콘(green-deep, 흰/글래스 위 대비) ── */
-.iconWrap {
+/* 코너 번호 배지 — 작은 샴페인 메탈릭 원(보조). */
+.stepNum {
+  position: absolute;
+  top: -8px;
+  right: -8px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-sm);
-  /* 샴페인 톤 fill + 골드 아이콘(통일). */
-  background: rgba(193, 154, 91, 0.14);
-  color: var(--champagne-deep);
-  box-shadow: inset 0 0 0 1px var(--lux-hairline);
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-pill);
+  background: var(--champagne-metallic);
+  color: #fffdf9;
+  font-family: var(--font-display);
+  font-size: 15px;
+  line-height: 1;
+  box-shadow: 0 2px 6px rgba(154, 123, 63, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.stepReveal:hover .iconWrap,
+.stepReveal:focus-within .iconWrap {
+  transform: scale(1.06) rotate(-3deg);
 }
 
 .icon {

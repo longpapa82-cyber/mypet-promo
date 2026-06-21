@@ -15,7 +15,6 @@
 import { useEffect } from 'react';
 import Header from './components/ui/Header';
 import Footer from './components/ui/Footer';
-import SectionDivider from './components/ui/SectionDivider';
 import InstallPrompt from './components/ui/InstallPrompt';
 import Hero from './sections/Hero';
 import Value from './sections/Value';
@@ -50,20 +49,14 @@ export default function App() {
       <span id="top" />
       <Header />
       <main id="main">
-        {/* v7 Warm Light Luxury — 전 섹션 크림 톤 통일. cream↔cream-2 미세 교차로 리듬,
-            경계는 디바이더가 한 톤에서 다음 톤으로 녹여 한 덩어리처럼. 다크 폐기. */}
+        {/* v7.1: SectionDivider 제거 — 단일 크림 톤 + 발자국 패턴이 연속되므로 디바이더(96px 빈 띠)가
+            오히려 패턴을 끊어 '중간 끊김'을 만들었다(사용자 지적). 섹션들이 패턴·톤으로 자연 연결. */}
         <Hero />
-        <SectionDivider topColor="var(--cream)" color="var(--cream-2)" />
         <Value />
-        <SectionDivider topColor="var(--cream-2)" color="var(--cream)" />
         <Features />
-        <SectionDivider topColor="var(--cream)" color="var(--cream-2)" />
         <HowTo />
-        <SectionDivider topColor="var(--cream-2)" color="var(--cream)" />
         <Premium />
-        <SectionDivider topColor="var(--cream)" color="var(--cream-2)" />
         <FAQ />
-        <SectionDivider topColor="var(--cream-2)" color="var(--cream)" />
         {/* 감성 스토리 → FinalCTA 자연 연결(크림 톤 유지). */}
         <Story />
         <FinalCTA />

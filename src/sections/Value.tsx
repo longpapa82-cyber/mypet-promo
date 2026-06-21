@@ -2,6 +2,7 @@ import Section from '../components/ui/Section';
 import Reveal from '../components/ui/Reveal';
 import Aurora from '../components/ui/Aurora';
 import SectionDoodles from '../components/ui/SectionDoodles';
+import CategoryIcon from '../components/ui/CategoryIcon';
 import { asset } from '../constants/stores';
 import styles from './Value.module.css';
 
@@ -64,20 +65,19 @@ const NEARBY: readonly NearbyItem[] = [
   { name: '튼튼 훈련소', category: '훈련소', distance: '2.1km' },
 ] as const;
 
-// 카테고리 10종
+// 카테고리 8종
 // ⚠️표시광고 정직성: 실제 노출(verified·영업중) 데이터가 있는 카테고리만 광고한다.
 // DB 조회(2026-06-20): 미용실9531·용품점7878·동물병원6333·호텔5304·공원844·유치원411·훈련소100·식당79.
-// 응급실·카페는 0건이라 제외(데이터 적재 시 다시 추가). '계속 확대 중' 카피가 미래 확장은 커버.
-// F3: 카테고리별 픽토그램(이모지) — 텍스트만인 칩에 시각 단서. 아기자기+스캔성.
+// v7.1: 이모지 → 통일된 디자인 SVG 아이콘(CategoryIcon) — '목업/기본' 느낌 제거.
 const CATEGORIES: readonly { name: string; icon: string }[] = [
-  { name: '동물병원', icon: '🏥' },
-  { name: '미용실', icon: '✂️' },
-  { name: '호텔', icon: '🏨' },
-  { name: '용품점', icon: '🛍️' },
-  { name: '유치원', icon: '🎒' },
-  { name: '훈련소', icon: '🦴' },
-  { name: '공원', icon: '🌳' },
-  { name: '식당', icon: '🍽️' },
+  { name: '동물병원', icon: 'hospital' },
+  { name: '미용실', icon: 'grooming' },
+  { name: '호텔', icon: 'hotel' },
+  { name: '용품점', icon: 'store' },
+  { name: '유치원', icon: 'daycare' },
+  { name: '훈련소', icon: 'training' },
+  { name: '공원', icon: 'park' },
+  { name: '식당', icon: 'restaurant' },
 ] as const;
 
 export default function Value() {
@@ -190,7 +190,7 @@ export default function Value() {
                 {CATEGORIES.map((c) => (
                   <li key={c.name} className={styles.chip}>
                     <span className={styles.chipIcon} aria-hidden="true">
-                      {c.icon}
+                      <CategoryIcon kind={c.icon} className={styles.chipSvg} />
                     </span>
                     {c.name}
                   </li>

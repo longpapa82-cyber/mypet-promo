@@ -32,6 +32,7 @@ const DownloadIcon = (
   </svg>
 );
 
+/* 가입 — 사람 + 체크(간편 가입) */
 const SparkIcon = (
   <svg
     className={styles.icon}
@@ -44,12 +45,13 @@ const SparkIcon = (
     aria-hidden="true"
     focusable="false"
   >
-    <path d="M12 4v4M12 16v4M4 12h4M16 12h4" />
-    <path d="M9 9 7 7M17 7l-2 2M9 15l-2 2M17 17l-2-2" />
-    <circle cx="12" cy="12" r="2.4" />
+    <circle cx="10" cy="8" r="3.4" />
+    <path d="M4 19.5c0-3.3 2.7-5.5 6-5.5 1 0 1.9.2 2.7.5" />
+    <path d="m15.5 18 1.8 1.8L21 16" />
   </svg>
 );
 
+/* 검색·상담 — 위치 핀 + 돋보기(내 주변 검색) */
 const SearchIcon = (
   <svg
     className={styles.icon}
@@ -62,8 +64,10 @@ const SearchIcon = (
     aria-hidden="true"
     focusable="false"
   >
-    <circle cx="11" cy="11" r="6.5" />
-    <path d="m20 20-3.6-3.6" />
+    <path d="M11 20s-6-4.5-6-9.5a6 6 0 0 1 12 0c0 1.6-.6 3.1-1.5 4.5" />
+    <circle cx="11" cy="10.5" r="2.2" />
+    <circle cx="17.5" cy="17.5" r="3" />
+    <path d="m20 20 1.8 1.8" />
   </svg>
 );
 
@@ -115,12 +119,10 @@ export default function HowTo() {
           {STEPS.map((step, index) => (
             <Reveal key={step.number} delay={index * 120} bounce className={styles.stepReveal}>
               <li className={`glass ${styles.step}`}>
-                <span className={styles.badge} aria-hidden="true">
-                  <span className={styles.badgeRing} />
-                  <span className={styles.badgeNum}>{step.number}</span>
-                </span>
+                {/* 큰 그림 아이콘(메인) + 작은 번호 배지(보조) — '원 안 숫자' 목업 패턴 탈피. */}
                 <span className={styles.iconWrap} aria-hidden="true">
                   {step.icon}
+                  <span className={styles.stepNum}>{step.number}</span>
                 </span>
                 <h3 className="t-headline-md" style={{ color: 'var(--ink)' }}>
                   {step.title}

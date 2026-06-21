@@ -16,12 +16,32 @@
   background: var(--grad-jewel);
 }
 
-/* v7 Warm Light Luxury — 따뜻한 크림 베이스. creamAlt는 살짝 진해 섹션 교차 리듬. */
+/* v7 — 쿨 아이보리 베이스 + 은은한 발자국 패턴(흰 면 심심함 제거, 펫 정체성). */
+.cream,
+.creamAlt {
+  position: relative;
+}
 .cream {
   background-color: var(--cream);
 }
 .creamAlt {
   background-color: var(--cream-2);
+}
+/* 발자국 텍스처 — 콘텐츠 뒤(z 음수로 확실히 뒤로). 실사 PhotoBackdrop이 덮는 영역은 사진 우선. */
+.cream::after,
+.creamAlt::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: var(--paw-pattern);
+  background-size: 90px 90px;
+  pointer-events: none;
+}
+/* 섹션이 stacking context를 만들어 ::after(z-1)가 페이지 뒤로 안 새게 + 콘텐츠는 자연히 위. */
+.cream,
+.creamAlt {
+  isolation: isolate;
 }
 
 .warm {

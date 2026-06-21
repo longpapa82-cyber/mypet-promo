@@ -343,42 +343,48 @@
   }
 }
 
-/* ── ② AI 상담: 말풍선 (글래스 카드, 민트 톤) ── */
+/* ── ② AI 상담: 진짜 채팅 UI (말풍선 꼬리 + 채팅 배경 영역) ── */
 .ai {
-  /* glass 유틸이 배경/blur/노이즈를 담당. 민트 보더로 톤 부여 */
-  border-color: rgba(39, 105, 94, 0.3);
+  border-color: var(--lux-hairline);
 }
 
+/* 채팅 영역 — 옅은 크림 배경 패널로 '실제 대화창' 느낌(흩어진 텍스트 탈피). */
 .bubbles {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   margin-top: auto;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(170deg, #f4f0e8, #efeae0);
+  box-shadow: inset 0 1px 3px rgba(154, 123, 63, 0.08);
 }
 
 .bubble {
-  max-width: 90%;
-  padding: 10px 14px;
-  font-size: 14px;
-  line-height: 20px;
+  position: relative;
+  max-width: 82%;
+  padding: 9px 13px;
+  font-size: 13.5px;
+  line-height: 19px;
   font-weight: 500;
 }
 
-/* 사용자 말풍선: 우측, surface (흰 카드 위 흰 말풍선이라 옅은 그림자로 분리) */
+/* 사용자 말풍선: 우측, 샴페인 톤 + 꼬리 */
 .bubbleUser {
   align-self: flex-end;
-  background-color: #ffffff;
-  color: var(--on-surface);
-  box-shadow: var(--shadow-rest);
-  border-radius: 16px 16px 4px 16px;
+  background: var(--champagne-metallic);
+  color: #fffdf9;
+  border-radius: 15px 15px 4px 15px;
+  box-shadow: 0 2px 5px rgba(154, 123, 63, 0.25);
 }
 
-/* AI 말풍선: 좌측, 민트 */
+/* AI 말풍선: 좌측, 흰 카드 + 꼬리 */
 .bubbleAi {
   align-self: flex-start;
-  background-color: var(--grad-mint);
-  color: var(--green-deep);
-  border-radius: 16px 16px 16px 4px;
+  background-color: #fffdf9;
+  color: var(--ink);
+  border-radius: 15px 15px 15px 4px;
+  box-shadow: 0 2px 5px rgba(60, 50, 30, 0.08);
 }
 
 .disclaimer {
@@ -420,10 +426,20 @@
   transition: transform 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
 }
 
-/* F3: 카테고리 픽토그램(이모지) */
+/* v7.1: 카테고리 SVG 아이콘 — 샴페인 톤 원형 배지에 담아 디자인된 느낌(이모지 탈피). */
 .chipIcon {
-  font-size: 15px;
-  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-pill);
+  background-color: rgba(193, 154, 91, 0.14);
+  color: var(--champagne-deep);
+}
+.chipSvg {
+  width: 15px;
+  height: 15px;
 }
 
 .chip:hover {
@@ -432,42 +448,94 @@
   transform: translateY(-2px);
 }
 
-/* ── ④ 통계 (글래스 카드) — 주지표 + 보조지표 ── */
+/* ── ④ 통계 (강조 카드) — 진한 샴페인 배경으로 다른 카드와 차별화 + "3만+" 강조 ── */
 .stat {
-  align-items: stretch;
+  position: relative;
+  overflow: hidden;
+  /* 가운데 정렬(사용자 요청) — 핵심 지표가 중앙에 당당히. */
+  align-items: center;
   justify-content: center;
+  text-align: center;
   gap: 14px;
-  border-color: rgba(0, 100, 145, 0.24);
+  /* 진한 샴페인 골드 그라디언트 — 흰 카드들 사이에서 핵심 지표가 확 띄게. */
+  background: radial-gradient(120% 90% at 50% 0%, #f6e8c8, transparent 65%),
+    linear-gradient(160deg, #edda b2 0%, #e2c896 100%) !important;
+  background: radial-gradient(120% 90% at 50% 0%, #f6e8c8, transparent 65%),
+    linear-gradient(160deg, #eddab2 0%, #e2c896 100%) !important;
+  box-shadow: 0 12px 32px rgba(154, 123, 63, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+/* 회전하는 골드 광채 — "3만+" 뒤 은은한 빛 효과(멋진 효과, 사용자 요청). */
+.stat::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 180%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(from 0deg, transparent 0deg, rgba(255, 255, 255, 0.45) 40deg, transparent 90deg, transparent 360deg);
+  opacity: 0.5;
+  animation: statShine 8s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes statShine {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+/* 큰 발자국 일러스트 — 우하단에 골드 톤으로(허전함 채움·펫 정체성). */
+.stat::after {
+  content: '';
+  position: absolute;
+  right: -8px;
+  bottom: -12px;
+  width: 96px;
+  height: 96px;
+  background-image: var(--paw-pattern);
+  background-size: 96px 96px;
+  opacity: 1;
+  transform: rotate(8deg) scale(1.1);
+  filter: brightness(0.9);
+  pointer-events: none;
 }
 
 .statMain {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 2px;
 }
 
 .statNumber {
-  /* 샴페인골드 메탈릭 숫자(럭셔리 시그니처). */
-  color: var(--champagne);
-  background: var(--champagne-metallic);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /* 진한 샴페인 배경 위 — 딥 브라운골드 + 크게 강조 + 은은한 호흡 효과(핵심 지표). */
+  color: #5c4a2a;
+  font-size: clamp(46px, 11vw, 64px);
   line-height: 1;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5), 0 1px 0 rgba(154, 123, 63, 0.2);
+  animation: statPulse 3s ease-in-out infinite;
+}
+@keyframes statPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
 }
 
 .statLabel {
-  color: var(--ink);
+  color: #6b5836;
+  font-weight: 700;
 }
 
-/* 보조지표 — 상단에 옅은 구분선(테두리 선 아님: 단일 hairline으로 정보 그룹 분리) */
+/* 보조지표 — 상단에 골드 구분선 */
 .statSubs {
+  position: relative;
+  z-index: 1;
+  width: 100%;
   display: flex;
   gap: 10px;
   margin: 0;
   padding: 12px 0 0;
   list-style: none;
-  border-top: 1px solid var(--cream-deep);
+  border-top: 1px solid rgba(154, 123, 63, 0.3);
 }
 
 .statSub {
@@ -481,14 +549,14 @@
   font-size: 18px;
   line-height: 22px;
   font-weight: 700;
-  color: var(--champagne-deep);
+  color: #5c4a2a;
 }
 
 .statSubLabel {
   font-size: 12px;
   line-height: 16px;
   font-weight: 600;
-  color: var(--ink-soft);
+  color: #7a6843;
 }
 
 /* ── reduced-motion ── */
@@ -496,5 +564,10 @@
   .card:hover,
   .chip:hover {
     transform: none;
+  }
+  /* 통계 카드 효과(회전 광채·펄스) 정지. */
+  .stat::before,
+  .statNumber {
+    animation: none;
   }
 }
