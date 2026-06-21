@@ -8,8 +8,8 @@
   color: #ffffff;
   border-radius: 12px;
   /* 보더 제거 — 다크 버튼의 흰 1px 외곽선도 '선'으로 보임. 그림자만으로 분리. */
-  box-shadow: var(--shadow-rest);
-  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.18s ease;
+  box-shadow: var(--lux-shadow-rest);
+  transition: transform 0.22s var(--ease-spring), box-shadow 0.22s ease;
   /* button/a 공통 — 네이티브 button 외형 리셋 (coming-soon이 <button>으로 렌더) */
   -webkit-appearance: none;
   appearance: none;
@@ -19,8 +19,8 @@
 }
 
 .badge:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-raised);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: var(--lux-shadow-overlay);
 }
 
 .badge:active {
