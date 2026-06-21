@@ -13,6 +13,11 @@
   opacity: 0.85;
 }
 
+/* v9: 실사 펫 배경 액센트 — 폰목업 뒤 은은히(심심함 완화). 더 옅게(콘텐츠 비방해). */
+.photoAccent {
+  opacity: 0.6;
+}
+
 /* 콘텐츠는 Aurora 위로 */
 .content {
   position: relative;
@@ -41,7 +46,11 @@
 
 .heading {
   margin: 16px 0 0;
-  color: var(--green-deep);
+  color: var(--ink);
+}
+/* v9: 헤딩 핵심어 코랄 강조. */
+.accentWord {
+  color: var(--accent-deep);
 }
 
 .lead {

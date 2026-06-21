@@ -44,7 +44,7 @@ export default function FAQ() {
       <Reveal>
         <div className={styles.heading}>
           <p className={`t-label-md ${styles.eyebrow}`}>자주 묻는 질문</p>
-          <h2 className="t-headline-lg">궁금한 점이 있으신가요?</h2>
+          <h2 className="t-headline-lg"><span style={{ color: 'var(--accent-deep)' }}>궁금한 점</span>이 있으신가요?</h2>
           <p className={`t-body-lg ${styles.lead}`}>
             설치 전에 가장 많이 묻는 질문을 모았어요.
           </p>

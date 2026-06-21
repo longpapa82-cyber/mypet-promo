@@ -107,7 +107,7 @@ export default function HowTo() {
           <header className={styles.header}>
             <p className={styles.eyebrow}>How To</p>
             <h2 className="t-headline-lg" style={{ color: 'var(--ink)' }}>
-              세 단계면 충분해요
+              <span style={{ color: 'var(--accent-deep)' }}>세 단계</span>면 충분해요
             </h2>
             <p className="t-body-lg" style={{ color: 'var(--ink-soft)' }}>
               설치부터 첫 검색·상담까지, 1분이면 시작할 수 있어요.

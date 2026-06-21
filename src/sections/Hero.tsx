@@ -175,9 +175,8 @@ export default function Hero() {
               aria-hidden="true"
             />
 
-            {/* 깜찍 도들 — 절제 2개(발자국·하트). 콘텐츠/통계칩 비가림 여백. 레이어 수 최소화. */}
-            <Doodle kind="paw" size={30} color="var(--cute-lav)" className={`${styles.doodle} ${styles.doodlePaw} cute-float`} />
-            <Doodle kind="heart" size={22} color="var(--accent)" className={`${styles.doodle} ${styles.doodleHeart} cute-pulse`} />
+            {/* v9: Hero 도들(하트·발자국) 제거 — 마스코트 카드 위에 겹쳐 어색했음(사용자 지적).
+                마스코트 카드(강아지·고양이·초록 하트)가 충분히 사랑스럽고, eyebrow에 코랄 발자국 있음. */}
 
             {/* 마스코트 카드: 바깥 wrapper=패럴랙스+둥실(transform), 안쪽 card=마우스 tilt(transform).
                 transform 충돌 방지로 레이어 분리. P2 claymorphism 점토 액자 + 3D 추종. */}

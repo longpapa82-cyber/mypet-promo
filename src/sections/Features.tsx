@@ -2,6 +2,7 @@ import { useEffect, useRef, type ReactNode } from 'react';
 import Section from '../components/ui/Section';
 import Reveal from '../components/ui/Reveal';
 import SectionDoodles from '../components/ui/SectionDoodles';
+import PhotoBackdrop from '../components/ui/PhotoBackdrop';
 import styles from './Features.module.css';
 
 // 에셋 경로: vite base('/mypet/')를 고려해 BASE_URL을 접두로 붙인다.
@@ -271,9 +272,9 @@ export default function Features() {
 
   return (
     <Section id="features" background="cream">
+      {/* v9: 실사 펫 배경 액센트(우측, 은은) — 심심한 Features에 생동감. 폰목업은 z-index로 위. */}
+      <PhotoBackdrop name="hero-cat" side="right" className={styles.photoAccent} />
       <div ref={rootRef} className={styles.root}>
-        {/* Aurora 제거: 폰 목업이 주인공인 섹션이라 배경은 조용하게(흰 surface).
-            warm Aurora의 골드 blob이 폰 주변을 노랗게 물들여 '테두리 두꺼움'으로 보이던 근본 원인. */}
         <SectionDoodles set="butter" />
 
         <div className={styles.content}>
@@ -281,7 +282,7 @@ export default function Features() {
             <header className={styles.head}>
               <span className={styles.kicker}>핵심 기능</span>
               <h2 className={`t-headline-lg ${styles.heading}`}>
-                반려생활에 꼭 필요한 두 가지
+                반려생활에 <span className={styles.accentWord}>꼭 필요한</span> 두 가지
               </h2>
               <p className={`t-body-lg ${styles.lead}`}>
                 내 주변 펫 시설을 찾고, 그 자리에서 AI에게 건강·법률을 물어보세요.

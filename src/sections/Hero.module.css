@@ -165,14 +165,17 @@
   z-index: 2;
   pointer-events: none;
 }
+/* 도들을 stage 상단 안쪽에만 배치(하단/좌우 경계 회피 — 어떤 화면에서도 안 잘림). */
 .doodlePaw {
-  top: 4%;
-  left: 0%;
+  top: 8%;
+  left: 6%;
   animation-delay: 0.2s;
 }
 .doodleHeart {
-  bottom: 10%;
-  left: 6%; /* 좌하단 — 통계칩(우측)·콘텐츠와 안 겹침 */
+  /* bottom 기준 폐기(섹션 경계 잘림 원인) → 상단 안쪽 우측에 배치. */
+  top: 12%;
+  right: 8%;
+  left: auto;
   animation-delay: 0.5s;
 }
 

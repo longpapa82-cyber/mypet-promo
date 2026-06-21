@@ -43,6 +43,10 @@
   margin: 16px 0 0;
   color: var(--ink);
 }
+/* v9: 헤딩 핵심어 코랄 강조(포인트 살리기). */
+.accentWord {
+  color: var(--accent-deep);
+}
 
 .lead {
   margin: 12px 0 0;
@@ -139,10 +143,10 @@
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
 }
 
-/* hover 마이크로 인터랙션: 살짝 raise + 그림자 강화 */
+/* hover 마이크로 인터랙션: 살짝 raise + 코랄 글로우(포인트 살리기, v9). */
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: inset 0 0 0 1px var(--lux-hairline), var(--lux-shadow-overlay);
+  box-shadow: inset 0 0 0 1px rgba(255, 107, 92, 0.35), var(--lux-shadow-overlay), 0 0 24px var(--accent-glow);
 }
 
 /* 카드 헤더(아이콘 + 제목) */

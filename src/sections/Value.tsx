@@ -3,6 +3,7 @@ import Reveal from '../components/ui/Reveal';
 import Aurora from '../components/ui/Aurora';
 import SectionDoodles from '../components/ui/SectionDoodles';
 import CategoryIcon from '../components/ui/CategoryIcon';
+import CountUp from '../components/ui/CountUp';
 import { asset } from '../constants/stores';
 import styles from './Value.module.css';
 
@@ -92,7 +93,7 @@ export default function Value() {
           <header className={styles.head}>
             <span className={styles.eyebrow}>두 가지 핵심 서비스</span>
             <h2 className={`${styles.title} t-headline-lg`}>
-              찾고, 묻고.<br />반려 생활의 두 축
+              <span className={styles.accentWord}>찾고, 묻고.</span><br />반려 생활의 두 축
             </h2>
           </header>
         </Reveal>
@@ -204,12 +205,12 @@ export default function Value() {
           <Reveal bounce className={styles.cellStat} delay={210}>
             <article className={`${styles.card} ${styles.stat} glass`}>
               <div className={styles.statMain}>
-                <span className={`${styles.statNumber} t-display-lg`}>3만+</span>
+                <CountUp to={3} suffix="만+" duration={1400} className={`${styles.statNumber} t-display-lg`} />
                 <span className={`${styles.statLabel} t-label-md`}>등록 펫 시설</span>
               </div>
               <ul className={styles.statSubs}>
                 <li className={styles.statSub}>
-                  <span className={styles.statSubNum}>8</span>
+                  <CountUp to={8} duration={1200} className={styles.statSubNum} />
                   <span className={styles.statSubLabel}>시설 카테고리</span>
                 </li>
                 <li className={styles.statSub}>
