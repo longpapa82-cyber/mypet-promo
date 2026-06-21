@@ -141,7 +141,7 @@ export default function Hero() {
       <div className={styles.inner}>
         <Reveal className={styles.copy}>
           <span className={`${styles.eyebrow} sticker t-label-md`}>
-            <Doodle kind="paw" size={16} color="var(--green)" />
+            <Doodle kind="paw" size={16} color="var(--accent)" />
             반려동물 필수 정보 앱
           </span>
 
@@ -156,7 +156,7 @@ export default function Hero() {
             바로 물어보세요. 등록된 3만여 곳의 병원·미용실·호텔·용품점까지 한 번에.
           </p>
 
-          <StoreCTA className={styles.cta} />
+          <StoreCTA className={styles.cta} align="center" />
         </Reveal>
 
         <Reveal className={styles.visual} delay={120}>
@@ -177,7 +177,7 @@ export default function Hero() {
 
             {/* 깜찍 도들 — 절제 2개(발자국·하트). 콘텐츠/통계칩 비가림 여백. 레이어 수 최소화. */}
             <Doodle kind="paw" size={30} color="var(--cute-lav)" className={`${styles.doodle} ${styles.doodlePaw} cute-float`} />
-            <Doodle kind="heart" size={22} color="var(--cute-coral)" className={`${styles.doodle} ${styles.doodleHeart} cute-pulse`} />
+            <Doodle kind="heart" size={22} color="var(--accent)" className={`${styles.doodle} ${styles.doodleHeart} cute-pulse`} />
 
             {/* 마스코트 카드: 바깥 wrapper=패럴랙스+둥실(transform), 안쪽 card=마우스 tilt(transform).
                 transform 충돌 방지로 레이어 분리. P2 claymorphism 점토 액자 + 3D 추종. */}

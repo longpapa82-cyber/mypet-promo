@@ -136,6 +136,14 @@
   --champagne-line: linear-gradient(90deg, rgba(193, 154, 91, 0) 0%, rgba(193, 154, 91, 0.6) 50%, rgba(193, 154, 91, 0) 100%);
   --champagne-metallic: linear-gradient(135deg, #e3cfa3 0%, #c19a5b 42%, #9a7b3f 70%, #c19a5b 100%);
 
+  /* v8 포인트 컬러 — 코랄/살구핑크(생동감·사랑스러움). 크림+골드(차분)에 과감한 포인트 1색.
+     전략 배치만(CTA·핵심 배지·hover·하트·헤딩 핵심어, 화면당 2~3곳). 과용 금지. */
+  --accent: #ff6b5c;          /* 코랄 — 포인트 메인 */
+  --accent-deep: #e8503f;     /* 진한 코랄(텍스트·hover) */
+  --accent-soft: #ffe4df;     /* 옅은 코랄(배경 fill·배지) */
+  --accent-ink: #8a2f23;      /* 코랄 위/옅은코랄 위 텍스트(대비 AA) */
+  --accent-glow: rgba(255, 107, 92, 0.35);
+
   /* 크림 위 글래스 + 골드 헤어라인 */
   --lux-glass: rgba(255, 253, 249, 0.7);
   --lux-glass-strong: rgba(255, 253, 249, 0.9);

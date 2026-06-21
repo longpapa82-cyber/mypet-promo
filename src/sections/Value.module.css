@@ -30,10 +30,10 @@
   display: inline-block;
   padding: 6px 16px;
   border-radius: var(--radius-pill);
-  /* 크림 위 골드 헤어라인 배지(Hero와 통일). */
-  background-color: var(--cream-card);
-  box-shadow: inset 0 0 0 1px var(--lux-hairline), var(--lux-shadow-rest);
-  color: var(--champagne-deep);
+  /* v8: 코랄 포인트 배지(Hero와 통일·생동감). */
+  background-color: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px rgba(255, 107, 92, 0.3);
+  color: var(--accent-ink);
   font-size: 14px;
   line-height: 20px;
   font-weight: 700;

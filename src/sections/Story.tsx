@@ -24,7 +24,7 @@ export default function Story() {
       />
       <Reveal className={styles.inner}>
         <span className={`${styles.eyebrow} t-label-md`}>
-          <Doodle kind="heart" size={16} color="var(--cute-coral)" />
+          <Doodle kind="heart" size={16} color="var(--accent)" />
           반려동물은 가족이니까
         </span>
         <h2 className={`${styles.heading} t-headline-lg`}>

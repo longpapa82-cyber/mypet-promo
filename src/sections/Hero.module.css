@@ -62,10 +62,10 @@
   gap: 8px;
   padding: 6px 16px 6px 12px;
   border-radius: var(--radius-pill);
-  /* 크림 위 골드 헤어라인 배지(따뜻한 럭셔리). */
-  background-color: var(--cream-card);
-  box-shadow: inset 0 0 0 1px var(--lux-hairline), var(--lux-shadow-rest);
-  color: var(--champagne-deep);
+  /* v8: 코랄 포인트 배지(생동감). 옅은 코랄 fill + 코랄 잉크 — 첫인상에 활기. */
+  background-color: var(--accent-soft);
+  box-shadow: inset 0 0 0 1px rgba(255, 107, 92, 0.3);
+  color: var(--accent-ink);
   align-self: center;
 }
 
@@ -329,8 +329,11 @@
     font-size: clamp(40px, 4vw, 56px);
   }
 
-  .cta {
+  /* 데스크톱(2열 좌측 카피): 모바일 가운데 정렬(align="center")을 좌측으로 복원. */
+  .cta,
+  .cta :global(.center) {
     justify-content: flex-start;
+    align-items: flex-start;
   }
 
   .chip1 {

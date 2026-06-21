@@ -85,9 +85,10 @@
   display: inline-block;
   padding: 5px 14px;
   border-radius: var(--radius-pill);
-  /* v7: 샴페인 톤 fill pill(골드 통일). */
-  background-color: rgba(193, 154, 91, 0.14);
-  color: var(--champagne-deep);
+  /* v8: 코랄 포인트 배지(통일·생동감). */
+  background-color: var(--accent-soft);
+  color: var(--accent-ink);
+  box-shadow: inset 0 0 0 1px rgba(255, 107, 92, 0.3);
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.02em;

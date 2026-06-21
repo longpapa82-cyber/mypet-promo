@@ -94,9 +94,10 @@
   gap: 8px;
   padding: 6px 14px;
   border-radius: var(--radius-pill);
-  /* 옅은 샴페인 fill(밝은 박스 위 강조). */
-  background-color: rgba(193, 154, 91, 0.16);
-  color: var(--champagne-deep);
+  /* v8: 코랄 포인트 배지(통일). */
+  background-color: var(--accent-soft);
+  color: var(--accent-ink);
+  box-shadow: inset 0 0 0 1px rgba(255, 107, 92, 0.3);
   letter-spacing: 0.02em;
 }
 

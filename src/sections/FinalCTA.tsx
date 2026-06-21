@@ -22,8 +22,8 @@ function SparkIcon() {
     >
       <path
         d="M12 2.5l2.78 5.63 6.22.9-4.5 4.39 1.06 6.18L12 16.68 6.44 19.6 7.5 13.42 3 9.03l6.22-.9L12 2.5z"
-        fill="var(--champagne)"
-        stroke="var(--champagne)"
+        fill="var(--accent)"
+        stroke="var(--accent)"
         strokeWidth="1.2"
         strokeLinejoin="round"
       />

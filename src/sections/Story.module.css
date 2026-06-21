@@ -30,10 +30,11 @@
   gap: 8px;
   padding: 7px 16px;
   border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.16);
+  /* v8: 사진 위 코랄 포인트 배지(반투명 코랄 + 흰 텍스트). */
+  background: rgba(255, 107, 92, 0.85);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  color: #f4f9f4;
+  color: #fffdf9;
   margin-bottom: 14px;
 }
 
