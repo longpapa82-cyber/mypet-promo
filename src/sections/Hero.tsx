@@ -26,7 +26,7 @@ function prefersReducedMotion(): boolean {
 
 // Hero — 풀블리드 첫 화면.
 // 배경: Aurora mixed(mint/sky/peach) 메시 blob.
-// 좌: 오버사이즈 헤드라인 + 서브카피 + StoreCTA(iOS활성·Android 출시예정).
+// 좌: 오버사이즈 헤드라인 + 서브카피 + StoreCTA(iOS·Android 모두 출시·활성).
 // 우: mascot-duo 글래스+골드 보더 카드 + 패럴랙스(스크롤 0.2~0.4) + 글래스 플로팅 통계칩.
 // 모바일 세로 스택 → 1024+ 2열. reduced-motion 시 패럴랙스 정지.
 export default function Hero() {

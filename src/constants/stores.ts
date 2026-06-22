@@ -6,7 +6,7 @@ export const APP_STORE_URL = 'https://apps.apple.com/kr/app/id6780117383';
 export const PLAY_STORE_URL =
   'https://play.google.com/store/apps/details?id=com.longpapa82.mypet';
 
-// 스토어 출시 상태 — iOS=출시됨(활성), Android=준비중(출시예정)
+// 스토어 출시 상태 — iOS=출시됨(활성), Android=출시됨(활성, 2026-06-22 프로덕션 정식 출시)
 export type StoreStatus = 'live' | 'coming-soon';
 
 export interface StoreInfo {
@@ -15,7 +15,7 @@ export interface StoreInfo {
 }
 
 export const APP_STORE: StoreInfo = { url: APP_STORE_URL, status: 'live' };
-export const PLAY_STORE: StoreInfo = { url: PLAY_STORE_URL, status: 'coming-soon' };
+export const PLAY_STORE: StoreInfo = { url: PLAY_STORE_URL, status: 'live' };
 
 export const LEGAL_BASE_URL = 'https://longpapa82-cyber.github.io/mypet-legal/';
 export const PRIVACY_POLICY_URL = `${LEGAL_BASE_URL}privacy-policy.html`;

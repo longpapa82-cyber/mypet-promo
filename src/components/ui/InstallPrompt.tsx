@@ -8,7 +8,8 @@ import styles from './InstallPrompt.module.css';
  * 홍보 사이트의 핵심 목적(설치 유도)을 직접 강화. UA로 모바일만 노출,
  * 첫 방문 1회만(sessionStorage), 닫으면 그 세션 동안 다시 안 뜬다.
  * - iOS: App Store 출시(활성) → "App Store에서 설치"
- * - Android: 출시예정 → "출시 예정"으로 안내(오해 방지)
+ * - Android: Google Play 출시(활성) → "Google Play에서 설치"
+ *   (stores.ts status가 coming-soon이면 "곧 출시" 안내로 자동 전환)
  * SSR-safe(마운트 후 판별), reduced-motion 시 슬라이드 모션 생략.
  */
 type Platform = 'ios' | 'android' | 'other';
@@ -56,6 +57,7 @@ export default function InstallPrompt() {
   if (platform === 'other' || !open) return null;
 
   const isIos = platform === 'ios';
+  const androidComingSoon = PLAY_STORE.status === 'coming-soon';
 
   return (
     <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="MyPet 앱 설치 안내">
@@ -80,7 +82,7 @@ export default function InstallPrompt() {
 
         <h2 className={styles.title}>앱으로 더 편하게 🐾</h2>
         <p className={styles.body}>
-          {isIos
+          {isIos || !androidComingSoon
             ? '내 주변 펫 시설 검색과 AI 건강·법률 상담을 MyPet 앱에서 바로 이용하세요.'
             : 'MyPet 앱은 곧 Google Play에 출시됩니다. iOS는 지금 App Store에서 만나보세요.'}
         </p>
@@ -97,7 +99,7 @@ export default function InstallPrompt() {
             rel="noopener noreferrer"
             onClick={close}
           >
-            Google Play에서 보기
+            {androidComingSoon ? 'Google Play에서 보기' : 'Google Play에서 설치'}
           </a>
         )}
 

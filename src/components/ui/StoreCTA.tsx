@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import StoreBadge from './StoreBadge';
+import { PLAY_STORE } from '../../constants/stores';
 import styles from './StoreCTA.module.css';
 
 type Platform = 'ios' | 'android' | 'both';
@@ -19,8 +20,8 @@ function detectPlatform(): Platform {
 
 // 두 배지를 묶고 UA 기반 자동 분기.
 // SSR-safe: 초기 렌더는 'both'(둘 다 노출) → 마운트 후 useEffect로 플랫폼 판별.
-// 스토어 차등: iOS=출시(활성), Android=출시예정(비활성 배지).
-// UA가 Android면 App Store를 강조하고 "iOS 먼저 출시, Android 곧 출시" 안내를 보인다.
+// 스토어 상태는 stores.ts 단일소스를 따른다(iOS·Android 모두 출시됨 → 안내 미표시).
+// 한쪽이 다시 coming-soon이 되면 해당 UA에서만 "곧 출시" 안내가 자동 노출된다.
 export default function StoreCTA({ className, align = 'start' }: StoreCTAProps) {
   const [platform, setPlatform] = useState<Platform>('both');
 
@@ -29,6 +30,7 @@ export default function StoreCTA({ className, align = 'start' }: StoreCTAProps) 
   }, []);
 
   const isAndroid = platform === 'android';
+  const androidComingSoon = PLAY_STORE.status === 'coming-soon';
 
   return (
     <div
@@ -42,7 +44,7 @@ export default function StoreCTA({ className, align = 'start' }: StoreCTAProps) 
         <StoreBadge store="android" />
       </div>
 
-      {isAndroid && (
+      {isAndroid && androidComingSoon && (
         <p className={styles.notice} role="note">
           iOS 버전이 먼저 출시되었어요. Android 버전은 곧 출시됩니다.
         </p>
