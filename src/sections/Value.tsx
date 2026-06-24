@@ -4,6 +4,7 @@ import Aurora from '../components/ui/Aurora';
 import SectionDoodles from '../components/ui/SectionDoodles';
 import CategoryIcon from '../components/ui/CategoryIcon';
 import CountUp from '../components/ui/CountUp';
+import DuotonePhoto from '../components/ui/DuotonePhoto';
 import { asset } from '../constants/stores';
 import styles from './Value.module.css';
 
@@ -86,6 +87,19 @@ export default function Value() {
     <Section id="services" background="creamAlt" className={styles.section}>
       {/* v7: 따뜻한 크림/골드 Aurora(다색 폐기, 통일). */}
       <Aurora variant="cream" className={styles.aurora} />
+
+      {/* 아트워크 배경 — 듀오톤 강아지 화보(장식). 카드 뒤 분위기 레이어, z-index:-1 상당(콘텐츠 아래). */}
+      <div className={styles.bgArt} aria-hidden="true">
+        <DuotonePhoto
+          name="hero-puppy"
+          decorative
+          intensity={0.5}
+          scrimDir="none"
+          position="62% 38%"
+          className={styles.bgArtPhoto}
+        />
+      </div>
+
       <SectionDoodles set="sky" />
 
       <div className={styles.content}>

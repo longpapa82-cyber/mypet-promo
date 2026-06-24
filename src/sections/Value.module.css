@@ -19,6 +19,31 @@
   z-index: 1;
 }
 
+/* 듀오톤 배경 아트 호스트 — DuotonePhoto(.wrap)가 100% 채우므로 명시적 크기 필수. */
+.bgArt {
+  position: absolute;
+  inset: 0;
+  z-index: 0;            /* .content는 z-index:1이라 이 위로 뜬다 */
+  overflow: hidden;
+  pointer-events: none;
+  /* 가장자리 페이드 — 화보가 섹션 안에 은은히 떠 있게(에디토리얼). */
+  -webkit-mask-image: radial-gradient(115% 100% at 60% 35%, #000 0%, #000 38%, transparent 72%);
+  mask-image: radial-gradient(115% 100% at 60% 35%, #000 0%, #000 38%, transparent 72%);
+}
+/* DuotonePhoto 래퍼 자체 — 살짝 확대·오프셋된 화보. 전체 plane은 옅게(텍스처). */
+.bgArtPhoto {
+  position: absolute;
+  top: -8%;
+  left: -6%;
+  width: 132%;
+  height: 132%;
+  opacity: 0.10;         /* 데스크탑: 0.10. 카드 텍스트 대비 무손상(불투명 카드 뒤). */
+  transform: translateZ(0);  /* 컴포지터 레이어 승격 */
+}
+@media (min-width: 1024px) {
+  .bgArtPhoto { opacity: 0.12; }  /* 큰 화면에서 살짝 더 보이게(여백이 넓어 안전) */
+}
+
 /* ── 헤더 ── */
 .head {
   text-align: center;
@@ -172,7 +197,7 @@
 }
 /* 부연 — 옅게(핵심에서 뒤로) */
 .muted {
-  color: var(--outline);
+  color: var(--ink-dim);
   font-weight: 500;
 }
 
@@ -206,6 +231,7 @@
 
 /* ── ① 시설검색: 지도 패널 + 거리 배지 ── */
 .facility {
+  position: relative;
   /* 따뜻한 크림 그라디언트(스카이 톤 폐기 — 통일된 럭셔리). */
   background: linear-gradient(160deg, #fdf9f1 0%, var(--cream-card) 60%);
 }
@@ -245,7 +271,7 @@
   box-shadow:
     0 2px 6px rgba(17, 24, 21, 0.16),
     0 18px 40px rgba(17, 24, 21, 0.22);
-  transform: perspective(1200px) rotateY(-5deg) rotateX(2deg);
+  transform: perspective(1200px) rotateY(-4deg) rotateX(2deg);
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .facility:hover .shotPhone {
@@ -349,7 +375,20 @@
 
 /* ── ② AI 상담: 진짜 채팅 UI (말풍선 꼬리 + 채팅 배경 영역) ── */
 .ai {
+  position: relative;
   border-color: var(--lux-hairline);
+}
+
+/* 보조 카드(AI·카테고리) 상단 골드 헤어라인 액센트 — 절제된 에디토리얼 디테일. */
+.ai::before,
+.categories::before {
+  content: '';
+  position: absolute;
+  top: 0; left: clamp(20px, 2.6vw, 28px); right: clamp(20px, 2.6vw, 28px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--champagne-line), transparent);
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 /* 채팅 영역 — 옅은 크림 배경 패널로 '실제 대화창' 느낌(흩어진 텍스트 탈피). */
@@ -394,7 +433,7 @@
 .disclaimer {
   margin: 8px 0 0;
   /* 법적 필수지만 부연이라 더 작고 옅게(핵심 가독 방해 최소). */
-  color: var(--outline);
+  color: var(--ink-dim);
   font-size: 11.5px;
   line-height: 16px;
   font-weight: 500;
@@ -402,6 +441,7 @@
 
 /* ── ③ 카테고리 칩 클러스터 ── */
 .categories {
+  position: relative;
   background: linear-gradient(160deg, #fdf9f1 0%, var(--cream-card) 60%);
 }
 
@@ -471,10 +511,14 @@
   gap: 14px;
   /* 진한 샴페인 골드 그라디언트 — 흰 카드들 사이에서 핵심 지표가 확 띄게. */
   background: radial-gradient(120% 90% at 50% 0%, #f6e8c8, transparent 65%),
-    linear-gradient(160deg, #edda b2 0%, #e2c896 100%) !important;
-  background: radial-gradient(120% 90% at 50% 0%, #f6e8c8, transparent 65%),
     linear-gradient(160deg, #eddab2 0%, #e2c896 100%) !important;
-  box-shadow: 0 12px 32px rgba(154, 123, 63, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+  /* 히어로 티어 — 듀오톤 plane·형제 카드 위로 또렷이 떠오르게(overlay 깊이). */
+  box-shadow: 0 22px 50px rgba(154, 123, 63, 0.34), 0 6px 16px rgba(154, 123, 63, 0.20), inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+/* 히어로 카드는 hover 시 들리지 않고(공통 .card:hover translateY 무효화) 글로우만 강화. */
+.stat:hover {
+  transform: none;
+  box-shadow: 0 26px 56px rgba(154, 123, 63, 0.40), 0 8px 18px rgba(154, 123, 63, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
 }
 /* 회전하는 골드 광채 — "3만+" 뒤 은은한 빛 효과(멋진 효과, 사용자 요청). */
 .stat::before {
@@ -486,8 +530,8 @@
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
   background: conic-gradient(from 0deg, transparent 0deg, rgba(255, 255, 255, 0.45) 40deg, transparent 90deg, transparent 360deg);
-  opacity: 0.5;
-  animation: statShine 8s linear infinite;
+  opacity: 0.38;
+  animation: statShine 14s linear infinite;
   pointer-events: none;
   z-index: 0;
 }
@@ -504,9 +548,9 @@
   height: 96px;
   background-image: var(--paw-pattern);
   background-size: 96px 96px;
-  opacity: 1;
+  opacity: 0.5;
   transform: rotate(8deg) scale(1.1);
-  filter: brightness(0.9);
+  filter: brightness(0.92);
   pointer-events: none;
 }
 
@@ -519,21 +563,35 @@
   gap: 2px;
 }
 
+/* 코랄 포인트 발자국 스티커 — 섹션 유일의 생동 포인트(절제). */
+.statMain::after {
+  content: '';
+  position: absolute;
+  top: -14px; right: -10px;
+  width: 22px; height: 22px;
+  background-color: var(--accent-soft);
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-18deg);
+  box-shadow: 0 2px 6px var(--accent-glow);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
 .statNumber {
-  /* 진한 샴페인 배경 위 — 딥 브라운골드 + 크게 강조 + 은은한 호흡 효과(핵심 지표). */
-  color: #5c4a2a;
+  /* 옅은 샴페인 배경 위 — 진한 잉크로 또렷하게(AA 대비 확보) + 크게 강조 + 은은한 호흡 효과(핵심 지표). */
+  color: var(--ink);
   font-size: clamp(46px, 11vw, 64px);
   line-height: 1;
   text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5), 0 1px 0 rgba(154, 123, 63, 0.2);
-  animation: statPulse 3s ease-in-out infinite;
+  animation: statPulse 5s ease-in-out infinite;
 }
 @keyframes statPulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.04); }
+  50% { transform: scale(1.03); }
 }
 
 .statLabel {
-  color: #6b5836;
+  color: var(--ink-soft);
   font-weight: 700;
 }
 
@@ -561,20 +619,23 @@
   font-size: 18px;
   line-height: 22px;
   font-weight: 700;
-  color: #5c4a2a;
+  color: var(--ink);
 }
 
 .statSubLabel {
   font-size: 12px;
   line-height: 16px;
   font-weight: 600;
-  color: #7a6843;
+  color: var(--ink-soft);
 }
 
 /* ── reduced-motion ── */
 @media (prefers-reduced-motion: reduce) {
   .card:hover,
-  .chip:hover {
+  .chip:hover,
+  .stat:hover,
+  .nearbyItem:hover,
+  .facility:hover .shotPhone {
     transform: none;
   }
   /* 통계 카드 효과(회전 광채·펄스) 정지. */
@@ -582,4 +643,6 @@
   .statNumber {
     animation: none;
   }
+  /* 배경 화보 transform 승격만 유지, 모션 없음(정적) */
+  .bgArtPhoto { transform: none; }
 }
