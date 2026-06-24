@@ -28,6 +28,20 @@
       content="MyPet은 내 주변 동물병원·응급실·미용실·호텔·유치원·훈련소·용품점·카페·공원·식당을 거리순으로 찾고, AI에게 반려동물 건강·법률을 묻는 반려동물 필수정보 앱입니다. 지금 설치하세요."
     />
 
+    <!-- 크롤링 허용 명시 + 키워드(네이버 일부 참고) + 작성자 -->
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="keywords"
+      content="마이펫, MyPet, 반려동물 앱, 펫 시설, 동물병원 찾기, 내 주변 펫 시설, 펫 AI 상담, 반려동물 건강 상담, 펫 미용실, 펫 호텔, 강아지 고양이 시설"
+    />
+    <meta name="author" content="AI Soft" />
+
+    <!-- 검색엔진 소유확인 자리(값은 콘솔에서 발급 후 채움 — Phase C) -->
+    <!-- 구글 Search Console: HTML 태그 방식 코드를 content 에 넣기 -->
+    <!-- <meta name="google-site-verification" content="" /> -->
+    <!-- 네이버 서치어드바이저: HTML 태그 방식 코드를 content 에 넣기 -->
+    <!-- <meta name="naver-site-verification" content="" /> -->
+
     <!-- Open Graph (크롤러는 상대경로 이미지를 못 읽으므로 절대 URL 사용) -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="MyPet" />
@@ -66,9 +80,64 @@
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Jua&display=swap"
       rel="stylesheet"
     />
+
+    <!-- 구조화 데이터(JSON-LD) — 정적 스크립트라 JS 미실행 크롤러(네이버 Yeti)도 읽음.
+         검색결과 앱 카드·지식 패널 가능성 + 엔티티 이해도↑. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://longpapa82-cyber.github.io/mypet-promo/#website",
+            "url": "https://longpapa82-cyber.github.io/mypet-promo/",
+            "name": "MyPet",
+            "description": "반려동물 필수정보 앱 — 내 주변 펫 시설 검색 + AI 펫 건강·법률 상담",
+            "inLanguage": "ko-KR",
+            "publisher": { "@id": "https://longpapa82-cyber.github.io/mypet-promo/#org" }
+          },
+          {
+            "@type": "Organization",
+            "@id": "https://longpapa82-cyber.github.io/mypet-promo/#org",
+            "name": "AI Soft",
+            "url": "https://longpapa82-cyber.github.io/mypet-promo/",
+            "logo": "https://longpapa82-cyber.github.io/mypet-promo/assets/apple-touch-icon.png",
+            "email": "longpapa82@gmail.com"
+          },
+          {
+            "@type": "MobileApplication",
+            "@id": "https://longpapa82-cyber.github.io/mypet-promo/#app",
+            "name": "MyPet",
+            "operatingSystem": "iOS, Android",
+            "applicationCategory": "LifestyleApplication",
+            "description": "내 주변 동물병원·미용실·호텔·유치원·훈련소·용품점·카페·공원·식당을 거리순으로 찾고, AI에게 반려동물 건강·법률을 묻는 반려동물 필수정보 앱.",
+            "inLanguage": "ko-KR",
+            "image": "https://longpapa82-cyber.github.io/mypet-promo/assets/hero-pet.jpg",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KRW" },
+            "publisher": { "@id": "https://longpapa82-cyber.github.io/mypet-promo/#org" },
+            "downloadUrl": [
+              "https://apps.apple.com/kr/app/id6780117383",
+              "https://play.google.com/store/apps/details?id=com.longpapa82.mypet"
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <!-- 안전망: 프리렌더·JS 모두 실패해도 핵심 텍스트·설치 링크는 항상 노출(크롤러·접근성). -->
+    <noscript>
+      <h1>MyPet — 반려동물 필수정보 앱</h1>
+      <p>
+        내 주변 동물병원·미용실·호텔·유치원·훈련소·용품점·카페·공원·식당을 거리순으로 찾고,
+        AI에게 반려동물 건강·법률을 바로 물어보세요. 전국 3만여 곳의 반려동물 시설 정보.
+      </p>
+      <ul>
+        <li><a href="https://apps.apple.com/kr/app/id6780117383">App Store에서 받기 (iOS)</a></li>
+        <li><a href="https://play.google.com/store/apps/details?id=com.longpapa82.mypet">Google Play에서 받기 (Android)</a></li>
+      </ul>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

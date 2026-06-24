@@ -1,5 +1,5 @@
 import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot, hydrateRoot } from 'react-dom/client';
 import './styles/tokens.css';
 import './styles/global.css';
 import App from './App';
@@ -13,8 +13,19 @@ if (!rootEl) {
   throw new Error('Root element #root not found');
 }
 
-createRoot(rootEl).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-);
+// SSG: 빌드 시 prerender가 #root에 본문을 박고 data-prerendered="true"를 단다.
+// 그 경우 hydrate(서버 HTML 재사용·이벤트만 부착, 깜빡임 없음). 비어 있으면(dev 등) 일반 렌더.
+if (rootEl.getAttribute('data-prerendered') === 'true' && rootEl.hasChildNodes()) {
+  hydrateRoot(
+    rootEl,
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  );
+} else {
+  createRoot(rootEl).render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  );
+}

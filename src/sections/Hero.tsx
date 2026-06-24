@@ -199,7 +199,8 @@ export default function Hero() {
                   width={768}
                   height={535}
                   loading="eager"
-                  fetchPriority="high"
+                  // SSR(renderToString)이 camelCase fetchPriority를 인식 못해 경고 → 소문자 DOM 속성으로 전달.
+                  {...{ fetchpriority: 'high' }}
                   decoding="async"
                 />
               </picture>

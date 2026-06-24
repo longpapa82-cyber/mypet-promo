@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# 네이버 검색로봇(가독성 위해 명시 — 위 *로 이미 허용됨)
+User-agent: Yeti
+Allow: /
+
 Sitemap: https://longpapa82-cyber.github.io/mypet-promo/sitemap.xml
