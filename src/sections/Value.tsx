@@ -150,24 +150,27 @@ export default function Value() {
           {/* ② AI 상담 — jewel 다크 카드 + 풀블리드 고양이 화보(크림 카드들과 극적 대비). */}
           <Reveal bounce className={styles.cellAi} delay={90}>
             <article className={`${styles.card} ${styles.ai} ${styles.cardDark}`}>
-              {/* 카드 안을 꽉 채우는 듀오톤 고양이 화보(청록 눈·다크 배경 — jewel과 완벽 조화). */}
+              {/* 카드 안을 꽉 채우는 듀오톤 강아지 화보(미사용 hero-profile, 타 섹션 중복 없음). */}
               <DuotonePhoto
-                name="hero-tip"
+                name="hero-profile"
                 decorative
-                intensity={0.58}
+                intensity={0.7}
                 scrimDir="bottom"
-                position="50% 32%"
+                position="50% 45%"
                 className={styles.cardPhoto}
               />
-              <div className={styles.cardHead}>
-                <span className={`${styles.iconWrap} ${styles.iconOnDark}`}>
-                  <ChatIcon />
-                </span>
-                <h3 className={`${styles.cardTitle} ${styles.titleOnDark} t-headline-md`}>AI 펫 상담</h3>
+              {/* 헤더 그룹 — 텍스트 뒤 백플레이트(국소 어둠)로 사진 밝은 영역 위에서도 또렷. */}
+              <div className={styles.darkHeadGroup}>
+                <div className={styles.cardHead}>
+                  <span className={`${styles.iconWrap} ${styles.iconOnDark}`}>
+                    <ChatIcon />
+                  </span>
+                  <h3 className={`${styles.cardTitle} ${styles.titleOnDark} t-headline-md`}>AI 펫 상담</h3>
+                </div>
+                <p className={`${styles.cardDesc} ${styles.descOnDark} t-body-md`}>
+                  건강·법률 궁금증을 <strong>바로 질문</strong>
+                </p>
               </div>
-              <p className={`${styles.cardDesc} ${styles.descOnDark} t-body-md`}>
-                건강·법률 궁금증을 <strong>바로 질문</strong>
-              </p>
 
               {/* 말풍선 대화 미리보기 — 실제 상담 흐름(밀도↑, 휑함 제거) */}
               <div className={styles.bubbles} aria-hidden="true">
