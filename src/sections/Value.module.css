@@ -19,29 +19,45 @@
   z-index: 1;
 }
 
-/* 듀오톤 배경 아트 호스트 — DuotonePhoto(.wrap)가 100% 채우므로 명시적 크기 필수. */
-.bgArt {
+/* ── 다크(jewel) 카드 — AI·통계 카드를 jewel-green 다크 + 풀블리드 화보로.
+   크림 카드(시설·카테고리)와 체커보드 대비를 만들어 베이토가 "확 달라" 보이게 한다. ── */
+.cardDark {
+  position: relative;
+  overflow: hidden;
+  /* jewel 다크 그라디언트 — 화보는 이 위에 듀오톤으로 깔린다. */
+  background: var(--grad-jewel);
+  /* 골드 헤어라인 + 깊은 그림자(다크 카드는 더 강한 입체). */
+  box-shadow: inset 0 0 0 1px var(--glass-border-dark), var(--lux-shadow-overlay);
+}
+
+/* 카드 안을 꽉 채우는 풀블리드 화보 레이어 — DuotonePhoto(.wrap)가 inset:0이라
+   부모 카드(relative+overflow:hidden) 모서리에 맞춰 잘린다. 콘텐츠는 위(z-index:1). */
+.cardPhoto {
   position: absolute;
   inset: 0;
-  z-index: 0;            /* .content는 z-index:1이라 이 위로 뜬다 */
-  overflow: hidden;
+  z-index: 0;
   pointer-events: none;
-  /* 가장자리 페이드 — 화보가 섹션 안에 은은히 떠 있게(에디토리얼). */
-  -webkit-mask-image: radial-gradient(115% 100% at 60% 35%, #000 0%, #000 38%, transparent 72%);
-  mask-image: radial-gradient(115% 100% at 60% 35%, #000 0%, #000 38%, transparent 72%);
 }
-/* DuotonePhoto 래퍼 자체 — 살짝 확대·오프셋된 화보. 전체 plane은 옅게(텍스처). */
-.bgArtPhoto {
-  position: absolute;
-  top: -8%;
-  left: -6%;
-  width: 132%;
-  height: 132%;
-  opacity: 0.10;         /* 데스크탑: 0.10. 카드 텍스트 대비 무손상(불투명 카드 뒤). */
-  transform: translateZ(0);  /* 컴포지터 레이어 승격 */
+/* 카드 안 모든 실제 콘텐츠를 화보 위로 */
+.cardDark > *:not(.cardPhoto) {
+  position: relative;
+  z-index: 1;
 }
-@media (min-width: 1024px) {
-  .bgArtPhoto { opacity: 0.12; }  /* 큰 화면에서 살짝 더 보이게(여백이 넓어 안전) */
+
+/* 다크 카드 위 텍스트/아이콘 변형 — 크림→화이트/골드. */
+.titleOnDark { color: #fffdf9; }
+.descOnDark { color: rgba(255, 253, 249, 0.86); }
+.descOnDark strong { color: var(--champagne-bright); }
+.iconOnDark {
+  background-color: rgba(243, 232, 212, 0.16);
+  box-shadow: inset 0 0 0 1px var(--glass-border-dark);
+}
+.iconOnDark .icon { color: var(--champagne-bright); }
+.disclaimerOnDark { color: rgba(255, 253, 249, 0.62); }
+
+/* 다크 카드는 hover 시 골드 글로우 강화(크림 카드의 코랄 글로우와 차별). */
+.cardDark:hover {
+  box-shadow: inset 0 0 0 1px var(--champagne), var(--lux-shadow-overlay), 0 0 30px rgba(202, 164, 106, 0.35);
 }
 
 /* ── 헤더 ── */
@@ -373,14 +389,10 @@
   }
 }
 
-/* ── ② AI 상담: 진짜 채팅 UI (말풍선 꼬리 + 채팅 배경 영역) ── */
-.ai {
-  position: relative;
-  border-color: var(--lux-hairline);
-}
+/* ── ② AI 상담: jewel 다크 카드 위 채팅 UI ── */
+/* (다크 배경·화보·텍스트는 .cardDark 시스템에서 처리) */
 
-/* 보조 카드(AI·카테고리) 상단 골드 헤어라인 액센트 — 절제된 에디토리얼 디테일. */
-.ai::before,
+/* 카테고리(크림 카드) 상단 골드 헤어라인 — 에디토리얼 디테일(다크 AI 카드엔 미적용). */
 .categories::before {
   content: '';
   position: absolute;
@@ -391,7 +403,7 @@
   pointer-events: none;
 }
 
-/* 채팅 영역 — 옅은 크림 배경 패널로 '실제 대화창' 느낌(흩어진 텍스트 탈피). */
+/* 채팅 영역 — jewel 다크 위 반투명 글래스 패널('실제 대화창' 느낌). */
 .bubbles {
   display: flex;
   flex-direction: column;
@@ -399,8 +411,8 @@
   margin-top: auto;
   padding: 14px;
   border-radius: var(--radius-sm);
-  background: linear-gradient(170deg, #f4f0e8, #efeae0);
-  box-shadow: inset 0 1px 3px rgba(154, 123, 63, 0.08);
+  background: rgba(11, 28, 23, 0.4);
+  box-shadow: inset 0 0 0 1px rgba(243, 232, 212, 0.12);
 }
 
 .bubble {
@@ -412,22 +424,22 @@
   font-weight: 500;
 }
 
-/* 사용자 말풍선: 우측, 샴페인 톤 + 꼬리 */
+/* 사용자 말풍선: 우측, 샴페인 메탈릭 + 꼬리 */
 .bubbleUser {
   align-self: flex-end;
   background: var(--champagne-metallic);
-  color: #fffdf9;
+  color: #2a1f0c;
   border-radius: 15px 15px 4px 15px;
-  box-shadow: 0 2px 5px rgba(154, 123, 63, 0.25);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-/* AI 말풍선: 좌측, 흰 카드 + 꼬리 */
+/* AI 말풍선: 좌측, 밝은 크림 카드 + 꼬리(다크 위에서 선명하게) */
 .bubbleAi {
   align-self: flex-start;
-  background-color: #fffdf9;
+  background-color: #fbf7ee;
   color: var(--ink);
   border-radius: 15px 15px 15px 4px;
-  box-shadow: 0 2px 5px rgba(60, 50, 30, 0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.28);
 }
 
 .disclaimer {
@@ -500,7 +512,7 @@
   transform: translateY(-2px);
 }
 
-/* ── ④ 통계 (강조 카드) — 진한 샴페인 배경으로 다른 카드와 차별화 + "3만+" 강조 ── */
+/* ── ④ 통계 (히어로 카드) — jewel 다크 + 풀블리드 강아지 화보 위 골드 "3만+" ── */
 .stat {
   position: relative;
   overflow: hidden;
@@ -509,18 +521,13 @@
   justify-content: center;
   text-align: center;
   gap: 14px;
-  /* 진한 샴페인 골드 그라디언트 — 흰 카드들 사이에서 핵심 지표가 확 띄게. */
-  background: radial-gradient(120% 90% at 50% 0%, #f6e8c8, transparent 65%),
-    linear-gradient(160deg, #eddab2 0%, #e2c896 100%) !important;
-  /* 히어로 티어 — 듀오톤 plane·형제 카드 위로 또렷이 떠오르게(overlay 깊이). */
-  box-shadow: 0 22px 50px rgba(154, 123, 63, 0.34), 0 6px 16px rgba(154, 123, 63, 0.20), inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+  /* 화보 가독을 위해 하단 jewel 스크림 보강(cardDark의 jewel 위 화보 + 추가 어둠). */
 }
-/* 히어로 카드는 hover 시 들리지 않고(공통 .card:hover translateY 무효화) 글로우만 강화. */
+/* 히어로 카드는 hover 시 들리지 않고(공통 .card:hover translateY 무효화) 골드 글로우만. */
 .stat:hover {
   transform: none;
-  box-shadow: 0 26px 56px rgba(154, 123, 63, 0.40), 0 8px 18px rgba(154, 123, 63, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
 }
-/* 회전하는 골드 광채 — "3만+" 뒤 은은한 빛 효과(멋진 효과, 사용자 요청). */
+/* 회전하는 골드 광채 — "3만+" 뒤 은은한 빛(다크 위에서 더 화려하게). */
 .stat::before {
   content: '';
   position: absolute;
@@ -529,16 +536,16 @@
   width: 180%;
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
-  background: conic-gradient(from 0deg, transparent 0deg, rgba(255, 255, 255, 0.45) 40deg, transparent 90deg, transparent 360deg);
-  opacity: 0.38;
+  background: conic-gradient(from 0deg, transparent 0deg, rgba(243, 232, 212, 0.32) 40deg, transparent 90deg, transparent 360deg);
+  opacity: 0.6;
   animation: statShine 14s linear infinite;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 @keyframes statShine {
   to { transform: translate(-50%, -50%) rotate(360deg); }
 }
-/* 큰 발자국 일러스트 — 우하단에 골드 톤으로(허전함 채움·펫 정체성). */
+/* 큰 발자국 일러스트 — 우하단에 골드 톤으로(허전함 채움·펫 정체성). 다크 위라 밝게. */
 .stat::after {
   content: '';
   position: absolute;
@@ -546,11 +553,12 @@
   bottom: -12px;
   width: 96px;
   height: 96px;
+  z-index: 1;
   background-image: var(--paw-pattern);
   background-size: 96px 96px;
-  opacity: 0.5;
+  opacity: 0.55;
   transform: rotate(8deg) scale(1.1);
-  filter: brightness(0.92);
+  filter: brightness(2.4);
   pointer-events: none;
 }
 
@@ -578,11 +586,11 @@
 }
 
 .statNumber {
-  /* 옅은 샴페인 배경 위 — 진한 잉크로 또렷하게(AA 대비 확보) + 크게 강조 + 은은한 호흡 효과(핵심 지표). */
-  color: var(--ink);
+  /* jewel 다크 위 — 밝은 샴페인골드로 화려하게 빛나는 핵심 지표 + 은은한 호흡. */
+  color: var(--champagne-bright);
   font-size: clamp(46px, 11vw, 64px);
   line-height: 1;
-  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5), 0 1px 0 rgba(154, 123, 63, 0.2);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5), 0 0 24px rgba(202, 164, 106, 0.4);
   animation: statPulse 5s ease-in-out infinite;
 }
 @keyframes statPulse {
@@ -591,11 +599,11 @@
 }
 
 .statLabel {
-  color: var(--ink-soft);
+  color: rgba(255, 253, 249, 0.82);
   font-weight: 700;
 }
 
-/* 보조지표 — 상단에 골드 구분선 */
+/* 보조지표 — 상단에 골드 메탈릭 구분선 */
 .statSubs {
   position: relative;
   z-index: 1;
@@ -605,7 +613,7 @@
   margin: 0;
   padding: 12px 0 0;
   list-style: none;
-  border-top: 1px solid rgba(154, 123, 63, 0.3);
+  border-top: 1px solid var(--glass-border-dark);
 }
 
 .statSub {
@@ -619,14 +627,14 @@
   font-size: 18px;
   line-height: 22px;
   font-weight: 700;
-  color: var(--ink);
+  color: #fffdf9;
 }
 
 .statSubLabel {
   font-size: 12px;
   line-height: 16px;
   font-weight: 600;
-  color: var(--ink-soft);
+  color: rgba(255, 253, 249, 0.7);
 }
 
 /* ── reduced-motion ── */
@@ -638,11 +646,10 @@
   .facility:hover .shotPhone {
     transform: none;
   }
+  /* 다크 카드 hover 글로우는 유지하되 lift 없음(.card:hover에서 처리). */
   /* 통계 카드 효과(회전 광채·펄스) 정지. */
   .stat::before,
   .statNumber {
     animation: none;
   }
-  /* 배경 화보 transform 승격만 유지, 모션 없음(정적) */
-  .bgArtPhoto { transform: none; }
 }

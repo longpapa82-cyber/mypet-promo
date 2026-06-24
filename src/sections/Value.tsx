@@ -88,18 +88,6 @@ export default function Value() {
       {/* v7: 따뜻한 크림/골드 Aurora(다색 폐기, 통일). */}
       <Aurora variant="cream" className={styles.aurora} />
 
-      {/* 아트워크 배경 — 듀오톤 강아지 화보(장식). 카드 뒤 분위기 레이어, z-index:-1 상당(콘텐츠 아래). */}
-      <div className={styles.bgArt} aria-hidden="true">
-        <DuotonePhoto
-          name="hero-puppy"
-          decorative
-          intensity={0.5}
-          scrimDir="none"
-          position="62% 38%"
-          className={styles.bgArtPhoto}
-        />
-      </div>
-
       <SectionDoodles set="sky" />
 
       <div className={styles.content}>
@@ -159,16 +147,25 @@ export default function Value() {
             </article>
           </Reveal>
 
-          {/* ② AI 상담 — 말풍선 모티프 (민트, 글래스 액센트) */}
+          {/* ② AI 상담 — jewel 다크 카드 + 풀블리드 고양이 화보(크림 카드들과 극적 대비). */}
           <Reveal bounce className={styles.cellAi} delay={90}>
-            <article className={`${styles.card} ${styles.ai} glass`}>
+            <article className={`${styles.card} ${styles.ai} ${styles.cardDark}`}>
+              {/* 카드 안을 꽉 채우는 듀오톤 고양이 화보 — jewel 톤 위에서 분위기 깊이. */}
+              <DuotonePhoto
+                name="hero-cat"
+                decorative
+                intensity={0.62}
+                scrimDir="bottom"
+                position="50% 30%"
+                className={styles.cardPhoto}
+              />
               <div className={styles.cardHead}>
-                <span className={`${styles.iconWrap} ${styles.iconMint}`}>
+                <span className={`${styles.iconWrap} ${styles.iconOnDark}`}>
                   <ChatIcon />
                 </span>
-                <h3 className={`${styles.cardTitle} t-headline-md`}>AI 펫 상담</h3>
+                <h3 className={`${styles.cardTitle} ${styles.titleOnDark} t-headline-md`}>AI 펫 상담</h3>
               </div>
-              <p className={`${styles.cardDesc} t-body-md`}>
+              <p className={`${styles.cardDesc} ${styles.descOnDark} t-body-md`}>
                 건강·법률 궁금증을 <strong>바로 질문</strong>
               </p>
 
@@ -188,7 +185,7 @@ export default function Value() {
                 </span>
               </div>
 
-              <p className={styles.disclaimer}>
+              <p className={`${styles.disclaimer} ${styles.disclaimerOnDark}`}>
                 ※ 참고용 정보 · 진단 아님
               </p>
             </article>
@@ -217,7 +214,16 @@ export default function Value() {
           {/* ④ 통계 — 주지표(3만+) + 보조지표(카테고리·전국)로 밀도 확보(M4).
               숫자 하나만 덩그러니 → 신뢰 지표 묶음 = 운영 사이트 느낌. 법무: 실측치만 표기. */}
           <Reveal bounce className={styles.cellStat} delay={210}>
-            <article className={`${styles.card} ${styles.stat} glass`}>
+            <article className={`${styles.card} ${styles.stat} ${styles.cardDark}`}>
+              {/* 풀블리드 강아지 화보 — "3만+" 골드 넘버 뒤 jewel 다크 분위기. */}
+              <DuotonePhoto
+                name="hero-puppy"
+                decorative
+                intensity={0.66}
+                scrimDir="none"
+                position="60% 35%"
+                className={styles.cardPhoto}
+              />
               <div className={styles.statMain}>
                 <CountUp to={3} suffix="만+" duration={1400} className={`${styles.statNumber} t-display-lg`} />
                 <span className={`${styles.statLabel} t-label-md`}>등록 펫 시설</span>
