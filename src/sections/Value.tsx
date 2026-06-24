@@ -150,13 +150,13 @@ export default function Value() {
           {/* ② AI 상담 — jewel 다크 카드 + 풀블리드 고양이 화보(크림 카드들과 극적 대비). */}
           <Reveal bounce className={styles.cellAi} delay={90}>
             <article className={`${styles.card} ${styles.ai} ${styles.cardDark}`}>
-              {/* 카드 안을 꽉 채우는 듀오톤 고양이 화보 — jewel 톤 위에서 분위기 깊이. */}
+              {/* 카드 안을 꽉 채우는 듀오톤 고양이 화보(청록 눈·다크 배경 — jewel과 완벽 조화). */}
               <DuotonePhoto
-                name="hero-cat"
+                name="hero-tip"
                 decorative
-                intensity={0.62}
+                intensity={0.58}
                 scrimDir="bottom"
-                position="50% 30%"
+                position="50% 32%"
                 className={styles.cardPhoto}
               />
               <div className={styles.cardHead}>
@@ -215,13 +215,13 @@ export default function Value() {
               숫자 하나만 덩그러니 → 신뢰 지표 묶음 = 운영 사이트 느낌. 법무: 실측치만 표기. */}
           <Reveal bounce className={styles.cellStat} delay={210}>
             <article className={`${styles.card} ${styles.stat} ${styles.cardDark}`}>
-              {/* 풀블리드 강아지 화보 — "3만+" 골드 넘버 뒤 jewel 다크 분위기. */}
+              {/* 풀블리드 강아지 화보(꽃밭 골든 2마리 — "3만+" 골드 넘버 뒤 따뜻한 풍성함). */}
               <DuotonePhoto
-                name="hero-puppy"
+                name="hero-home"
                 decorative
                 intensity={0.66}
                 scrimDir="none"
-                position="60% 35%"
+                position="50% 40%"
                 className={styles.cardPhoto}
               />
               <div className={styles.statMain}>

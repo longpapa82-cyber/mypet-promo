@@ -31,17 +31,28 @@
 }
 
 /* 카드 안을 꽉 채우는 풀블리드 화보 레이어 — DuotonePhoto(.wrap)가 inset:0이라
-   부모 카드(relative+overflow:hidden) 모서리에 맞춰 잘린다. 콘텐츠는 위(z-index:1). */
+   부모 카드(relative+overflow:hidden) 모서리에 맞춰 잘린다. 콘텐츠는 위(z-index:2). */
 .cardPhoto {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
 }
-/* 카드 안 모든 실제 콘텐츠를 화보 위로 */
+/* 가독 보호 비네팅 — 화보 위(z1), 콘텐츠 아래(z2). 상·하단을 jewel 톤으로 눌러
+   사진의 밝은 영역(고양이 얼굴 등)과 헤더/부제 텍스트가 겹쳐도 또렷하게. */
+.cardDark::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(16, 38, 31, 0.78) 0%, rgba(16, 38, 31, 0.28) 30%, rgba(16, 38, 31, 0.18) 55%, rgba(16, 38, 31, 0.55) 100%);
+}
+/* 카드 안 모든 실제 콘텐츠를 화보·비네팅 위로 */
 .cardDark > *:not(.cardPhoto) {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 /* 다크 카드 위 텍스트/아이콘 변형 — 크림→화이트/골드. */
