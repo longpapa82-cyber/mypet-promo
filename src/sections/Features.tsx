@@ -5,7 +5,7 @@ import SectionDoodles from '../components/ui/SectionDoodles';
 import PhotoBackdrop from '../components/ui/PhotoBackdrop';
 import styles from './Features.module.css';
 
-// 에셋 경로: vite base('/mypet/')를 고려해 BASE_URL을 접두로 붙인다.
+// 에셋 경로: vite base('/')를 고려해 BASE_URL을 접두로 붙인다(base 변경 시 자동 대응).
 const asset = (file: string): string => `${import.meta.env.BASE_URL}assets/${file}`;
 
 // 기능 항목 정의.

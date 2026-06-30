@@ -25,6 +25,6 @@ export const CONTACT_EMAIL = 'longpapa82@gmail.com';
 
 export const BUSINESS_INFO = 'AI Soft · 대표 박훈재 · 사업자등록 411-18-92743 · 통신판매업 면제';
 
-// vite base('/mypet/')를 반영한 public 에셋 경로 헬퍼
+// vite base('/')를 반영한 public 에셋 경로 헬퍼(BASE_URL 접두 → base 변경 시 자동 대응)
 export const asset = (path: string): string =>
   `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`;

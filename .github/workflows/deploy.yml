@@ -1,5 +1,5 @@
 # MyPet 홍보 사이트 — GitHub Pages 자동 배포.
-# main 푸시 시 빌드 → dist/ 를 Pages에 게시. 프로젝트 사이트(base '/mypet-promo/').
+# main 푸시 시 빌드 → dist/ 를 Pages에 게시. 커스텀 도메인 with-my-pet.com 루트(base '/').
 name: Deploy to GitHub Pages
 
 on:

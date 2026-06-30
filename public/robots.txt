@@ -5,4 +5,4 @@ Allow: /
 User-agent: Yeti
 Allow: /
 
-Sitemap: https://longpapa82-cyber.github.io/mypet-promo/sitemap.xml
+Sitemap: https://with-my-pet.com/sitemap.xml
