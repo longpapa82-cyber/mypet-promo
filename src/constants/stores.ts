@@ -23,6 +23,9 @@ export const TERMS_URL = `${LEGAL_BASE_URL}terms.html`;
 
 export const CONTACT_EMAIL = 'longpapa82@gmail.com';
 
+// 회사(AI Soft) 소개 사이트 — MyPet 앱 사업자의 기업 소개 페이지(외부 링크)
+export const COMPANY_URL = 'https://aisoft-iota.vercel.app/';
+
 export const BUSINESS_INFO = 'AI Soft · 대표 박훈재 · 사업자등록 411-18-92743 · 통신판매업 면제';
 
 // vite base('/')를 반영한 public 에셋 경로 헬퍼(BASE_URL 접두 → base 변경 시 자동 대응)
