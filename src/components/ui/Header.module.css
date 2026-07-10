@@ -69,7 +69,20 @@
   gap: 14px;
 }
 
-/* 헤더 네비 링크(블로그 등 실경로). 모바일에서 actions가 숨으므로 데스크톱 전용. */
+/* 좌측 그룹: 로고 + 네비를 한 덩어리로 묶어 정렬(네비가 로고와 배지 사이에 떠 보이던 문제 해결). */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+/* 헤더 네비(블로그·지역 실경로). 로고 바로 옆. */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .navLink {
   font-size: 15px;
   font-weight: 600;
@@ -88,9 +101,22 @@
   transform-origin: right center;
 }
 
+/* 좁은 화면: 네비를 로고 아래로 붙이지 않고 간격만 축소(로고+블로그·지역은 유지). */
+@media (max-width: 720px) {
+  .left {
+    gap: 16px;
+  }
+  .nav {
+    gap: 14px;
+  }
+}
+
 /* 모바일에서 배지가 좁으면 숨기고, 페이지 본문 CTA로 유도 */
 @media (max-width: 600px) {
   .actions {
+    display: none;
+  }
+  .nav {
     display: none;
   }
 }

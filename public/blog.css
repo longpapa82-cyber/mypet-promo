@@ -168,23 +168,28 @@
 }
 
 /* 헤더 우측 스토어 CTA(작은 pill) */
-.site-header__cta {
+.site-header__cta,
+.site-header__cta:link,
+.site-header__cta:visited {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 9px 16px;
+  padding: 10px 20px;
   border-radius: var(--radius-pill, 9999px);
-  background: var(--blog-green);
-  color: #ffffff;
+  /* 진한 green 단색 — 흰 헤더에서 또렷하게 분리(전역 링크색 상속 방지 위해 명시). */
+  background: var(--green-deep, #2e5d4b);
+  color: #ffffff !important;
   font-size: 14px;
-  font-weight: 700;
-  box-shadow: var(--blog-shadow-rest);
+  font-weight: 800;
+  box-shadow: 0 3px 8px rgba(46, 93, 75, 0.28);
   white-space: nowrap;
 }
 
 .site-header__cta:hover {
-  background: var(--blog-green-deep);
+  background: #244a3c;
+  color: #ffffff !important;
   text-decoration: none;
+  box-shadow: 0 4px 12px rgba(46, 93, 75, 0.36);
 }
 
 /* ── Breadcrumb ─────────────────────────────────────────────────

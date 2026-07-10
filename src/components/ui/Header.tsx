@@ -8,14 +8,21 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={[styles.inner, 'container'].join(' ')}>
-        <a className={styles.brand} href="#top" aria-label="MyPet 홈">
-          <img className={styles.logo} src={asset('assets/logo.png')} alt="MyPet 로고" width={36} height={36} />
-          <span className={styles.name}>MyPet</span>
-        </a>
-        <div className={styles.actions}>
-          <a className={styles.navLink} href="/blog/">
-            블로그
+        <div className={styles.left}>
+          <a className={styles.brand} href="#top" aria-label="MyPet 홈">
+            <img className={styles.logo} src={asset('assets/logo.png')} alt="MyPet 로고" width={36} height={36} />
+            <span className={styles.name}>MyPet</span>
           </a>
+          <nav className={styles.nav} aria-label="사이트 메뉴">
+            <a className={styles.navLink} href="/blog/">
+              블로그
+            </a>
+            <a className={styles.navLink} href="/near/">
+              지역
+            </a>
+          </nav>
+        </div>
+        <div className={styles.actions}>
           <StoreCTA className={styles.cta} />
         </div>
       </div>
