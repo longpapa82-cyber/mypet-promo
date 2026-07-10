@@ -5,10 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && npm run build:client && npm run build:ssr && node scripts/prerender.mjs",
+    "build": "tsc --noEmit && npm run build:client && npm run build:ssr && node scripts/prerender.mjs && npm run build:blog && npm run build:near && npm run build:sitemap",
     "build:client": "vite build",
     "build:ssr": "vite build --ssr src/entry-server.tsx --outDir dist-ssr",
+    "build:blog": "node scripts/build-blog.mjs",
+    "build:near": "node scripts/build-near.mjs",
+    "build:sitemap": "node scripts/build-sitemap.mjs",
     "build:spa": "vite build",
+    "export:facilities": "node --env-file=../app/.env scripts/export-facilities.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"
   },

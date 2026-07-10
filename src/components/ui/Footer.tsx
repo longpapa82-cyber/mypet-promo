@@ -11,6 +11,14 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={['container', styles.inner].join(' ')}>
         <nav className={styles.links} aria-label="법적 고지 및 문의">
+          <a href="/blog/">블로그</a>
+          <span className={styles.dot} aria-hidden="true">
+            ·
+          </span>
+          <a href="/near/">지역별 시설 찾기</a>
+          <span className={styles.dot} aria-hidden="true">
+            ·
+          </span>
           <a href="#/privacy">개인정보 처리방침</a>
           <span className={styles.dot} aria-hidden="true">
             ·

@@ -13,6 +13,9 @@ export default function Header() {
           <span className={styles.name}>MyPet</span>
         </a>
         <div className={styles.actions}>
+          <a className={styles.navLink} href="/blog/">
+            블로그
+          </a>
           <StoreCTA className={styles.cta} />
         </div>
       </div>

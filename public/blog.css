@@ -1,0 +1,996 @@
+/* ════════════════════════════════════════════════════════════════
+   blog.css — MyPet 정적 블로그 / 지역(near) 페이지 전용 스타일
+   ────────────────────────────────────────────────────────────────
+   ⚠️ tokens.css 를 복제/추출하지 않는다. tokens.css 의 CSS 변수
+      (--green, --gold, --surface …)를 "사용만" 한다.
+   전제: 정적 페이지 <head> 에서 /tokens.css 를 먼저 link 하고,
+         그 다음 /blog.css 를 link 한다. (tokens.css 를 public 으로
+         복사하는 것은 build 스크립트가 담당 — 여기선 blog.css 만.)
+
+   브랜드: --green 계열 + --gold 포인트. 그림자 --shadow-rest/raised.
+           radius 22px. 시스템 폰트 스택(Quicksand 는 앱 전용).
+   반응형: 320 ~ 1440.
+   ════════════════════════════════════════════════════════════════ */
+
+/* ── 로컬 기본값 폴백 ────────────────────────────────────────────
+   tokens.css 가 어떤 이유로 로드 실패해도 페이지가 완전히 깨지지
+   않도록, blog.css 가 참조하는 변수의 최소 폴백만 :root 에 둔다.
+   (tokens.css 가 먼저 로드되면 그 값이 우선하므로 드리프트 아님 —
+    아래는 "없을 때만" 쓰이는 안전망.) */
+:root {
+  --blog-green: var(--green, #2f7d5e);
+  --blog-green-deep: var(--green-deep, #2e5d4b);
+  --blog-gold: var(--gold, #caa46a);
+  --blog-surface: var(--surface, #f7fafe);
+  --blog-ink: var(--on-surface, #181c1f);
+  --blog-ink-variant: var(--on-surface-variant, #4a4f54);
+  --blog-outline: var(--outline-variant, #d4d8de);
+  --blog-radius: var(--radius-card, 22px);
+  --blog-radius-sm: var(--radius-sm, 16px);
+  --blog-shadow-rest: var(--shadow-rest, 0 1px 3px rgba(24, 28, 31, 0.08), 0 1px 2px rgba(24, 28, 31, 0.06));
+  --blog-shadow-raised: var(--shadow-raised, 0 6px 18px rgba(24, 28, 31, 0.1), 0 2px 6px rgba(24, 28, 31, 0.08));
+  --blog-font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+
+  /* 페이지 로컬 스케일 */
+  --blog-header-h: 60px;
+  --blog-gap: 16px;
+  --blog-gap-lg: 24px;
+}
+
+/* ── Base ───────────────────────────────────────────────────────
+   앱 tokens.css 의 body 는 홍보웹(React) 기준이라, 정적 블로그
+   페이지는 흰 계열 배경 + 시스템 폰트로 가독성 우선(문서형). */
+.blog-page {
+  margin: 0;
+  background-color: #ffffff;
+  color: var(--blog-ink);
+  font-family: var(--blog-font);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.blog-page *,
+.blog-page *::before,
+.blog-page *::after {
+  box-sizing: border-box;
+}
+
+.blog-page img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.blog-page a {
+  color: var(--blog-green);
+  text-decoration: none;
+}
+
+.blog-page a:hover {
+  text-decoration: underline;
+}
+
+/* 스크린리더 전용(스킵 링크 등) */
+.blog-page .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── 레이아웃 컨테이너 ───────────────────────────────────────────
+   .wrap        = 본문(글) 최대 720px
+   .wrap.wide   = 목록/지역 매트릭스 최대 920px */
+.wrap {
+  width: 100%;
+  max-width: 720px;
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+.wrap.wide {
+  max-width: 920px;
+}
+
+/* ── 사이트 헤더 ─────────────────────────────────────────────────
+   로고(홈) + 네비(블로그/지역) + 스토어 CTA. sticky. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: saturate(160%) blur(8px);
+  -webkit-backdrop-filter: saturate(160%) blur(8px);
+  border-bottom: 1px solid var(--blog-outline);
+}
+
+.site-header__inner {
+  max-width: 920px;
+  margin-inline: auto;
+  min-height: var(--blog-header-h);
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+  gap: var(--blog-gap);
+}
+
+.site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--blog-green-deep);
+}
+
+.site-header__brand:hover {
+  text-decoration: none;
+}
+
+.site-header__brand img {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.site-nav a {
+  padding: 8px 12px;
+  border-radius: var(--radius-pill, 9999px);
+  color: var(--blog-ink-variant);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.site-nav a:hover {
+  background: var(--green-fixed, #dcead9);
+  color: var(--blog-green-deep);
+  text-decoration: none;
+}
+
+.site-nav a[aria-current='page'] {
+  color: var(--blog-green-deep);
+  background: var(--green-fixed, #dcead9);
+}
+
+/* 헤더 우측 스토어 CTA(작은 pill) */
+.site-header__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border-radius: var(--radius-pill, 9999px);
+  background: var(--blog-green);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: var(--blog-shadow-rest);
+  white-space: nowrap;
+}
+
+.site-header__cta:hover {
+  background: var(--blog-green-deep);
+  text-decoration: none;
+}
+
+/* ── Breadcrumb ─────────────────────────────────────────────────
+   홈 > 블로그 > 현재. 접근성: <nav aria-label="Breadcrumb"><ol> */
+.breadcrumb {
+  padding-block: 16px 4px;
+  font-size: 13px;
+  color: var(--blog-ink-variant);
+}
+
+.breadcrumb ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.breadcrumb li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.breadcrumb li + li::before {
+  content: '›';
+  color: var(--blog-outline);
+  font-weight: 700;
+}
+
+.breadcrumb a {
+  color: var(--blog-ink-variant);
+}
+
+.breadcrumb a:hover {
+  color: var(--blog-green);
+}
+
+.breadcrumb [aria-current='page'] {
+  color: var(--blog-ink);
+  font-weight: 600;
+}
+
+/* ── 아티클 (블로그 글 / 지역 랜딩 본문) ────────────────────────── */
+.article {
+  padding-block: 8px 40px;
+}
+
+.article__header {
+  padding-block: 8px 20px;
+  border-bottom: 1px solid var(--blog-outline);
+  margin-bottom: 24px;
+}
+
+.article__eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--blog-green);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.article__meta {
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--blog-ink-variant);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+}
+
+.article h1 {
+  font-size: clamp(28px, 5.4vw, 40px);
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--blog-green-deep);
+  margin: 0;
+  text-wrap: balance;
+}
+
+.article h2 {
+  font-size: clamp(22px, 3.4vw, 28px);
+  line-height: 1.3;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--blog-green-deep);
+  margin: 40px 0 14px;
+  scroll-margin-top: calc(var(--blog-header-h) + 12px);
+}
+
+/* h2 왼쪽 골드 악센트 바 */
+.article h2::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 0.85em;
+  margin-right: 10px;
+  border-radius: 3px;
+  background: var(--blog-gold);
+  vertical-align: -0.06em;
+}
+
+.article h3 {
+  font-size: clamp(18px, 2.6vw, 21px);
+  line-height: 1.35;
+  font-weight: 700;
+  color: var(--blog-ink);
+  margin: 28px 0 10px;
+  scroll-margin-top: calc(var(--blog-header-h) + 12px);
+}
+
+.article p {
+  margin: 0 0 18px;
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--blog-ink);
+}
+
+.article ul,
+.article ol {
+  margin: 0 0 18px;
+  padding-left: 24px;
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--blog-ink);
+}
+
+.article li {
+  margin-bottom: 8px;
+}
+
+.article ul li::marker {
+  color: var(--blog-green);
+}
+
+.article ol li::marker {
+  color: var(--blog-green);
+  font-weight: 700;
+}
+
+.article strong {
+  font-weight: 700;
+  color: var(--blog-green-deep);
+}
+
+.article a {
+  color: var(--blog-green);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--blog-outline);
+}
+
+.article a:hover {
+  text-decoration-color: var(--blog-green);
+}
+
+.article blockquote {
+  margin: 24px 0;
+  padding: 4px 0 4px 18px;
+  border-left: 4px solid var(--blog-gold);
+  color: var(--blog-ink-variant);
+  font-style: italic;
+}
+
+.article img {
+  margin: 24px 0;
+  border-radius: var(--blog-radius);
+  box-shadow: var(--blog-shadow-rest);
+}
+
+.article figure {
+  margin: 24px 0;
+}
+
+.article figcaption {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--blog-ink-variant);
+  text-align: center;
+}
+
+.article hr {
+  margin: 36px 0;
+  border: 0;
+  border-top: 1px solid var(--blog-outline);
+}
+
+/* 본문 표 */
+.article table {
+  width: 100%;
+  margin: 24px 0;
+  border-collapse: collapse;
+  font-size: 15px;
+  overflow: hidden;
+  border-radius: var(--blog-radius-sm);
+  box-shadow: var(--blog-shadow-rest);
+}
+
+.article th,
+.article td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--blog-outline);
+}
+
+.article th {
+  background: var(--green-fixed, #dcead9);
+  color: var(--blog-green-deep);
+  font-weight: 700;
+}
+
+.article tr:last-child td {
+  border-bottom: 0;
+}
+
+.article code {
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: var(--blog-surface);
+  border: 1px solid var(--blog-outline);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+/* ── 콜아웃 박스: tip / warning / disclaimer ───────────────────── */
+.tip,
+.warning,
+.disclaimer {
+  margin: 24px 0;
+  padding: 16px 18px;
+  border-radius: var(--blog-radius-sm);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.tip > :first-child,
+.warning > :first-child,
+.disclaimer > :first-child {
+  margin-top: 0;
+}
+
+.tip > :last-child,
+.warning > :last-child,
+.disclaimer > :last-child {
+  margin-bottom: 0;
+}
+
+/* 제목 라인(선택): .tip__title 등 */
+.tip__title,
+.warning__title,
+.disclaimer__title {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* tip = green 톤(도움말) */
+.tip {
+  background: var(--green-fixed, #dcead9);
+  border-left: 4px solid var(--blog-green);
+  color: var(--blog-green-deep);
+}
+
+.tip .tip__title {
+  color: var(--blog-green-deep);
+}
+
+/* warning = gold 톤(주의) — 골드는 보더/포인트로만, 텍스트는 진한 잉크 */
+.warning {
+  background: var(--gold-soft, #f3e8d4);
+  border-left: 4px solid var(--blog-gold);
+  color: #6b5320;
+}
+
+.warning .warning__title {
+  color: #6b5320;
+}
+
+/* disclaimer = YMYL 면책(중립 회색, 축소된 어조) */
+.disclaimer {
+  background: var(--blog-surface);
+  border: 1px solid var(--blog-outline);
+  color: var(--blog-ink-variant);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.disclaimer .disclaimer__title {
+  color: var(--blog-ink);
+}
+
+/* ── CTA 박스 (green 그라디언트 + 흰 버튼) ───────────────────────
+   본문 하단 메인 전환 지점. iOS/Android 버튼. */
+.cta-box {
+  margin: 40px 0;
+  padding: 28px 24px;
+  border-radius: var(--blog-radius);
+  background: linear-gradient(150deg, var(--blog-green-deep), var(--blog-green));
+  color: #ffffff;
+  box-shadow: var(--blog-shadow-raised);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 우상단 골드 글로우 악센트(절제) */
+.cta-box::after {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -30px;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(202, 164, 106, 0.35), transparent 70%);
+  pointer-events: none;
+}
+
+.cta-box h2,
+.cta-box h3 {
+  color: #ffffff;
+  margin: 0 0 8px;
+  font-size: clamp(20px, 3.2vw, 26px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+/* CTA 박스 안의 h2 는 골드 악센트 바 제거(흰 배경 위 규칙과 분리) */
+.cta-box h2::before {
+  content: none;
+}
+
+.cta-box p {
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0 auto 20px;
+  max-width: 44ch;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.cta-box__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+/* 흰 버튼 (스토어) */
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 190px;
+  padding: 14px 22px;
+  border-radius: var(--radius-pill, 9999px);
+  background: #ffffff;
+  color: var(--blog-green-deep);
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: var(--blog-shadow-rest);
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--blog-shadow-raised);
+  text-decoration: none;
+}
+
+.cta-btn:active {
+  transform: translateY(0);
+}
+
+.cta-btn img,
+.cta-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* 보조(반투명 아웃라인) 버튼 변형 */
+.cta-btn--ghost {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+.cta-btn--ghost:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ── 관련/인접 링크 (세로 나열) ─────────────────────────────────
+   .related — 관련 글 / 인접 지역 링크 목록. */
+.related {
+  margin: 40px 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--blog-outline);
+}
+
+.related__title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--blog-green-deep);
+  text-transform: uppercase;
+  margin: 0 0 14px;
+}
+
+.related ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.related li {
+  margin: 0;
+}
+
+.related a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--blog-radius-sm);
+  background: var(--blog-surface);
+  border: 1px solid var(--blog-outline);
+  color: var(--blog-ink);
+  font-size: 15px;
+  font-weight: 600;
+  transition: border-color 0.16s ease, background 0.16s ease, transform 0.16s ease;
+}
+
+.related a::after {
+  content: '→';
+  color: var(--blog-green);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.related a:hover {
+  background: #ffffff;
+  border-color: var(--blog-green);
+  transform: translateX(2px);
+  text-decoration: none;
+}
+
+/* ── 지역 시설 리스트 (.facility-list) ──────────────────────────
+   지역 랜딩의 시설 카드(상호 · 주소 · 전화). */
+.facility-list {
+  list-style: none;
+  margin: 24px 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.facility-card {
+  padding: 16px 18px;
+  border-radius: var(--blog-radius);
+  background: #ffffff;
+  border: 1px solid var(--blog-outline);
+  box-shadow: var(--blog-shadow-rest);
+  transition: box-shadow 0.16s ease, border-color 0.16s ease;
+}
+
+.facility-card:hover {
+  box-shadow: var(--blog-shadow-raised);
+  border-color: var(--green-fixed, #dcead9);
+}
+
+.facility-card__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.facility-card__name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--blog-green-deep);
+  margin: 0;
+}
+
+/* 카테고리 배지 */
+.facility-card__badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill, 9999px);
+  background: var(--green-fixed, #dcead9);
+  color: var(--blog-green-deep);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.facility-card__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--blog-ink-variant);
+}
+
+.facility-card__row .facility-card__label {
+  flex-shrink: 0;
+  color: var(--blog-gold);
+  font-weight: 700;
+}
+
+.facility-card__phone {
+  color: var(--blog-green);
+  font-weight: 600;
+}
+
+/* 시설 수 요약 라인 */
+.facility-summary {
+  margin: 20px 0 8px;
+  font-size: 14px;
+  color: var(--blog-ink-variant);
+}
+
+.facility-summary strong {
+  color: var(--blog-green-deep);
+}
+
+/* ── 목록 카드 그리드 (.post-grid) ──────────────────────────────
+   블로그 목록 / 지역 허브 매트릭스 공용. */
+.post-grid {
+  list-style: none;
+  margin: 24px 0 40px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--blog-radius);
+  background: #ffffff;
+  border: 1px solid var(--blog-outline);
+  box-shadow: var(--blog-shadow-rest);
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--blog-shadow-raised);
+  border-color: var(--green-fixed, #dcead9);
+  text-decoration: none;
+}
+
+.post-card__thumb {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  object-fit: cover;
+  background: var(--blog-surface);
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+}
+
+.post-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px;
+  flex: 1;
+}
+
+.post-card__eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--blog-green);
+}
+
+.post-card__title {
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--blog-green-deep);
+  margin: 0;
+}
+
+.post-card__excerpt {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--blog-ink-variant);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-card__meta {
+  margin-top: auto;
+  padding-top: 8px;
+  font-size: 12px;
+  color: var(--blog-ink-variant);
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* 지역 허브용 컴팩트 카드(썸네일 없이 텍스트만) */
+.post-card--compact .post-card__body {
+  padding: 16px 18px;
+}
+
+.post-card--compact .post-card__title {
+  font-size: 16px;
+}
+
+/* 섹션 소제목(목록 상단) */
+.section-head {
+  margin: 32px 0 4px;
+}
+
+.section-head h1,
+.section-head h2 {
+  font-size: clamp(24px, 4.4vw, 34px);
+  line-height: 1.25;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--blog-green-deep);
+  margin: 0;
+}
+
+.section-head p {
+  margin: 10px 0 0;
+  color: var(--blog-ink-variant);
+  font-size: 16px;
+}
+
+/* ── 푸터 ───────────────────────────────────────────────────────
+   법무·사업자정보 + 스토어 링크. */
+.site-footer {
+  margin-top: 48px;
+  border-top: 1px solid var(--blog-outline);
+  background: var(--blog-surface);
+}
+
+.site-footer__inner {
+  max-width: 920px;
+  margin-inline: auto;
+  padding: 32px 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.site-footer__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--blog-green-deep);
+}
+
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  font-size: 14px;
+}
+
+.site-footer__links a {
+  color: var(--blog-ink-variant);
+  font-weight: 600;
+}
+
+.site-footer__links a:hover {
+  color: var(--blog-green);
+}
+
+.site-footer__stores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.site-footer__stores a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill, 9999px);
+  border: 1px solid var(--blog-outline);
+  background: #ffffff;
+  color: var(--blog-green-deep);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.site-footer__stores a:hover {
+  border-color: var(--blog-green);
+  text-decoration: none;
+}
+
+.site-footer__legal {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--blog-ink-variant);
+}
+
+.site-footer__legal .site-footer__biz {
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ── 반응형 (320 ~ 1440) ────────────────────────────────────────
+   기본은 모바일 우선. 위 스타일이 320px 부터 안전(오버플로 없음). */
+
+/* 태블릿 이상: 네비/CTA 간격 확대 */
+@media (min-width: 768px) {
+  .site-header__inner {
+    padding: 8px 24px;
+  }
+
+  .wrap {
+    padding-inline: 24px;
+  }
+}
+
+/* 데스크톱: 본문 여백 확대, 카드 그리드 밀도 유지 */
+@media (min-width: 1024px) {
+  .article p,
+  .article ul,
+  .article ol {
+    font-size: 18px;
+  }
+}
+
+/* 대형 화면: 컨테이너가 이미 max-width 로 캡됨 — 좌우 여백만 넉넉히 */
+@media (min-width: 1440px) {
+  .site-header__inner,
+  .site-footer__inner {
+    padding-inline: 0;
+  }
+}
+
+/* 초소형(≤360px): 헤더 네비 축약, CTA 텍스트 유지 */
+@media (max-width: 400px) {
+  .site-header__inner {
+    gap: 8px;
+    padding: 8px 14px;
+  }
+
+  .site-nav a {
+    padding: 8px 8px;
+    font-size: 14px;
+  }
+
+  .site-header__cta {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .wrap {
+    padding-inline: 16px;
+  }
+
+  .cta-box {
+    padding: 22px 18px;
+  }
+
+  .cta-btn {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .facility-card__head {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+/* 모션 최소화(접근성) */
+@media (prefers-reduced-motion: reduce) {
+  .blog-page *,
+  .blog-page *::before,
+  .blog-page *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

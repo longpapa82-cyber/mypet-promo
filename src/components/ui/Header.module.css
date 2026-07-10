@@ -66,6 +66,19 @@
 .actions {
   display: flex;
   align-items: center;
+  gap: 14px;
+}
+
+/* 헤더 네비 링크(블로그 등 실경로). 모바일에서 actions가 숨으므로 데스크톱 전용. */
+.navLink {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--green-deep);
+  white-space: nowrap;
+  transition: color 0.18s ease;
+}
+.navLink:hover {
+  color: var(--green);
 }
 
 /* 헤더 우측 배지는 콤팩트하게 */
