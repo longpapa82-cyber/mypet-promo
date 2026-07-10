@@ -29,7 +29,7 @@ function renderHeader() {
       <a href="/blog/">블로그</a>
       <a href="/near/">지역</a>
     </nav>
-    <a class="site-header__cta" href="${escapeHtml(PLAY_STORE_URL)}" rel="noopener">앱 설치</a>
+    <a class="site-header__cta" href="${escapeHtml(PLAY_STORE_URL)}" target="_blank" rel="noopener noreferrer">앱 설치</a>
   </div>
 </header>`;
 }
@@ -74,8 +74,8 @@ function renderCtaBox(ctaText) {
     <h2>MyPet 앱에서 더 많은 정보를</h2>
     <p>${escapeHtml(ctaText)}</p>
     <div class="cta-box__buttons">
-      <a class="cta-btn" href="${escapeHtml(APP_STORE_URL)}" rel="noopener">App Store</a>
-      <a class="cta-btn" href="${escapeHtml(PLAY_STORE_URL)}" rel="noopener">Google Play</a>
+      <a class="cta-btn" href="${escapeHtml(APP_STORE_URL)}" target="_blank" rel="noopener noreferrer">App Store</a>
+      <a class="cta-btn" href="${escapeHtml(PLAY_STORE_URL)}" target="_blank" rel="noopener noreferrer">Google Play</a>
     </div>
   </section>
 </div>`;
@@ -88,14 +88,14 @@ function renderFooter() {
   <div class="site-footer__inner">
     <a class="site-footer__brand" href="/">MyPet</a>
     <nav class="site-footer__links" aria-label="법무 및 문의">
-      <a href="${escapeHtml(PRIVACY_URL)}" rel="noopener">개인정보처리방침</a>
-      <a href="${escapeHtml(TERMS_URL)}" rel="noopener">이용약관</a>
+      <a href="${escapeHtml(PRIVACY_URL)}" target="_blank" rel="noopener noreferrer">개인정보처리방침</a>
+      <a href="${escapeHtml(TERMS_URL)}" target="_blank" rel="noopener noreferrer">이용약관</a>
       <a href="mailto:${escapeHtml(CONTACT_EMAIL)}">문의</a>
-      <a href="${escapeHtml(COMPANY_URL)}" rel="noopener">회사소개</a>
+      <a href="${escapeHtml(COMPANY_URL)}" target="_blank" rel="noopener noreferrer">회사소개</a>
     </nav>
     <div class="site-footer__stores">
-      <a href="${escapeHtml(APP_STORE_URL)}" rel="noopener">App Store</a>
-      <a href="${escapeHtml(PLAY_STORE_URL)}" rel="noopener">Google Play</a>
+      <a href="${escapeHtml(APP_STORE_URL)}" target="_blank" rel="noopener noreferrer">App Store</a>
+      <a href="${escapeHtml(PLAY_STORE_URL)}" target="_blank" rel="noopener noreferrer">Google Play</a>
     </div>
     <div class="site-footer__legal">
       <span class="site-footer__biz">${escapeHtml(BUSINESS_INFO)}</span>
