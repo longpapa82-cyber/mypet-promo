@@ -21,6 +21,11 @@ const PRIVACY_URL =
 const TERMS_URL = 'https://longpapa82-cyber.github.io/mypet-legal/terms.html';
 
 // ── 사이트 헤더 ──────────────────────────────────────────────────
+// [GNB 동기화] 이 정적 헤더의 브랜드·네비 링크·순서는 React 공용 헤더
+//   (web/src/components/ui/Header.tsx)와 일치시켜 유지한다.
+//   렌더 시스템이 달라(빌드타임 문자열 vs 런타임 JSX) 컴포넌트는 공유하지 않으므로,
+//   네비 항목을 추가·변경할 때는 이 함수와 Header.tsx를 함께 수정해야 한다.
+//   브랜드(→홈) → 네비(블로그 /blog/, 지역 /near/) → 설치 CTA(스토어) 순서.
 function renderHeader() {
   return `<header class="site-header">
   <div class="site-header__inner">
