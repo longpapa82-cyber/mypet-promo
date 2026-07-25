@@ -15,10 +15,12 @@ import {
 } from '../../src/constants/stores.shared.mjs';
 import { escapeHtml } from './seo.mjs';
 
-// 법무 문서(GitHub Pages 호스팅) — 고정 외부 URL.
-const PRIVACY_URL =
-  'https://longpapa82-cyber.github.io/mypet-legal/privacy-policy.html';
-const TERMS_URL = 'https://longpapa82-cyber.github.io/mypet-legal/terms.html';
+// 법무 문서 — 홍보웹 내부 페이지(메인 GNB·디자인 동일)로 통일한다.
+//   메인/법적 페이지는 해시 라우팅(useHashRoute)으로 #privacy·#terms 를 렌더한다.
+//   정적 페이지는 루트 배포이므로 '/#privacy' 로 홈 SPA를 열면 해당 문서가 표시된다.
+//   (별도 mypet-legal 사이트는 스토어 심사·앱 공유용으로 계속 유지되지만, 웹 GNB 일관성을 위해 여기선 내부 링크 사용.)
+const PRIVACY_URL = '/#privacy';
+const TERMS_URL = '/#terms';
 
 // ── 사이트 헤더 ──────────────────────────────────────────────────
 // [GNB 동기화] 이 정적 헤더의 브랜드·네비 링크·순서는 React 공용 헤더
@@ -93,8 +95,8 @@ function renderFooter() {
   <div class="site-footer__inner">
     <a class="site-footer__brand" href="/">MyPet</a>
     <nav class="site-footer__links" aria-label="법무 및 문의">
-      <a href="${escapeHtml(PRIVACY_URL)}" target="_blank" rel="noopener noreferrer">개인정보처리방침</a>
-      <a href="${escapeHtml(TERMS_URL)}" target="_blank" rel="noopener noreferrer">이용약관</a>
+      <a href="${escapeHtml(PRIVACY_URL)}">개인정보처리방침</a>
+      <a href="${escapeHtml(TERMS_URL)}">이용약관</a>
       <a href="mailto:${escapeHtml(CONTACT_EMAIL)}">문의</a>
       <a href="${escapeHtml(COMPANY_URL)}" target="_blank" rel="noopener noreferrer">회사소개</a>
     </nav>
