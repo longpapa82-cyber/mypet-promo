@@ -111,12 +111,16 @@
   }
 }
 
-/* 모바일에서 배지가 좁으면 숨기고, 페이지 본문 CTA로 유도 */
+/* 모바일: 스토어 배지(2개, 폭 큼)만 숨기고 페이지 본문 CTA로 유도한다.
+   블로그·지역 네비는 유지 — 정적(블로그/지역) 헤더와 GNB 일관성 확보. */
 @media (max-width: 600px) {
   .actions {
     display: none;
   }
+  .left {
+    gap: 14px;
+  }
   .nav {
-    display: none;
+    gap: 12px;
   }
 }
