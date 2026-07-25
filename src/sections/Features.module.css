@@ -438,7 +438,11 @@
   padding: 10px 16px;
   border-radius: var(--radius-pill);
   z-index: 4;
-  /* 패럴랙스 transform과 충돌하지 않도록 위치는 left/bottom로만 */
+  /* 정적 기본 Z-lift: JS 패럴랙스가 첫 스크롤에서 인라인 transform을 쓰기 전(초기 페인트)에도
+     캡션이 폰의 rotateY 평면 뒤로 잘리지 않도록 뷰어 쪽으로 띄운다. JS는 스크롤 시 인라인
+     style.transform으로 이 값을 덮어쓴다(--p-lift=60 동일). */
+  transform: translate3d(0, 0, 60px);
+  /* 위치는 left/bottom로만 잡고, 3D lift는 위 transform이 담당(패럴랙스 translateY와 합성). */
 }
 
 /* NOTE: 캡션칩의 transform은 useParallax(JS 인라인 style.transform)가 소유한다.
@@ -535,9 +539,15 @@
 /* ── Reduced motion: 패럴랙스·호버·펄스 전면 정지 ── */
 @media (prefers-reduced-motion: reduce) {
   .screenMedia,
-  .caption,
   [data-parallax] {
     transform: none !important;
+  }
+
+  /* 캡션은 모션은 끄되(패럴랙스 translateY 제거) 정적 Z-lift는 유지한다. 폰이 reduced-motion에서도
+     rotateY(±4°) 원근을 유지하므로, translateZ가 없으면 캡션 좌측 오버행이 화면 뒤로 잘린다.
+     정지된 3D lift는 모션이 아니라 reduced-motion 위반이 아니다. */
+  .caption {
+    transform: translate3d(0, 0, 60px) !important;
   }
 
   /* D-1/D-3 신규 모션도 정지: 폰 호버 트랜지션·dot 펄스. 단 기본 3D 원근(±4°)은 정적이라 유지

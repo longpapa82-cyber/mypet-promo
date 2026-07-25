@@ -155,7 +155,10 @@ function FeatureRow({ item, index }: FeatureRowProps) {
         .join(' ')}
       {...(onDark ? { 'data-on-dark': '' } : {})}
       data-parallax=""
-      style={{ '--p-depth': 0.2 } as React.CSSProperties}
+      // --p-lift: 캡션을 폰의 preserve-3d 평면에서 뷰어 쪽(+Z)으로 띄운다.
+      // 폰이 rotateY(±4°)로 기울어 있어, Z=0 자식(캡션)의 좌측 오버행이 화면 평면 '뒤'로
+      // 회전해 잘려 보이던 버그를 방지 — 항상 화면 앞에 떠 z-index가 정상 동작한다.
+      style={{ '--p-depth': 0.2, '--p-lift': 60 } as React.CSSProperties}
     >
       <span className={styles.captionDot} aria-hidden="true" />
       <span className={`${styles.captionText} t-label-md`}>{item.bullets[0]}</span>
@@ -227,7 +230,10 @@ function useParallax(rootRef: React.RefObject<HTMLDivElement | null>) {
         const progress = (rect.top + rect.height / 2 - vh / 2) / vh;
         const depth = Number(el.style.getPropertyValue('--p-depth')) || 0.3;
         const shift = -progress * depth * 40; // px, 최대 ±~12px
-        el.style.transform = `translate3d(0, ${shift.toFixed(2)}px, 0)`;
+        // --p-lift: preserve-3d 부모(폰) 안에서 뷰어 쪽으로 띄우는 Z값(px, 기본 0).
+        // 캡션 칩은 60px 띄워 폰의 rotateY 회전으로 화면 뒤에 묻히지 않게 한다.
+        const lift = Number(el.style.getPropertyValue('--p-lift')) || 0;
+        el.style.transform = `translate3d(0, ${shift.toFixed(2)}px, ${lift}px)`;
       }
     };
 
