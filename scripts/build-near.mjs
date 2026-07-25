@@ -32,6 +32,27 @@ const CAT_KO = Object.freeze({
   hotel: '호텔',
 });
 
+// 카테고리별 이용 안내(콘텐츠 밀도 보강 — thin content 방지).
+// 시설 목록(고유 콘텐츠) 아래에 배치해 페이지의 최소 유용성을 확보한다.
+// 사실·안전 원칙: 일반적 준비 안내에 한정, 진단·법률 단정 금지.
+const CAT_GUIDE = Object.freeze({
+  hospital: `<section class="cat-guide" aria-labelledby="guide-h">
+  <h2 id="guide-h" class="related__title">동물병원 방문 전 알아두면 좋은 점</h2>
+  <p>처음 방문하는 동물병원이라면 반려동물의 예방접종 기록과 최근 건강 상태를 미리 정리해 두면 진료가 한결 수월합니다. 접종 수첩이나 이전 병원의 진료 기록이 있다면 함께 지참하는 것이 좋습니다. 증상이 있다면 언제부터, 어떤 양상으로 나타났는지 구체적으로 메모해 두면 수의사가 상태를 파악하는 데 도움이 됩니다.</p>
+  <p>야간이나 휴일에 갑작스러운 응급 상황이 생길 수 있으므로, 평소 24시간 진료가 가능한 인근 병원을 미리 확인해 두는 것을 권합니다. 병원마다 진료 과목과 가능한 처치 범위가 다를 수 있어, 방문 전 전화로 진료 가능 여부를 확인하면 헛걸음을 줄일 수 있습니다.</p>
+</section>`,
+  grooming: `<section class="cat-guide" aria-labelledby="guide-h">
+  <h2 id="guide-h" class="related__title">펫 미용실 선택 시 확인할 점</h2>
+  <p>반려동물 미용실은 견종·묘종과 털 상태에 따라 가능한 미용 범위가 다릅니다. 처음 방문한다면 원하는 미용 스타일과 우리 아이의 성향(낯가림, 예민한 부위 등)을 미리 전화로 상담하면 당일 진행이 수월합니다. 대형견이나 특수 미용이 필요한 경우 별도 예약이 필요할 수 있습니다.</p>
+  <p>미용 전 예방접종 여부를 요구하는 곳이 많으므로 접종 기록을 확인해 두는 것이 좋습니다. 위생과 도구 관리 상태, 미용 중 반려동물을 다루는 방식 등을 미리 살펴보면 안심하고 맡길 수 있습니다.</p>
+</section>`,
+  hotel: `<section class="cat-guide" aria-labelledby="guide-h">
+  <h2 id="guide-h" class="related__title">펫 호텔 이용 전 준비사항</h2>
+  <p>펫 호텔에 반려동물을 맡길 때는 대부분 예방접종 증명을 요구하므로 접종 기록을 미리 확인하세요. 평소 먹는 사료와 좋아하는 장난감, 익숙한 담요 등을 함께 보내면 낯선 환경에서의 스트레스를 줄이는 데 도움이 됩니다.</p>
+  <p>입실 전 반려동물의 건강 상태와 특이사항(알레르기, 복용 중인 약, 분리불안 등)을 상세히 전달하는 것이 중요합니다. 케이지 크기, 산책·놀이 시간, 보호자 연락 방식, 응급 시 대응 절차 등을 미리 확인해 두면 안심하고 맡길 수 있습니다.</p>
+</section>`,
+});
+
 // 인접 링크 최대 개수(같은 sigungu 다른 category / 같은 sido 다른 sigungu).
 const MAX_NEARBY_SIGUNGU = 5;
 // 시설 리스트 최대 표시(초과 시 "앱에서 전체 보기").
@@ -115,7 +136,7 @@ function renderFacilityList(facilities) {
         : '';
       return `<li class="facility-card">
       <div class="facility-card__head">
-        <h2 class="facility-card__name">${name}</h2>
+        <strong class="facility-card__name">${name}</strong>
         <span class="facility-card__badge">${escapeHtml(catKo)}</span>
       </div>
       ${addrRow}
@@ -213,12 +234,13 @@ function buildLanding({ sido, sidoKo, sigungu, sigunguKo, category, facilities, 
   const bodyHtml = `<article class="article">
   <header class="article__header">
     <span class="article__eyebrow">${escapeHtml(sidoKo)} · ${escapeHtml(catKo)}</span>
-    <h1>${escapeHtml(`${sigunguKo} ${catKo} 찾기`)} | MyPet</h1>
+    <h1>${escapeHtml(`${sigunguKo} ${catKo} 찾기`)}</h1>
   </header>
   <p>${escapeHtml(sidoKo)} ${escapeHtml(sigunguKo)}에서 이용할 수 있는 <strong>${escapeHtml(catKo)}</strong> 정보를 모았습니다. 아래 목록의 상호·주소·전화로 바로 연락할 수 있으며, 지도·거리·운영시간 등 자세한 정보는 MyPet 앱에서 확인할 수 있습니다.</p>
   <p class="facility-summary"><strong>${escapeHtml(sigunguKo)} ${escapeHtml(catKo)} ${total}곳</strong>${summaryExtra}</p>
   ${renderFacilityList(facilities)}
   <p class="facility-summary">운영시간·지도·거리는 시설 사정에 따라 달라질 수 있습니다. 최신 정보는 <strong>MyPet 앱</strong>에서 확인하세요.</p>
+  ${CAT_GUIDE[category] || ''}
   ${renderRelated({ sido, sidoKo, sigungu, sigunguKo, category, sidoEntry })}
 </article>`;
 

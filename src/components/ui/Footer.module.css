@@ -13,6 +13,32 @@
   text-align: center;
 }
 
+/* 인기 지역 바로가기 행 — 기존 links 패턴을 따르되 라벨을 앞에 둔다. */
+.regions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.regions a {
+  color: var(--green-deep);
+  transition: color 0.18s ease;
+}
+
+.regions a:hover {
+  color: var(--green);
+  text-decoration: underline;
+}
+
+.regionsLabel {
+  color: var(--on-surface-variant);
+  font-weight: 700;
+}
+
 .links {
   display: flex;
   flex-wrap: wrap;

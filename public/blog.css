@@ -682,6 +682,7 @@
 }
 
 .facility-card__name {
+  display: block; /* h2→strong 변경 후 블록 동작 보존 */
   font-size: 17px;
   font-weight: 700;
   color: var(--blog-green-deep);
