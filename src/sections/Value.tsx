@@ -238,7 +238,7 @@ export default function Value() {
                 </li>
                 <li className={styles.statSub}>
                   <span className={styles.statSubNum}>전국</span>
-                  <span className={styles.statSubLabel}>거리순 · 운영시간</span>
+                  <span className={styles.statSubLabel}>거리순 · 운영시간(일부)</span>
                 </li>
               </ul>
             </article>

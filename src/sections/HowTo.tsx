@@ -81,7 +81,7 @@ const STEPS: readonly Step[] = [
   {
     number: 2,
     title: '간편 가입',
-    description: '이메일 또는 소셜 계정(카카오·구글·애플)으로 빠르게 시작하세요.',
+    description: '이메일 또는 소셜 계정(카카오·구글, iOS는 애플도)으로 빠르게 시작하세요.',
     icon: SparkIcon,
   },
   {
