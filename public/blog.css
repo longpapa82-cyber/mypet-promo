@@ -980,7 +980,11 @@
    블로그·지역 네비는 유지한다(본문 CTA로 설치 유도). 좁은 폭에서 로고+워드마크+
    nav+CTA가 한 줄에 안 들어가 nav가 밀려 안 보이던 문제 해결. */
 @media (max-width: 600px) {
-  .site-header__cta {
+  /* 기본 규칙이 :link/:visited(특이도 0,2,0)를 포함하므로, 숨김도 같은
+     의사클래스로 특이도를 맞춰야 display:none 이 실제로 이긴다. */
+  .site-header__cta,
+  .site-header__cta:link,
+  .site-header__cta:visited {
     display: none;
   }
   .site-nav {
