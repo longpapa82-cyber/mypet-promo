@@ -159,11 +159,13 @@
   }
 }
 
+/* 네비는 로고 바로 옆(좌측)에 둔다 — 메인(React) 헤더와 동일 배치.
+   (margin-left:auto 로 우측에 밀면 홈/법적 페이지와 위치가 달라 보인다.) */
 .site-nav {
   display: flex;
   align-items: center;
   gap: 4px;
-  margin-left: auto;
+  margin-left: 12px;
 }
 
 .site-nav a {
@@ -185,10 +187,11 @@
   background: var(--green-fixed, #dcead9);
 }
 
-/* 헤더 우측 스토어 CTA(작은 pill) */
+/* 헤더 우측 스토어 CTA(작은 pill) — 우측 끝으로 밀어 [로고 nav … CTA] 배치 */
 .site-header__cta,
 .site-header__cta:link,
 .site-header__cta:visited {
+  margin-left: auto;
   display: inline-flex;
   align-items: center;
   gap: 6px;
