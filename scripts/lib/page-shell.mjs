@@ -29,7 +29,7 @@ const TERMS_URL = 'https://longpapa82-cyber.github.io/mypet-legal/terms.html';
 function renderHeader() {
   return `<header class="site-header">
   <div class="site-header__inner">
-    <a class="site-header__brand" href="/">MyPet</a>
+    <a class="site-header__brand" href="/" aria-label="MyPet 홈"><img class="site-header__logo" src="/assets/logo.png" alt="MyPet 로고" width="34" height="34" /><span class="site-header__name">MyPet</span></a>
     <nav class="site-nav" aria-label="주요">
       <a href="/blog/">블로그</a>
       <a href="/near/">지역</a>

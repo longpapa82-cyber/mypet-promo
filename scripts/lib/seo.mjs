@@ -65,6 +65,11 @@ export function buildHead({
     `<meta name="twitter:title" content="${t}" />`,
     `<meta name="twitter:description" content="${d}" />`,
     `<meta name="twitter:image" content="${escapeHtml(imageUrl)}" />`,
+    // 폰트: 본문 Quicksand + 헤딩/워드마크 Jua — 메인(index.html)과 동일 로드.
+    //   정적 헤더 브랜드(MyPet)가 홈과 같은 Jua 디스플레이·둥근 인상을 갖도록 필요.
+    '<link rel="preconnect" href="https://fonts.googleapis.com" />',
+    '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />',
+    '<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Jua&display=swap" rel="stylesheet" />',
     // 스타일: tokens.css → blog.css 순서(폴백은 blog.css 안에서 처리)
     '<link rel="stylesheet" href="/tokens.css" />',
     '<link rel="stylesheet" href="/blog.css" />',

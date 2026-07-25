@@ -121,24 +121,42 @@
   gap: var(--blog-gap);
 }
 
+/* 브랜드 = 로고 + 워드마크(홈 헤더 components/ui/Header 와 시각 통일). */
 .site-header__brand {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 20px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--blog-green-deep);
+  gap: 10px;
 }
 
 .site-header__brand:hover {
   text-decoration: none;
 }
 
-.site-header__brand img {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
+.site-header__logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  box-shadow: var(--lux-shadow-rest, 0 2px 8px rgba(0, 0, 0, 0.08));
+}
+
+/* 워드마크 — 홈과 동일: Jua 디스플레이 + 샴페인 메탈릭 그라디언트(텍스트 클립).
+   변수는 tokens.css(선로드)에서 제공. clip 미지원 브라우저는 champagne-deep 폴백. */
+.site-header__name {
+  font-family: var(--font-display, 'Jua', 'Quicksand', system-ui, sans-serif);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--champagne-deep, #9a7b3f);
+  background: var(--champagne-metallic, #9a7b3f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .site-header__name {
+    -webkit-text-fill-color: var(--champagne-deep, #9a7b3f);
+  }
 }
 
 .site-nav {
