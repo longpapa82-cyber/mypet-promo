@@ -11,3 +11,9 @@ scripts/capture-v6.mjs
 scripts/measure.mjs
 scripts/verify-responsive.mjs
 scripts/cap-desk-value.mjs
+
+# 일회성 스크린샷 캡처·측정 검증 스크립트 및 산출물(로컬 검증용)
+scripts/cap-*.mjs
+scripts/measure-*.mjs
+_m.png
+public/assets/favicon-backup-preapp/
