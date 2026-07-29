@@ -14,6 +14,7 @@ import {
   COMPANY_URL,
 } from '../../src/constants/stores.shared.mjs';
 import { escapeHtml } from './seo.mjs';
+import { analyticsSnippet } from './analytics.mjs';
 
 // 법무 문서 — 홍보웹 내부 페이지(메인 GNB·디자인 동일)로 통일한다.
 //   메인/법적 페이지는 해시 라우팅(useHashRoute)으로 #privacy·#terms 를 렌더한다.
@@ -121,10 +122,11 @@ export function renderPage({
   ctaText,
   disclaimer,
 } = {}) {
+  const analytics = analyticsSnippet();
   return `<!DOCTYPE html>
 <html lang="ko">
 <head>
-${head}
+${head}${analytics ? '\n' + analytics : ''}
 </head>
 <body class="blog-page">
 ${renderHeader()}

@@ -69,9 +69,14 @@ function classify(urlPath) {
   if (urlPath === '/near/') {
     return { priority: '0.8', changefreq: 'weekly' };
   }
-  // 시/도 index: /near/<sido>/  (세그먼트 3개: '', 'near', '<sido>', '')
+  // near 디렉토리(trailing slash) index — 세그먼트 수로 시도/시군구 구분.
+  //   /near/<sido>/          → split('/') = ['','near','<sido>',''] 길이 4 → 시/도 0.7
+  //   /near/<sido>/<sigungu>/→ 길이 5 → 시군구 index 0.65(허브 > 시도 > 시군구 > 리프)
   if (urlPath.startsWith('/near/') && urlPath.endsWith('/')) {
-    return { priority: '0.7', changefreq: 'weekly' };
+    const segs = urlPath.split('/').length;
+    return segs >= 5
+      ? { priority: '0.65', changefreq: 'weekly' }
+      : { priority: '0.7', changefreq: 'weekly' };
   }
   // 블로그 개별 글: /blog/<slug>.html
   if (urlPath.startsWith('/blog/') && urlPath.endsWith('.html')) {

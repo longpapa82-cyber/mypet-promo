@@ -61,6 +61,7 @@ const MAX_FACILITIES_SHOWN = 30;
 // ── URL 헬퍼(링크 계약) ─────────────────────────────────────────
 const nearHubUrl = () => '/near/';
 const nearSidoUrl = (sido) => `/near/${sido}/`;
+const nearSigunguUrl = (sido, sigungu) => `/near/${sido}/${sigungu}/`;
 const nearLandingUrl = (sido, sigungu, category) =>
   `/near/${sido}/${sigungu}/${category}.html`;
 
@@ -204,7 +205,8 @@ function buildLanding({ sido, sidoKo, sigungu, sigunguKo, category, facilities, 
     { name: '홈', url: '/' },
     { name: '지역', url: nearHubUrl() },
     { name: sidoKo, url: nearSidoUrl(sido) },
-    { name: `${sigunguKo} ${catKo}` },
+    { name: sigunguKo, url: nearSigunguUrl(sido, sigungu) },
+    { name: catKo },
   ];
 
   const head = buildHead({
@@ -243,6 +245,77 @@ function buildLanding({ sido, sidoKo, sigungu, sigunguKo, category, facilities, 
   ${CAT_GUIDE[category] || ''}
   ${renderRelated({ sido, sidoKo, sigungu, sigunguKo, category, sidoEntry })}
 </article>`;
+
+  return renderPage({
+    head,
+    breadcrumb: trail,
+    bodyHtml,
+    ctaText: `${sigunguKo}의 반려동물 시설을 MyPet 앱에서 지도·거리·운영시간까지 확인하세요.`,
+  });
+}
+
+// (A2) 시군구 index — 한 구의 카테고리별 리프로 연결하는 허브.
+//   크롤 경로 보강(시도 index → 시군구 index → 카테고리 리프) + 로컬 유입.
+//   thin content 방지: 임계치 통과 카테고리 카드 + 지역·카테고리 요약 문단.
+function buildSigunguIndex({ sido, sidoKo, sigungu, sigunguKo, sgEntry }) {
+  const url = nearSigunguUrl(sido, sigungu);
+
+  // 임계치 통과 카테고리만 카드로(리프가 실제 존재하는 것).
+  const passing = [];
+  for (const cat of Object.keys(CAT_KO)) {
+    const list = sgEntry.cats.get(cat);
+    if (!list || list.length < MIN_FACILITIES_PER_PAGE) continue;
+    passing.push({ cat, count: list.length });
+  }
+
+  // 자기완결 가드: 통과 카테고리가 없으면 빈/얇은 페이지를 만들지 않고 null 반환.
+  //   (호출부의 sigunguLeafCount 가드와 별개로 이 함수 자체가 전제를 검증한다.)
+  if (passing.length === 0) return null;
+
+  const catNames = passing.map((p) => CAT_KO[p.cat]).join('·');
+  const title = `${sigunguKo} 반려동물 시설 (${catNames}) | MyPet`;
+  const description = `${sidoKo} ${sigunguKo}의 ${catNames} 정보를 한 곳에. 상호·주소·전화와 함께 MyPet 앱에서 지도·거리·운영시간까지 확인하세요.`;
+
+  const trail = [
+    { name: '홈', url: '/' },
+    { name: '지역', url: nearHubUrl() },
+    { name: sidoKo, url: nearSidoUrl(sido) },
+    { name: sigunguKo },
+  ];
+
+  const head = buildHead({
+    title,
+    description,
+    canonical: url,
+    ogType: 'website',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@graph': [
+        { '@type': 'WebPage', name: title, url: `https://with-my-pet.com${url}` },
+        breadcrumb(trail),
+      ],
+    },
+  });
+
+  const cards = passing
+    .map(
+      ({ cat, count }) => `<li class="post-card post-card--compact">
+      <a class="post-card__body" href="${escapeHtml(nearLandingUrl(sido, sigungu, cat))}" style="text-decoration:none">
+        <span class="post-card__eyebrow">${escapeHtml(sigunguKo)}</span>
+        <h2 class="post-card__title">${escapeHtml(CAT_KO[cat])}</h2>
+        <p class="post-card__excerpt">${escapeHtml(sigunguKo)} ${escapeHtml(CAT_KO[cat])} ${count}곳</p>
+      </a>
+    </li>`
+    )
+    .join('\n');
+
+  const bodyHtml = `<div class="section-head">
+    <h1>${escapeHtml(sigunguKo)} 반려동물 시설 찾기</h1>
+    <p>${escapeHtml(sidoKo)} ${escapeHtml(sigunguKo)}에서 이용할 수 있는 ${escapeHtml(catNames)}을(를) 카테고리별로 모았습니다. 원하는 시설을 선택해 상호·주소·전화를 확인하고, 지도·거리·운영시간은 MyPet 앱에서 살펴보세요.</p>
+  </div>
+  <ul class="post-grid">
+${cards}
+  </ul>`;
 
   return renderPage({
     head,
@@ -295,10 +368,11 @@ function buildSidoIndex({ sido, sidoEntry, generated }) {
       );
     }
     if (catLinks.length === 0) continue; // 이 구에 임계치 통과 카테고리 없음
+    // 구 제목은 시군구 index로 링크(크롤 허브) + 카테고리 리프 직접 링크 병행.
     cards.push(`<li class="post-card post-card--compact">
       <div class="post-card__body">
         <span class="post-card__eyebrow">${escapeHtml(sidoKo)}</span>
-        <h2 class="post-card__title">${escapeHtml(entry.sigunguKo)}</h2>
+        <h2 class="post-card__title"><a href="${escapeHtml(nearSigunguUrl(sido, sg))}">${escapeHtml(entry.sigunguKo)}</a></h2>
         <div class="post-card__meta">${catLinks.join(' · ')}</div>
       </div>
     </li>`);
@@ -390,6 +464,7 @@ function main() {
 
   let generated = 0;
   let skipped = 0;
+  let sigunguIndexCount = 0;
 
   // 시/도 정렬(한글)
   const sidoSorted = [...bySido.entries()].sort((a, b) =>
@@ -402,6 +477,7 @@ function main() {
     let sidoLandingCount = 0;
 
     for (const [sigungu, sgEntry] of sidoEntry.sigungus) {
+      let sigunguLeafCount = 0;
       for (const [category, facilities] of sgEntry.cats) {
         if (facilities.length < MIN_FACILITIES_PER_PAGE) {
           skipped++;
@@ -420,6 +496,23 @@ function main() {
         writeFile(outPath, html);
         generated++;
         sidoLandingCount++;
+        sigunguLeafCount++;
+      }
+
+      // 시군구 index — 이 구에 리프가 하나라도 있을 때만(thin content 방지).
+      //   buildSigunguIndex 가 자체 가드로 null 을 반환할 수 있으므로 그때는 스킵.
+      if (sigunguLeafCount > 0) {
+        const sgHtml = buildSigunguIndex({
+          sido,
+          sidoKo: sidoEntry.sidoKo,
+          sigungu,
+          sigunguKo: sgEntry.sigunguKo,
+          sgEntry,
+        });
+        if (sgHtml) {
+          writeFile(path.join(OUT_ROOT, sido, sigungu, 'index.html'), sgHtml);
+          sigunguIndexCount++;
+        }
       }
     }
 
@@ -436,7 +529,7 @@ function main() {
   writeFile(path.join(OUT_ROOT, 'index.html'), hubHtml);
 
   console.log(
-    `[build-near] 생성 ${generated}개 랜딩 + ${hubSidos.length}개 시/도 index + 1개 허브. 임계치 미달 스킵 ${skipped}개.`
+    `[build-near] 생성 ${generated}개 랜딩 + ${sigunguIndexCount}개 시군구 index + ${hubSidos.length}개 시/도 index + 1개 허브. 임계치 미달 스킵 ${skipped}개.`
   );
   console.log(
     `[build-near] 대상 시/도: ${hubSidos.map((s) => `${s.sidoKo}(${s.count})`).join(', ')}`

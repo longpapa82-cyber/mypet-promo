@@ -1,4 +1,5 @@
 import { APP_STORE, PLAY_STORE, type StoreStatus } from '../../constants/stores';
+import { ConversionEvent, trackEvent } from '../../lib/track';
 import styles from './StoreBadge.module.css';
 
 type Store = 'ios' | 'android';
@@ -93,6 +94,7 @@ export default function StoreBadge({ store, status, className }: StoreBadgeProps
       target="_blank"
       rel="noopener noreferrer"
       aria-label={c.aria}
+      onClick={() => trackEvent(ConversionEvent.STORE_CLICK, { store })}
     >
       {inner}
     </a>
